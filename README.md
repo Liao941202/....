@@ -3,7 +3,7 @@
 [![Language](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg)](https://isocpp.org/)
 [![Framework](https://img.shields.io/badge/Framework-Qt%206.9.0-green.svg)](https://www.qt.io/)
 [![Database](https://img.shields.io/badge/Database-SQLite-orange.svg)](https://www.sqlite.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](MIT%20LICENSE/LICENSE)
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)]()
 
 > **企業級自動櫃員機模擬系統** - 運用現代 C++ 技術與 Qt 框架開發的完整金融應用程式
@@ -15,7 +15,7 @@
 | [📊 專案概覽](#-專案概覽) | [✨ 核心功能](#-核心功能特色) | [🛠️ 技術架構](#️-技術架構) | [📖 文件資源](#-文件資源) |
 | [🚀 快速開始](#-快速開始) | [🔒 安全機制](#-安全機制) | [📁 專案結構](#-專案結構) | [🤝 貢獻指南](#-貢獻指南) |
 | [⚙️ 系統需求](#系統需求) | [🎯 核心元件](#-核心元件) | [🏗️ 設計模式](#️-設計模式) | [📝 版本歷史](#-版本歷史) |
-| [💻 安裝步驟](#安裝步驟) | [🔄 系統流程](#-系統流程) | [📈 效能特點](#-效能特點) | [⚠️ 注意事項](#️-重要注意事項) |
+| [💻 執行方式](#執行方式) | [🔄 系統流程](#-系統流程) | [📈 效能特點](#-效能特點) | [⚠️ 注意事項](#️-重要注意事項) |
 
 ---
 
@@ -159,15 +159,14 @@ MinGW 64-bit 編譯器
 
 #### **👤 一般用戶帳戶**
 ```
-帳號: 123456789
-密碼: 1234
-初始餘額: NT$ 50,000
+帳號: 123
+密碼: 3210
 ```
 
 #### **👨‍💼 管理員帳戶**
 ```
 帳號: admin
-密碼: admin123
+密碼: 5678
 ```
 
 ### **功能測試建議**
@@ -238,7 +237,7 @@ ATM_Banking_System/
 │   ├── *.dll                             # Qt 相關 DLL 檔案
 │   ├── *.o                               # 編譯物件檔案
 │   └── 其他執行時相依檔案                # 執行所需的支援檔案
-├── 📖 Introduction/                      # 專案介紹資料
+├── 📖 Introdution/                       # 專案介紹資料
 ├── 🗂️ Spare_file/                       # 備用檔案
 ├── 🎨 UML/                               # UML 設計圖源檔
 └── 🖼️ UML_picture/                      # UML 圖片檔案
@@ -295,7 +294,7 @@ sequenceDiagram
 - 📋 [**README.md**](README.md) - 完整專案說明文件
 - 🎨 [**UML 設計圖檔**](UML/) - 系統設計圖表源檔
 - 🖼️ [**UML 圖片檔案**](UML_picture/) - 系統架構視覺化圖檔
-- 📖 [**專案介紹資料**](Introduction/) - 詳細專案介紹文件
+- 📖 [**專案介紹資料**](Introdution/) - 詳細專案介紹文件
 - 🗂️ [**備用檔案**](Spare_file/) - 開發過程中的備用檔案
 
 ## 🤝 貢獻指南
@@ -308,20 +307,18 @@ sequenceDiagram
 
 ## 📝 版本歷史
 
-- **v1.0.0** (2025-06-08) - 完整功能發布版本
-- **v0.9.0** (2025-06-07) - Beta 測試版本
-- **v0.8.0** (2025-06-06) - Alpha 開發版本
+- **v1.0.0** (2025-06-09) - 完整功能發布版本
 
 ## 📄 授權協議
 
-本專案採用 MIT 授權協議 - 詳見 [LICENSE](LICENSE) 檔案
+本專案採用 MIT 授權協議 - 詳見 [LICENSE](MIT%20LICENSE/LICENSE) 檔案
 
 ## 👨‍💻 開發者
 
-**專案開發者**: [您的姓名]
+**專案開發者**: [WU]
 - 🎓 **專長**: C++、Qt、資料庫設計、軟體架構
-- 📧 **聯絡**: your.email@example.com
-- 🔗 **GitHub**: [@yourusername](https://github.com/yourusername)
+- 📧 **聯絡**: B3230665@ulive.pccu.edu.tw
+- 🔗 **GitHub**: [@sheng5526cs](https://github.com/sheng5526cs)
 
 ---
 
