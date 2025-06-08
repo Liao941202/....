@@ -102,55 +102,146 @@
 ## 🚀 快速開始
 
 ### **系統需求**
-- Windows 10/11 (64-bit)
-- Qt 6.9.0 或更高版本
-- MinGW 64-bit 編譯器
-- 至少 2GB 可用記憶體
+- **作業系統**: Windows 10/11 (64-bit)
+- **開發工具**: Qt Creator (推薦 6.9.0 或更高版本)
+- **編譯器**: MinGW 64-bit
+- **記憶體**: 至少 2GB 可用記憶體
+- **硬碟空間**: 至少 500MB 可用空間
 
-### **安裝步驟**
+### **下載與使用**
 
-1. **下載 Qt Creator**
-   ```bash
-   # 官方下載連結
-   https://www.qt.io/download-qt-installer
-   ```
+1. **下載專案**
+   - 下載整個 `ATM_Banking_System` 專案資料夾
+   - 解壓縮到您的工作目錄
 
-2. **克隆專案**
-   ```bash
-   git clone https://github.com/yourusername/ATM_OOPByCpp.git
-   cd ATM_OOPByCpp/2025_0608_finalrealesw
-   ```
+### **執行方式**
 
-3. **編譯與執行**
-   - 開啟 Qt Creator
-   - 選擇 "Open Project" → 選擇 `ATM/ATM.pro`
-   - 選擇 Qt 6.9.0 MinGW 64-bit 套件
-   - 點擊 ▶️ 建置並執行
+#### **方法一：直接執行已編譯版本 (建議)**
+**最簡單的使用方式，無需安裝任何開發工具**
 
-### **預設帳戶資訊**
+1. 開啟 `ATM_Banking_System\ATM_Version 1.0\` 資料夾
+2. 雙擊 `ATM.exe` 檔案直接執行
+
+**特點**:
+- ✅ 無需安裝 Qt Creator 或編譯器
+- ✅ 包含所有必要的 DLL 檔案
+- ✅ 開箱即用，適合一般用戶
+- ✅ 完整的 SQLite 資料庫
+
+#### **方法二：從原始碼編譯 (開發者)**
+**適合想要修改程式碼或學習的開發者**
+
+**環境需求**:
 ```
-👤 測試帳戶: 123456789
-🔐 密碼: 1234
-💰 初始餘額: NT$ 50,000
-
-👨‍💼 管理員帳戶: admin
-🔐 管理員密碼: admin123
+Qt Creator 6.9.0 或更高版本
+MinGW 64-bit 編譯器
 ```
+
+**安裝 Qt Creator**:
+```
+官方下載: https://www.qt.io/download-qt-installer
+```
+- 選擇開源版本 (Open Source)
+- 安裝時確保勾選 MinGW 64-bit 編譯器
+- 選擇 Qt 6.9.0 或最新版本
+
+**編譯步驟**:
+1. 開啟 Qt Creator
+2. 選擇 `File` → `Open File or Project`
+3. 導航到 `ATM_Banking_System/ATM_Code/` 資料夾
+4. 選擇 `ATM.pro` 檔案並開啟
+5. 選擇 Qt 6.9.0 MinGW 64-bit 套件
+6. 點擊左下角的 ▶️ 綠色三角形建置並執行
+
+### **首次啟動**
+
+程式啟動後，您可以使用以下預設帳戶進行測試：
+
+#### **👤 一般用戶帳戶**
+```
+帳號: 123456789
+密碼: 1234
+初始餘額: NT$ 50,000
+```
+
+#### **👨‍💼 管理員帳戶**
+```
+帳號: admin
+密碼: admin123
+```
+
+### **功能測試建議**
+
+1. **基本功能測試**:
+   - ✅ 登入/登出
+   - ✅ 餘額查詢
+   - ✅ 存款操作
+   - ✅ 提款操作
+
+2. **進階功能測試**:
+   - ✅ 轉帳功能
+   - ✅ 交易記錄查詢
+   - ✅ 密碼變更
+
+3. **管理員功能測試**:
+   - ✅ 帳戶管理
+   - ✅ 系統維護
+   - ✅ 用戶狀態設定
+
+### **常見問題排除**
+
+#### **編譯錯誤**
+- 確保已安裝正確版本的 Qt 和 MinGW
+- 檢查專案路徑是否包含中文字元
+- 嘗試清理專案後重新建置
+
+#### **執行錯誤**
+- 檢查 `atm.db` 資料庫檔案是否存在
+- 確保所有 DLL 檔案都在執行檔同一目錄
+- 檢查系統是否安裝 Visual C++ Redistributable
+
+#### **資料庫問題**
+- 如果資料庫損壞，可以刪除 `atm.db` 讓程式重新建立
+- 初始化後會自動建立預設帳戶
 
 ## 📁 專案結構
 
 ```
-ATM_OOPByCpp/
+ATM_Banking_System/
 ├── 📋 README.md                           # 專案說明文件
-├── 🎨 *.puml                             # UML 設計圖檔
-├── 📊 ATM_Project_Presentation.md         # 專案簡報文件
-└── 💻 ATM/                               # 主程式目錄
-    ├── 🎮 controller.{h,cpp}             # 中央控制器
-    ├── 💾 databasemanager.{h,cpp}        # 資料庫管理
-    ├── 🖼️ *window.{h,cpp,ui}             # GUI 視窗類別
-    ├── 🗃️ atm.db                        # SQLite 資料庫
-    ├── 🔧 ATM.pro                        # Qt 專案檔
-    └── 📦 build/                         # 編譯輸出目錄
+├── 💻 ATM_Code/                          # 原始碼目錄 (開發者參考)
+│   ├── 🎮 controller.{h,cpp}             # 中央控制器
+│   ├── 💾 databasemanager.{h,cpp}        # 資料庫管理
+│   ├── 🏠 main.cpp                       # 程式進入點
+│   ├── 🔧 ATM.pro                        # Qt 專案檔
+│   ├── 🗃️ atm.db                        # SQLite 資料庫
+│   ├── 🖼️ GUI 視窗檔案:
+│   │   ├── loginwindow.{h,cpp,ui}        # 登入視窗
+│   │   ├── userwindow.{h,cpp,ui}         # 用戶主頁
+│   │   ├── adminwindow.{h,cpp,ui}        # 管理員主頁
+│   │   ├── depositwindow.{h,cpp,ui}      # 存款視窗
+│   │   ├── withdrowwindow.{h,cpp,ui}     # 提款視窗
+│   │   ├── transwindow.{h,cpp,ui}        # 轉帳視窗
+│   │   ├── summarywindow.{h,cpp,ui}      # 交易記錄
+│   │   ├── changepasswordwindow.{h,cpp,ui} # 密碼變更
+│   │   ├── addaccwindow.{h,cpp,ui}       # 新增帳戶
+│   │   ├── acclistwindow.{h,cpp,ui}      # 帳戶列表
+│   │   ├── setpasswordwindow.{h,cpp,ui}  # 重設密碼
+│   │   ├── setstatuswindow.{h,cpp,ui}    # 設定狀態
+│   │   └── docuwindow.{h,cpp,ui}         # 文件視窗
+│   ├── 📦 build/                         # 編譯輸出目錄
+│   ├── 🎨 styles/                        # 樣式檔案
+│   └── 🌐 ATM_zh_TW.ts                   # 中文語言檔
+├── 📦 ATM_Version 1.0/                   # 已編譯版本 (主要使用)
+│   ├── ATM.exe                           # 可執行檔案
+│   ├── atm.db                            # 資料庫檔案
+│   ├── *.dll                             # Qt 相關 DLL 檔案
+│   ├── *.o                               # 編譯物件檔案
+│   └── 其他執行時相依檔案                # 執行所需的支援檔案
+├── 📖 Introduction/                      # 專案介紹資料
+├── 🗂️ Spare_file/                       # 備用檔案
+├── 🎨 UML/                               # UML 設計圖源檔
+└── 🖼️ UML_picture/                      # UML 圖片檔案
 ```
 
 ## 🎯 核心元件
@@ -201,10 +292,11 @@ sequenceDiagram
 
 ## 📖 文件資源
 
-- 📋 [**系統設計文件**](ATM_Project_Presentation.md)
-- 🎨 [**UML 設計圖**](ATM_Complete_System_UML_ClassDiagram.puml)
-- 🏗️ [**架構設計圖**](ATM_Complete_System_Architecture.puml)
-- 🔄 [**序列圖**](ATM_Complete_System_SignalSlot_Sequence.puml)
+- 📋 [**README.md**](README.md) - 完整專案說明文件
+- 🎨 [**UML 設計圖檔**](UML/) - 系統設計圖表源檔
+- 🖼️ [**UML 圖片檔案**](UML_picture/) - 系統架構視覺化圖檔
+- 📖 [**專案介紹資料**](Introduction/) - 詳細專案介紹文件
+- 🗂️ [**備用檔案**](Spare_file/) - 開發過程中的備用檔案
 
 ## 🤝 貢獻指南
 
