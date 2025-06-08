@@ -1,5 +1,5 @@
 # 🏦 ATM 自動櫃員機系統
-
+“Enterprise-grade ATM banking simulation for modern C++ and Qt, with multi-layered security and rich GUI.”
 [![Language](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg)](https://isocpp.org/)
 [![Framework](https://img.shields.io/badge/Framework-Qt%206.9.0-green.svg)](https://www.qt.io/)
 [![Database](https://img.shields.io/badge/Database-SQLite-orange.svg)](https://www.sqlite.org/)
