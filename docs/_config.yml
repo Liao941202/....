@@ -1,0 +1,56 @@
+# GitHub Pages 配置
+# 詳見：https://docs.github.com/en/pages
+
+# 網站標題
+title: ATM Banking System
+description: 專業的銀行自動櫃員機模擬系統 - 功能完整的 C++ 專案
+
+# 基本配置
+baseurl: "" # 如果網站在子目錄，填入子目錄名稱，如 "/ATM_Banking_System"
+url: "" # 你的 GitHub Pages URL，如 "https://username.github.io"
+
+# 構建設置
+markdown: kramdown
+highlighter: rouge
+theme: null # 我們使用自定義主題
+
+# 排除文件
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
+  - gemfiles
+  - build
+
+# 包含文件
+include:
+  - docs
+
+# 插件
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+
+# SEO 設置
+author:
+  name: ATM Banking System Team
+  email: support@atm-system.com
+
+# 社交媒體
+social:
+  name: ATM Banking System
+  links:
+    - https://github.com/your-username/ATM_Banking_System
+
+# 網站配置
+lang: zh-TW
+timezone: Asia/Taipei
+
+# GitHub Pages 特定設置
+repository: your-username/ATM_Banking_System
+github:
+  is_project_page: true

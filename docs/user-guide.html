@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用者指南 - ATM Banking System</title>
+    <meta name="description" content="詳細的 ATM Banking System 使用者操作指南，包含登入、交易、查詢等完整功能說明">
+    <meta name="keywords" content="ATM, 使用者指南, 操作手冊, 銀行系統, 教學">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="使用者指南 - ATM Banking System">
+    <meta property="og:description" content="詳細的 ATM Banking System 使用者操作指南">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/images/og-image.svg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 導航列 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-university"></i>
+                <span>ATM Banking System</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">首頁</a>
+                </li>
+                <li class="nav-item">
+                    <a href="getting-started.html" class="nav-link">快速開始</a>
+                </li>
+                <li class="nav-item">
+                    <a href="user-guide.html" class="nav-link active">使用者指南</a>
+                </li>
+                <li class="nav-item">
+                    <a href="api-reference.html" class="nav-link">API 參考</a>
+                </li>
+                <li class="nav-item">
+                    <a href="architecture.html" class="nav-link">架構設計</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <main class="docs-main">
+        <div class="docs-container">
+            <!-- 側邊欄 -->
+            <aside class="docs-sidebar">
+                <div class="sidebar-content">
+                    <h3>使用者指南</h3>
+                    <nav class="sidebar-nav">
+                        <ul>
+                            <li><a href="#overview">系統概覽</a></li>
+                            <li><a href="#user-interface">使用者介面</a></li>
+                            <li><a href="#login">登入系統</a></li>
+                            <li><a href="#basic-operations">基本操作</a>
+                                <ul>
+                                    <li><a href="#check-balance">查詢餘額</a></li>
+                                    <li><a href="#withdraw">提款操作</a></li>
+                                    <li><a href="#deposit">存款操作</a></li>
+                                    <li><a href="#transfer">轉帳功能</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#account-management">帳戶管理</a>
+                                <ul>
+                                    <li><a href="#view-history">查看交易紀錄</a></li>
+                                    <li><a href="#change-pin">修改密碼</a></li>
+                                    <li><a href="#account-settings">帳戶設定</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#admin-features">管理員功能</a>
+                                <ul>
+                                    <li><a href="#admin-login">管理員登入</a></li>
+                                    <li><a href="#user-management">用戶管理</a></li>
+                                    <li><a href="#system-monitoring">系統監控</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#security-tips">安全提醒</a></li>
+                            <li><a href="#troubleshooting">故障排除</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- 文檔內容 -->
+            <div class="docs-content">
+                <header class="docs-header">
+                    <h1>使用者指南</h1>
+                    <p>完整的 ATM Banking System 操作指南</p>
+                </header>
+
+                <section id="overview" class="docs-section">
+                    <h2><i class="fas fa-eye"></i> 系統概覽</h2>
+                    <p>ATM Banking System 是一個功能完整的銀行自動櫃員機模擬系統，提供基本的銀行服務功能：</p>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-wallet"></i>
+                            <h3>帳戶服務</h3>
+                            <p>餘額查詢、存提款、轉帳功能</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-history"></i>
+                            <h3>交易紀錄</h3>
+                            <p>詳細的交易歷史記錄</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>安全機制</h3>
+                            <p>PIN 碼驗證與安全保護</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-cogs"></i>
+                            <h3>管理功能</h3>
+                            <p>系統管理與用戶管理</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="user-interface" class="docs-section">
+                    <h2><i class="fas fa-desktop"></i> 使用者介面</h2>
+                    <p>系統採用命令列介面 (CLI) 設計，提供直觀的選單導航：</p>
+                    <div class="code-block">
+                        <pre><code>=======================================
+         ATM Banking System
+=======================================
+1. 用戶登入
+2. 管理員登入  
+3. 退出系統
+請選擇 (1-3): </code></pre>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>提示：</strong> 輸入對應的數字選項，按 Enter 確認
+                    </div>
+                </section>
+
+                <section id="login" class="docs-section">
+                    <h2><i class="fas fa-sign-in-alt"></i> 登入系統</h2>
+                    
+                    <h3>用戶登入流程</h3>
+                    <ol class="step-list">
+                        <li>
+                            <strong>選擇用戶登入</strong>
+                            <p>在主選單選擇 "1. 用戶登入"</p>
+                        </li>
+                        <li>
+                            <strong>輸入帳號</strong>
+                            <p>輸入您的銀行帳號 (10 位數字)</p>
+                        </li>
+                        <li>
+                            <strong>輸入 PIN 碼</strong>
+                            <p>輸入 4 位數的 PIN 碼</p>
+                        </li>
+                        <li>
+                            <strong>驗證成功</strong>
+                            <p>系統將驗證您的身份並進入用戶介面</p>
+                        </li>
+                    </ol>
+
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>安全提醒：</strong> PIN 碼輸入錯誤超過 3 次將鎖定帳戶
+                    </div>
+
+                    <h3>測試帳戶</h3>
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th>帳號</th>
+                                <th>PIN 碼</th>
+                                <th>初始餘額</th>
+                                <th>說明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1234567890</td>
+                                <td>1234</td>
+                                <td>$10,000</td>
+                                <td>一般用戶帳戶</td>
+                            </tr>
+                            <tr>
+                                <td>9876543210</td>
+                                <td>5678</td>
+                                <td>$25,000</td>
+                                <td>高額度帳戶</td>
+                            </tr>
+                            <tr>
+                                <td>1111111111</td>
+                                <td>0000</td>
+                                <td>$5,000</td>
+                                <td>基本帳戶</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="basic-operations" class="docs-section">
+                    <h2><i class="fas fa-tasks"></i> 基本操作</h2>
+
+                    <div id="check-balance" class="operation-section">
+                        <h3><i class="fas fa-search-dollar"></i> 查詢餘額</h3>
+                        <p>查看帳戶當前餘額：</p>
+                        <ol>
+                            <li>登入後選擇 "1. 查詢餘額"</li>
+                            <li>系統顯示當前餘額</li>
+                            <li>按任意鍵返回主選單</li>
+                        </ol>
+                        <div class="code-block">
+                            <pre><code>當前餘額: $10,000.00
+按任意鍵繼續...</code></pre>
+                        </div>
+                    </div>
+
+                    <div id="withdraw" class="operation-section">
+                        <h3><i class="fas fa-money-bill-wave"></i> 提款操作</h3>
+                        <p>從帳戶提取現金：</p>
+                        <ol>
+                            <li>選擇 "2. 提款"</li>
+                            <li>輸入提款金額</li>
+                            <li>確認交易</li>
+                            <li>系統處理並更新餘額</li>
+                        </ol>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>限制：</strong> 單次提款限額 $1,000，每日限額 $3,000
+                        </div>
+                    </div>
+
+                    <div id="deposit" class="operation-section">
+                        <h3><i class="fas fa-piggy-bank"></i> 存款操作</h3>
+                        <p>向帳戶存入現金：</p>
+                        <ol>
+                            <li>選擇 "3. 存款"</li>
+                            <li>輸入存款金額</li>
+                            <li>確認交易</li>
+                            <li>系統處理並更新餘額</li>
+                        </ol>
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i>
+                            <strong>無限制：</strong> 存款金額無上限限制
+                        </div>
+                    </div>
+
+                    <div id="transfer" class="operation-section">
+                        <h3><i class="fas fa-exchange-alt"></i> 轉帳功能</h3>
+                        <p>向其他帳戶轉帳：</p>
+                        <ol>
+                            <li>選擇 "4. 轉帳"</li>
+                            <li>輸入收款人帳號</li>
+                            <li>輸入轉帳金額</li>
+                            <li>確認交易詳情</li>
+                            <li>系統處理轉帳</li>
+                        </ol>
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>注意：</strong> 轉帳前請確認收款人帳號正確
+                        </div>
+                    </div>
+                </section>
+
+                <section id="account-management" class="docs-section">
+                    <h2><i class="fas fa-user-cog"></i> 帳戶管理</h2>
+
+                    <div id="view-history" class="operation-section">
+                        <h3><i class="fas fa-history"></i> 查看交易紀錄</h3>
+                        <p>檢視帳戶的交易歷史：</p>
+                        <ol>
+                            <li>選擇 "5. 交易紀錄"</li>
+                            <li>選擇查詢期間（最近 10 筆/全部）</li>
+                            <li>查看詳細交易資訊</li>
+                        </ol>
+                        <div class="code-block">
+                            <pre><code>交易紀錄:
+日期: 2024-01-15 10:30:25 | 類型: 提款 | 金額: -$500.00 | 餘額: $9,500.00
+日期: 2024-01-14 14:22:10 | 類型: 存款 | 金額: +$1,000.00 | 餘額: $10,000.00</code></pre>
+                        </div>
+                    </div>
+
+                    <div id="change-pin" class="operation-section">
+                        <h3><i class="fas fa-key"></i> 修改密碼</h3>
+                        <p>更改 PIN 碼以提高安全性：</p>
+                        <ol>
+                            <li>選擇 "6. 修改 PIN 碼"</li>
+                            <li>輸入當前 PIN 碼</li>
+                            <li>輸入新的 PIN 碼</li>
+                            <li>確認新的 PIN 碼</li>
+                            <li>系統更新密碼</li>
+                        </ol>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>要求：</strong> PIN 碼必須為 4 位數字
+                        </div>
+                    </div>
+                </section>
+
+                <section id="admin-features" class="docs-section">
+                    <h2><i class="fas fa-user-shield"></i> 管理員功能</h2>
+
+                    <div id="admin-login" class="operation-section">
+                        <h3><i class="fas fa-sign-in-alt"></i> 管理員登入</h3>
+                        <p>管理員專用登入介面：</p>
+                        <ol>
+                            <li>在主選單選擇 "2. 管理員登入"</li>
+                            <li>輸入管理員帳號：<code>admin</code></li>
+                            <li>輸入管理員密碼：<code>admin123</code></li>
+                        </ol>
+                    </div>
+
+                    <div id="user-management" class="operation-section">
+                        <h3><i class="fas fa-users"></i> 用戶管理</h3>
+                        <p>管理系統用戶：</p>
+                        <ul>
+                            <li><strong>查看所有用戶：</strong> 顯示系統中所有用戶資訊</li>
+                            <li><strong>新增用戶：</strong> 創建新的用戶帳戶</li>
+                            <li><strong>刪除用戶：</strong> 移除指定用戶</li>
+                            <li><strong>解鎖帳戶：</strong> 解鎖被鎖定的用戶帳戶</li>
+                        </ul>
+                    </div>
+
+                    <div id="system-monitoring" class="operation-section">
+                        <h3><i class="fas fa-chart-line"></i> 系統監控</h3>
+                        <p>監控系統狀態：</p>
+                        <ul>
+                            <li><strong>交易統計：</strong> 查看系統交易統計資料</li>
+                            <li><strong>用戶活動：</strong> 監控用戶活動記錄</li>
+                            <li><strong>系統日誌：</strong> 查看系統運行日誌</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="security-tips" class="docs-section">
+                    <h2><i class="fas fa-shield-alt"></i> 安全提醒</h2>
+                    <div class="security-tips">
+                        <div class="tip-item">
+                            <i class="fas fa-eye-slash"></i>
+                            <h3>保護 PIN 碼</h3>
+                            <p>不要與他人分享您的 PIN 碼，輸入時注意遮擋</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-clock"></i>
+                            <h3>及時登出</h3>
+                            <p>使用完畢後請及時登出系統</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-sync-alt"></i>
+                            <h3>定期更換密碼</h3>
+                            <p>建議定期更換 PIN 碼以保障帳戶安全</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>異常提醒</h3>
+                            <p>發現異常交易請立即聯繫管理員</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="troubleshooting" class="docs-section">
+                    <h2><i class="fas fa-tools"></i> 故障排除</h2>
+                    <div class="troubleshoot-item">
+                        <h3>Q: 忘記 PIN 碼怎麼辦？</h3>
+                        <p><strong>A:</strong> 請聯繫管理員重置 PIN 碼，或使用管理員功能解鎖帳戶。</p>
+                    </div>
+                    <div class="troubleshoot-item">
+                        <h3>Q: 帳戶被鎖定如何處理？</h3>
+                        <p><strong>A:</strong> PIN 碼輸入錯誤超過 3 次會導致帳戶鎖定，需要管理員解鎖。</p>
+                    </div>
+                    <div class="troubleshoot-item">
+                        <h3>Q: 轉帳失敗的原因？</h3>
+                        <p><strong>A:</strong> 可能原因包括：餘額不足、收款帳號不存在、輸入金額無效。</p>
+                    </div>
+                    <div class="troubleshoot-item">
+                        <h3>Q: 如何查看完整交易記錄？</h3>
+                        <p><strong>A:</strong> 在交易記錄選單中選擇 "查看全部記錄" 選項。</p>
+                    </div>
+                </section>
+
+                <!-- 回到頂部按鈕 -->
+                <button id="scrollToTop" class="scroll-to-top" title="回到頂部">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ATM Banking System</h3>
+                <p>專業的銀行自動櫃員機模擬系統</p>
+            </div>
+            <div class="footer-section">
+                <h4>文檔連結</h4>
+                <ul>
+                    <li><a href="getting-started.html">快速開始</a></li>
+                    <li><a href="user-guide.html">使用者指南</a></li>
+                    <li><a href="api-reference.html">API 參考</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>聯繫資訊</h4>
+                <p>Email: support@atm-system.com</p>
+                <p>GitHub: <a href="https://github.com/your-repo">ATM Banking System</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ATM Banking System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

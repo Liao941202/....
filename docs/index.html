@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM 自動櫃員機系統 - 企業級金融模擬系統</title>
+    <meta name="description" content="Enterprise-grade ATM banking simulation built with modern C++ and Qt framework">
+    <meta name="keywords" content="ATM, Banking System, C++, Qt, SQLite, GUI, Enterprise">
+    <meta name="author" content="WU">
+      <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ATM 自動櫃員機系統">
+    <meta property="og:description" content="專業的銀行自動櫃員機模擬系統 - 使用 C++ 開發的完整金融交易平台">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-username.github.io/ATM_Banking_System/">
+    <meta property="og:image" content="assets/images/og-image.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ATM 自動櫃員機系統">
+    <meta name="twitter:description" content="專業的銀行自動櫃員機模擬系統 - 使用 C++ 開發的完整金融交易平台">
+    <meta name="twitter:image" content="assets/images/og-image.svg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/images/favicon.svg">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-university"></i>
+                <span>ATM System</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">首頁</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#features" class="nav-link">功能特色</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#architecture" class="nav-link">系統架構</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#documentation" class="nav-link">文檔</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#download" class="nav-link">下載</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://github.com/sheng5526cs/ATM_Banking_System" class="nav-link" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-code"></i>
+                    <span>6,650+ 行程式碼</span>
+                </div>
+                <h1 class="hero-title">
+                    🏦 ATM 自動櫃員機系統
+                </h1>
+                <p class="hero-subtitle">
+                    Enterprise-grade ATM banking simulation for modern C++ and Qt
+                </p>
+                <p class="hero-description">
+                    企業級自動櫃員機模擬系統，運用現代 C++ 技術與 Qt 框架開發的完整金融應用程式，
+                    具備多層次安全機制、豐富的 GUI 界面以及完整的銀行業務流程模擬。
+                </p>
+                <div class="hero-badges">
+                    <img src="https://img.shields.io/badge/Language-C%2B%2B17-blue.svg" alt="C++17">
+                    <img src="https://img.shields.io/badge/Framework-Qt%206.9.0-green.svg" alt="Qt 6.9.0">
+                    <img src="https://img.shields.io/badge/Database-SQLite-orange.svg" alt="SQLite">
+                    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License">
+                </div>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <i class="fas fa-download"></i>
+                        立即下載
+                    </a>
+                    <a href="#documentation" class="btn btn-secondary">
+                        <i class="fas fa-book"></i>
+                        查看文檔
+                    </a>
+                    <a href="https://github.com/sheng5526cs/ATM_Banking_System" class="btn btn-outline" target="_blank">
+                        <i class="fab fa-github"></i>
+                        GitHub 源碼
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-mockup">
+                    <i class="fas fa-desktop"></i>
+                    <div class="mockup-screen">
+                        <div class="mockup-header">
+                            <div class="mockup-controls">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="mockup-content">
+                            <div class="login-form">
+                                <h3>ATM 登入系統</h3>
+                                <div class="input-group">
+                                    <input type="text" placeholder="帳號">
+                                </div>
+                                <div class="input-group">
+                                    <input type="password" placeholder="密碼">
+                                </div>
+                                <button class="login-btn">登入</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>核心功能特色</h2>
+                <p>完整的銀行業務功能與企業級安全機制</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>用戶功能模組</h3>
+                    <ul>
+                        <li>🔐 安全登入系統</li>
+                        <li>💰 餘額查詢</li>
+                        <li>💳 存款作業</li>
+                        <li>🏧 提款作業</li>
+                        <li>💸 轉帳功能</li>
+                        <li>📊 交易紀錄</li>
+                        <li>🔑 密碼變更</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>管理員功能模組</h3>
+                    <ul>
+                        <li>🛡️ 管理員專用登入</li>
+                        <li>📋 帳戶管理</li>
+                        <li>🔧 系統維護</li>
+                        <li>📈 系統監控</li>
+                        <li>👥 用戶狀態管理</li>
+                        <li>🔄 密碼重設</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>安全機制</h3>
+                    <ul>
+                        <li>⏰ 90秒會話超時</li>
+                        <li>🚫 登入失敗保護</li>
+                        <li>🔐 SHA-256 密碼加密</li>
+                        <li>👮 異常行為監測</li>
+                        <li>🔒 多層次身份驗證</li>
+                        <li>📝 完整日誌記錄</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <div class="section-header">
+                <h2>系統架構</h2>
+                <p>基於 MVC 模式的企業級架構設計</p>
+            </div>
+            
+            <div class="architecture-content">
+                <div class="architecture-diagram">
+                    <div class="arch-layer">
+                        <h3>Presentation Layer</h3>
+                        <p>GUI Windows & User Interface</p>
+                        <div class="layer-tech">Qt Widgets</div>
+                    </div>
+                    <div class="arch-arrow">↕</div>
+                    <div class="arch-layer">
+                        <h3>Business Logic Layer</h3>
+                        <p>Controller & Signal/Slots</p>
+                        <div class="layer-tech">Qt Signals</div>
+                    </div>
+                    <div class="arch-arrow">↕</div>
+                    <div class="arch-layer">
+                        <h3>Data Access Layer</h3>
+                        <p>DatabaseManager & SQLite DB</p>
+                        <div class="layer-tech">SQLite</div>
+                    </div>
+                </div>
+                
+                <div class="tech-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">6,650+</div>
+                        <div class="stat-label">行程式碼</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">13</div>
+                        <div class="stat-label">GUI 界面</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">43</div>
+                        <div class="stat-label">原始碼檔案</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">&lt;100ms</div>
+                        <div class="stat-label">響應時間</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="documentation" class="documentation">
+        <div class="container">
+            <div class="section-header">
+                <h2>文檔資源</h2>
+                <p>完整的開發文檔與使用指南</p>
+            </div>
+            
+            <div class="docs-grid">
+                <a href="getting-started.html" class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>快速開始</h3>
+                    <p>系統安裝、配置與第一次使用指南</p>
+                </a>
+                
+                <a href="user-guide.html" class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-user-guide"></i>
+                    </div>
+                    <h3>使用手冊</h3>
+                    <p>詳細的功能說明與操作指南</p>
+                </a>
+                
+                <a href="api-reference.html" class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>API 參考</h3>
+                    <p>完整的類別與方法文檔</p>
+                </a>
+                
+                <a href="architecture.html" class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3>架構設計</h3>
+                    <p>系統架構與設計模式說明</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <div class="section-header">
+                <h2>下載與安裝</h2>
+                <p>選擇適合您的下載方式</p>
+            </div>
+            
+            <div class="download-options">
+                <div class="download-card recommended">
+                    <div class="download-badge">推薦</div>
+                    <h3>已編譯版本</h3>
+                    <p>適合一般用戶，開箱即用</p>
+                    <div class="download-features">
+                        <span>✅ 無需開發環境</span>
+                        <span>✅ 包含所有依賴</span>
+                        <span>✅ 立即執行</span>
+                    </div>
+                    <a href="https://github.com/sheng5526cs/ATM_Banking_System/releases/latest" class="btn btn-primary">
+                        <i class="fas fa-download"></i>
+                        下載 v1.0.0
+                    </a>
+                </div>
+                
+                <div class="download-card">
+                    <h3>原始碼</h3>
+                    <p>適合開發者，可自訂修改</p>
+                    <div class="download-features">
+                        <span>🔧 需要 Qt Creator</span>
+                        <span>📝 可修改程式碼</span>
+                        <span>🎓 學習用途</span>
+                    </div>
+                    <a href="https://github.com/sheng5526cs/ATM_Banking_System" class="btn btn-secondary">
+                        <i class="fab fa-github"></i>
+                        GitHub 克隆
+                    </a>
+                </div>
+            </div>
+            
+            <div class="system-requirements">
+                <h3>系統需求</h3>
+                <div class="requirements-grid">
+                    <div class="req-item">
+                        <strong>作業系統:</strong> Windows 10/11 (64-bit)
+                    </div>
+                    <div class="req-item">
+                        <strong>記憶體:</strong> 至少 2GB 可用記憶體
+                    </div>
+                    <div class="req-item">
+                        <strong>硬碟空間:</strong> 至少 500MB 可用空間
+                    </div>
+                    <div class="req-item">
+                        <strong>開發工具:</strong> Qt Creator 6.9.0+ (開發者)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ATM Banking System</h4>
+                    <p>企業級自動櫃員機模擬系統</p>
+                    <div class="social-links">
+                        <a href="https://github.com/sheng5526cs" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>快速連結</h4>
+                    <ul>
+                        <li><a href="#features">功能特色</a></li>
+                        <li><a href="#architecture">系統架構</a></li>
+                        <li><a href="#documentation">文檔</a></li>
+                        <li><a href="#download">下載</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>文檔</h4>
+                    <ul>
+                        <li><a href="getting-started.html">快速開始</a></li>
+                        <li><a href="user-guide.html">使用手冊</a></li>
+                        <li><a href="api-reference.html">API 參考</a></li>
+                        <li><a href="architecture.html">架構設計</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>技術支援</h4>
+                    <ul>
+                        <li><a href="https://github.com/sheng5526cs/ATM_Banking_System/issues" target="_blank">問題回報</a></li>
+                        <li><a href="mailto:B3230665@ulive.pccu.edu.tw">聯絡開發者</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 WU. Licensed under MIT License.</p>
+                <p>Built with ❤️ using Modern C++ and Qt Framework</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

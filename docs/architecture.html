@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>架構設計 - ATM Banking System</title>
+    <meta name="description" content="ATM Banking System 系統架構與設計說明 - 類別圖、循序圖、設計模式詳解">
+    <meta name="keywords" content="系統架構, 設計模式, UML, 類別圖, 循序圖, 軟體設計">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="架構設計 - ATM Banking System">
+    <meta property="og:description" content="ATM Banking System 系統架構與設計說明">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/images/og-image.svg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 導航列 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-university"></i>
+                <span>ATM Banking System</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">首頁</a>
+                </li>
+                <li class="nav-item">
+                    <a href="getting-started.html" class="nav-link">快速開始</a>
+                </li>
+                <li class="nav-item">
+                    <a href="user-guide.html" class="nav-link">使用者指南</a>
+                </li>
+                <li class="nav-item">
+                    <a href="api-reference.html" class="nav-link">API 參考</a>
+                </li>
+                <li class="nav-item">
+                    <a href="architecture.html" class="nav-link active">架構設計</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <main class="docs-main">
+        <div class="docs-container">
+            <!-- 側邊欄 -->
+            <aside class="docs-sidebar">
+                <div class="sidebar-content">
+                    <h3>架構設計</h3>
+                    <nav class="sidebar-nav">
+                        <ul>
+                            <li><a href="#overview">系統概覽</a></li>
+                            <li><a href="#architecture-principles">架構原則</a></li>
+                            <li><a href="#system-components">系統組件</a>
+                                <ul>
+                                    <li><a href="#presentation-layer">展示層</a></li>
+                                    <li><a href="#business-layer">業務層</a></li>
+                                    <li><a href="#data-layer">資料層</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#class-diagram">類別圖</a></li>
+                            <li><a href="#sequence-diagrams">循序圖</a>
+                                <ul>
+                                    <li><a href="#login-sequence">登入流程</a></li>
+                                    <li><a href="#withdraw-sequence">提款流程</a></li>
+                                    <li><a href="#transfer-sequence">轉帳流程</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#security-architecture">安全架構</a></li>
+                            <li><a href="#data-flow">資料流程</a></li>
+                            <li><a href="#design-patterns">設計模式</a></li>
+                            <li><a href="#scalability">擴展性設計</a></li>
+                            <li><a href="#performance">效能考量</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- 文檔內容 -->
+            <div class="docs-content">
+                <header class="docs-header">
+                    <h1>系統架構設計</h1>
+                    <p>ATM Banking System 的完整架構設計與技術說明</p>
+                </header>
+
+                <section id="overview" class="docs-section">
+                    <h2><i class="fas fa-sitemap"></i> 系統概覽</h2>
+                    <p>ATM Banking System 採用分層架構設計，將系統劃分為展示層、業務邏輯層和資料層，提供清晰的職責分離和良好的維護性。</p>
+                    
+                    <div class="architecture-overview">
+                        <div class="layer-diagram">
+                            <div class="layer presentation">
+                                <h3><i class="fas fa-desktop"></i> 展示層 (Presentation Layer)</h3>
+                                <p>ATM 介面、用戶互動、選單系統</p>
+                            </div>
+                            <div class="layer business">
+                                <h3><i class="fas fa-cogs"></i> 業務層 (Business Layer)</h3>
+                                <p>帳戶管理、交易處理、安全驗證</p>
+                            </div>
+                            <div class="layer data">
+                                <h3><i class="fas fa-database"></i> 資料層 (Data Layer)</h3>
+                                <p>檔案儲存、資料持久化、JSON 處理</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-specs">
+                        <div class="spec-card">
+                            <h3><i class="fas fa-code"></i> 技術棧</h3>
+                            <ul>
+                                <li>程式語言：C++ (C++17)</li>
+                                <li>建構工具：CMake</li>
+                                <li>JSON 處理：nlohmann/json</li>
+                                <li>開發環境：Visual Studio 2019+</li>
+                            </ul>
+                        </div>
+                        <div class="spec-card">
+                            <h3><i class="fas fa-cubes"></i> 架構特色</h3>
+                            <ul>
+                                <li>物件導向設計</li>
+                                <li>分層架構模式</li>
+                                <li>SOLID 設計原則</li>
+                                <li>錯誤處理機制</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="architecture-principles" class="docs-section">
+                    <h2><i class="fas fa-balance-scale"></i> 架構原則</h2>
+                    
+                    <div class="principles-grid">
+                        <div class="principle-card">
+                            <h3><i class="fas fa-layer-group"></i> 關注點分離</h3>
+                            <p>將使用者介面、業務邏輯和資料存取分離到不同的層次，確保每個層次專注於自己的職責。</p>
+                        </div>
+                        <div class="principle-card">
+                            <h3><i class="fas fa-plug"></i> 低耦合度</h3>
+                            <p>各個模組之間的依賴性降到最低，提高系統的可維護性和可測試性。</p>
+                        </div>
+                        <div class="principle-card">
+                            <h3><i class="fas fa-expand-arrows-alt"></i> 高內聚性</h3>
+                            <p>相關功能聚集在同一個模組中，提高程式碼的可讀性和重用性。</p>
+                        </div>
+                        <div class="principle-card">
+                            <h3><i class="fas fa-shield-alt"></i> 安全第一</h3>
+                            <p>在架構設計中優先考慮安全性，包括資料加密、存取控制和錯誤處理。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="system-components" class="docs-section">
+                    <h2><i class="fas fa-puzzle-piece"></i> 系統組件</h2>
+
+                    <div id="presentation-layer" class="component-section">
+                        <h3><i class="fas fa-desktop"></i> 展示層 (Presentation Layer)</h3>
+                        <p>負責與用戶的互動，包括輸入處理、輸出顯示和選單導航。</p>
+                        
+                        <div class="component-details">
+                            <h4>主要組件：</h4>
+                            <ul>
+                                <li><strong>ATM 類別：</strong> 主要的使用者介面控制器</li>
+                                <li><strong>選單系統：</strong> 階層式選單導航</li>
+                                <li><strong>輸入驗證：</strong> 用戶輸入的格式驗證</li>
+                                <li><strong>顯示格式化：</strong> 金額、日期的格式化顯示</li>
+                            </ul>
+
+                            <div class="code-block">
+                                <pre><code>ATM
+├── 主選單
+│   ├── 用戶登入
+│   ├── 管理員登入
+│   └── 系統退出
+├── 用戶選單
+│   ├── 查詢餘額
+│   ├── 提款操作
+│   ├── 存款操作
+│   ├── 轉帳功能
+│   ├── 交易記錄
+│   └── 修改密碼
+└── 管理員選單
+    ├── 查看所有用戶
+    ├── 新增用戶
+    ├── 刪除用戶
+    └── 解鎖帳戶</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="business-layer" class="component-section">
+                        <h3><i class="fas fa-cogs"></i> 業務層 (Business Layer)</h3>
+                        <p>包含所有的業務邏輯和規則，處理銀行操作的核心功能。</p>
+                        
+                        <div class="component-details">
+                            <h4>核心模組：</h4>
+                            <div class="module-grid">
+                                <div class="module-card">
+                                    <h5><i class="fas fa-user"></i> Account 模組</h5>
+                                    <ul>
+                                        <li>帳戶資料管理</li>
+                                        <li>PIN 碼驗證</li>
+                                        <li>帳戶鎖定機制</li>
+                                        <li>餘額操作</li>
+                                    </ul>
+                                </div>
+                                <div class="module-card">
+                                    <h5><i class="fas fa-university"></i> Bank 模組</h5>
+                                    <ul>
+                                        <li>帳戶集合管理</li>
+                                        <li>轉帳處理</li>
+                                        <li>系統統計</li>
+                                        <li>資料同步</li>
+                                    </ul>
+                                </div>
+                                <div class="module-card">
+                                    <h5><i class="fas fa-exchange-alt"></i> Transaction 模組</h5>
+                                    <ul>
+                                        <li>交易記錄</li>
+                                        <li>交易驗證</li>
+                                        <li>歷史查詢</li>
+                                        <li>審計追蹤</li>
+                                    </ul>
+                                </div>
+                                <div class="module-card">
+                                    <h5><i class="fas fa-shield-alt"></i> Security 模組</h5>
+                                    <ul>
+                                        <li>身份驗證</li>
+                                        <li>授權控制</li>
+                                        <li>安全日誌</li>
+                                        <li>錯誤處理</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="data-layer" class="component-section">
+                        <h3><i class="fas fa-database"></i> 資料層 (Data Layer)</h3>
+                        <p>負責資料的持久化存儲和檢索，使用 JSON 格式存儲帳戶和交易資料。</p>
+                        
+                        <div class="component-details">
+                            <h4>資料結構：</h4>
+                            <div class="code-block">
+                                <pre><code>{
+  "accounts": [
+    {
+      "accountNumber": "1234567890",
+      "pinCode": "1234",
+      "balance": 10000.00,
+      "isLocked": false,
+      "failedAttempts": 0,
+      "transactionHistory": [
+        {
+          "transactionId": "TXN_001",
+          "type": "DEPOSIT",
+          "amount": 1000.00,
+          "balanceAfter": 10000.00,
+          "timestamp": "2024-01-15T10:30:00Z",
+          "description": "ATM 存款"
+        }
+      ]
+    }
+  ],
+  "systemInfo": {
+    "lastBackup": "2024-01-15T00:00:00Z",
+    "totalTransactions": 156,
+    "activeAccounts": 25
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="class-diagram" class="docs-section">
+                    <h2><i class="fas fa-project-diagram"></i> 類別圖</h2>
+                    <p>系統的主要類別及其關係圖：</p>
+                    
+                    <div class="diagram-container">
+                        <div class="class-diagram">
+                            <div class="class-box atm-class">
+                                <h4>ATM</h4>
+                                <div class="attributes">
+                                    <p>- bank: Bank*</p>
+                                    <p>- currentAccount: Account*</p>
+                                    <p>- isUserLoggedIn: bool</p>
+                                    <p>- isAdminLoggedIn: bool</p>
+                                </div>
+                                <div class="methods">
+                                    <p>+ start(): void</p>
+                                    <p>+ userLogin(): bool</p>
+                                    <p>+ adminLogin(): bool</p>
+                                    <p>+ userMenu(): void</p>
+                                    <p>+ adminMenu(): void</p>
+                                </div>
+                            </div>
+
+                            <div class="class-box bank-class">
+                                <h4>Bank</h4>
+                                <div class="attributes">
+                                    <p>- accounts: vector&lt;Account&gt;</p>
+                                    <p>- dataFile: string</p>
+                                </div>
+                                <div class="methods">
+                                    <p>+ findAccount(string): Account*</p>
+                                    <p>+ addAccount(Account): bool</p>
+                                    <p>+ transfer(string, string, double): bool</p>
+                                    <p>+ loadData(): void</p>
+                                    <p>+ saveData(): void</p>
+                                </div>
+                            </div>
+
+                            <div class="class-box account-class">
+                                <h4>Account</h4>
+                                <div class="attributes">
+                                    <p>- accountNumber: string</p>
+                                    <p>- pinCode: string</p>
+                                    <p>- balance: double</p>
+                                    <p>- isLocked: bool</p>
+                                    <p>- transactionHistory: vector&lt;Transaction&gt;</p>
+                                </div>
+                                <div class="methods">
+                                    <p>+ validatePin(string): bool</p>
+                                    <p>+ getBalance(): double</p>
+                                    <p>+ withdraw(double): bool</p>
+                                    <p>+ deposit(double): void</p>
+                                    <p>+ addTransaction(Transaction): void</p>
+                                </div>
+                            </div>
+
+                            <div class="class-box transaction-class">
+                                <h4>Transaction</h4>
+                                <div class="attributes">
+                                    <p>- transactionId: string</p>
+                                    <p>- accountNumber: string</p>
+                                    <p>- type: string</p>
+                                    <p>- amount: double</p>
+                                    <p>- timestamp: string</p>
+                                </div>
+                                <div class="methods">
+                                    <p>+ getTransactionId(): string</p>
+                                    <p>+ getType(): string</p>
+                                    <p>+ getAmount(): double</p>
+                                    <p>+ toString(): string</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relationships">
+                            <p><strong>關係說明：</strong></p>
+                            <ul>
+                                <li>ATM <strong>使用</strong> Bank (1:1)</li>
+                                <li>Bank <strong>管理</strong> Account (1:N)</li>
+                                <li>Account <strong>擁有</strong> Transaction (1:N)</li>
+                                <li>ATM <strong>當前操作</strong> Account (1:0..1)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="sequence-diagrams" class="docs-section">
+                    <h2><i class="fas fa-long-arrow-alt-right"></i> 循序圖</h2>
+
+                    <div id="login-sequence" class="sequence-section">
+                        <h3><i class="fas fa-sign-in-alt"></i> 用戶登入流程</h3>
+                        <div class="sequence-diagram">
+                            <div class="sequence-step">
+                                <div class="step-number">1</div>
+                                <div class="step-description">
+                                    <strong>用戶</strong> → <strong>ATM</strong>: 選擇用戶登入
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">2</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>用戶</strong>: 請求輸入帳號
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">3</div>
+                                <div class="step-description">
+                                    <strong>用戶</strong> → <strong>ATM</strong>: 輸入帳號
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">4</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>Bank</strong>: findAccount(accountNumber)
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">5</div>
+                                <div class="step-description">
+                                    <strong>Bank</strong> → <strong>ATM</strong>: 回傳 Account 物件
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">6</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>用戶</strong>: 請求輸入 PIN 碼
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">7</div>
+                                <div class="step-description">
+                                    <strong>用戶</strong> → <strong>ATM</strong>: 輸入 PIN 碼
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">8</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>Account</strong>: validatePin(pinCode)
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">9</div>
+                                <div class="step-description">
+                                    <strong>Account</strong> → <strong>ATM</strong>: 回傳驗證結果
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">10</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>用戶</strong>: 顯示登入結果
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="withdraw-sequence" class="sequence-section">
+                        <h3><i class="fas fa-money-bill-wave"></i> 提款操作流程</h3>
+                        <div class="sequence-diagram">
+                            <div class="sequence-step">
+                                <div class="step-number">1</div>
+                                <div class="step-description">
+                                    <strong>用戶</strong> → <strong>ATM</strong>: 選擇提款功能
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">2</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>用戶</strong>: 請求輸入提款金額
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">3</div>
+                                <div class="step-description">
+                                    <strong>用戶</strong> → <strong>ATM</strong>: 輸入金額
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">4</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>ATM</strong>: 驗證金額有效性
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">5</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>Account</strong>: withdraw(amount)
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">6</div>
+                                <div class="step-description">
+                                    <strong>Account</strong> → <strong>Account</strong>: 檢查餘額是否足夠
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">7</div>
+                                <div class="step-description">
+                                    <strong>Account</strong> → <strong>ATM</strong>: 回傳操作結果
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">8</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>Transaction</strong>: 建立交易記錄
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">9</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>Account</strong>: addTransaction(transaction)
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">10</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>用戶</strong>: 顯示操作結果
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="transfer-sequence" class="sequence-section">
+                        <h3><i class="fas fa-exchange-alt"></i> 轉帳操作流程</h3>
+                        <div class="sequence-diagram">
+                            <div class="sequence-step">
+                                <div class="step-number">1</div>
+                                <div class="step-description">
+                                    <strong>用戶</strong> → <strong>ATM</strong>: 選擇轉帳功能
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">2</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>用戶</strong>: 請求輸入收款帳號
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">3</div>
+                                <div class="step-description">
+                                    <strong>用戶</strong> → <strong>ATM</strong>: 輸入收款帳號
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">4</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>Bank</strong>: findAccount(toAccount)
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">5</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>用戶</strong>: 請求輸入轉帳金額
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">6</div>
+                                <div class="step-description">
+                                    <strong>用戶</strong> → <strong>ATM</strong>: 輸入金額
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">7</div>
+                                <div class="step-description">
+                                    <strong>ATM</strong> → <strong>Bank</strong>: transfer(fromAccount, toAccount, amount)
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">8</div>
+                                <div class="step-description">
+                                    <strong>Bank</strong> → <strong>Account</strong>: withdraw(amount) [from]
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">9</div>
+                                <div class="step-description">
+                                    <strong>Bank</strong> → <strong>Account</strong>: deposit(amount) [to]
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">10</div>
+                                <div class="step-description">
+                                    <strong>Bank</strong> → <strong>ATM</strong>: 回傳轉帳結果
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="security-architecture" class="docs-section">
+                    <h2><i class="fas fa-shield-alt"></i> 安全架構</h2>
+                    
+                    <div class="security-layers">
+                        <div class="security-layer">
+                            <h3><i class="fas fa-key"></i> 身份驗證層</h3>
+                            <ul>
+                                <li><strong>PIN 碼驗證：</strong> 4 位數字 PIN 碼保護</li>
+                                <li><strong>帳戶鎖定：</strong> 3 次錯誤嘗試後自動鎖定</li>
+                                <li><strong>管理員認證：</strong> 獨立的管理員登入系統</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="security-layer">
+                            <h3><i class="fas fa-lock"></i> 授權控制層</h3>
+                            <ul>
+                                <li><strong>角色分離：</strong> 用戶與管理員功能分離</li>
+                                <li><strong>操作限制：</strong> 交易金額限制和頻率控制</li>
+                                <li><strong>資料隔離：</strong> 用戶只能存取自己的帳戶</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="security-layer">
+                            <h3><i class="fas fa-history"></i> 審計追蹤層</h3>
+                            <ul>
+                                <li><strong>交易記錄：</strong> 完整的交易歷史追蹤</li>
+                                <li><strong>操作日誌：</strong> 系統操作的詳細記錄</li>
+                                <li><strong>錯誤監控：</strong> 異常行為的檢測和記錄</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="security-measures">
+                        <h3>安全措施實作</h3>
+                        <div class="code-block">
+                            <pre><code>// PIN 碼驗證與帳戶鎖定
+bool Account::validatePin(const std::string& pin) {
+    if (isLocked) {
+        return false;
+    }
+    
+    if (pinCode == pin) {
+        failedAttempts = 0;
+        return true;
+    } else {
+        failedAttempts++;
+        if (failedAttempts >= MAX_FAILED_ATTEMPTS) {
+            lockAccount();
+        }
+        return false;
+    }
+}
+
+// 交易限額檢查
+bool Account::withdraw(double amount) {
+    if (amount > DAILY_LIMIT) {
+        throw std::runtime_error("超過每日提款限額");
+    }
+    
+    if (amount > SINGLE_TRANSACTION_LIMIT) {
+        throw std::runtime_error("超過單次交易限額");
+    }
+    
+    if (balance < amount) {
+        return false;
+    }
+    
+    balance -= amount;
+    return true;
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="data-flow" class="docs-section">
+                    <h2><i class="fas fa-stream"></i> 資料流程</h2>
+                    
+                    <div class="data-flow-diagram">
+                        <h3>系統資料流向</h3>
+                        <div class="flow-steps">
+                            <div class="flow-step">
+                                <div class="step-icon"><i class="fas fa-user"></i></div>
+                                <h4>用戶輸入</h4>
+                                <p>帳號、PIN 碼、交易資訊</p>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="step-icon"><i class="fas fa-desktop"></i></div>
+                                <h4>ATM 介面</h4>
+                                <p>輸入驗證、格式化處理</p>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="step-icon"><i class="fas fa-cogs"></i></div>
+                                <h4>業務邏輯</h4>
+                                <p>身份驗證、交易處理</p>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="step-icon"><i class="fas fa-database"></i></div>
+                                <h4>資料儲存</h4>
+                                <p>JSON 檔案讀寫</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-persistence">
+                        <h3>資料持久化策略</h3>
+                        <div class="persistence-grid">
+                            <div class="persistence-card">
+                                <h4><i class="fas fa-save"></i> 即時存檔</h4>
+                                <p>每次交易完成後立即保存資料到檔案</p>
+                            </div>
+                            <div class="persistence-card">
+                                <h4><i class="fas fa-shield-alt"></i> 資料完整性</h4>
+                                <p>使用 JSON 格式確保資料結構完整性</p>
+                            </div>
+                            <div class="persistence-card">
+                                <h4><i class="fas fa-history"></i> 版本備份</h4>
+                                <p>定期備份資料檔案防止資料遺失</p>
+                            </div>
+                            <div class="persistence-card">
+                                <h4><i class="fas fa-sync-alt"></i> 自動同步</h4>
+                                <p>系統啟動時自動載入最新資料</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="design-patterns" class="docs-section">
+                    <h2><i class="fas fa-drafting-compass"></i> 設計模式</h2>
+                    
+                    <div class="patterns-grid">
+                        <div class="pattern-card">
+                            <h3><i class="fas fa-crown"></i> Singleton 模式</h3>
+                            <p><strong>應用：</strong> Bank 系統實例</p>
+                            <p><strong>用途：</strong> 確保整個系統只有一個銀行實例，統一管理所有帳戶</p>
+                            <div class="code-example">
+                                <pre><code>class Bank {
+private:
+    static Bank* instance;
+    Bank() {}
+    
+public:
+    static Bank* getInstance() {
+        if (!instance) {
+            instance = new Bank();
+        }
+        return instance;
+    }
+};</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="pattern-card">
+                            <h3><i class="fas fa-factory"></i> Factory 模式</h3>
+                            <p><strong>應用：</strong> Transaction 物件創建</p>
+                            <p><strong>用途：</strong> 根據交易類型創建不同的交易物件</p>
+                            <div class="code-example">
+                                <pre><code>class TransactionFactory {
+public:
+    static Transaction* createTransaction(
+        const std::string& type,
+        double amount,
+        const std::string& account) {
+        
+        if (type == "WITHDRAW") {
+            return new WithdrawTransaction(amount, account);
+        } else if (type == "DEPOSIT") {
+            return new DepositTransaction(amount, account);
+        }
+        return nullptr;
+    }
+};</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="pattern-card">
+                            <h3><i class="fas fa-eye"></i> Observer 模式</h3>
+                            <p><strong>應用：</strong> 交易通知系統</p>
+                            <p><strong>用途：</strong> 當帳戶餘額變化時通知相關觀察者</p>
+                            <div class="code-example">
+                                <pre><code>class Account : public Subject {
+    void notifyObservers() override {
+        for (auto observer : observers) {
+            observer->update(this);
+        }
+    }
+    
+    void withdraw(double amount) {
+        balance -= amount;
+        notifyObservers();  // 通知餘額變化
+    }
+};</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="pattern-card">
+                            <h3><i class="fas fa-chess-knight"></i> Strategy 模式</h3>
+                            <p><strong>應用：</strong> 不同的驗證策略</p>
+                            <p><strong>用途：</strong> 根據用戶類型使用不同的身份驗證方式</p>
+                            <div class="code-example">
+                                <pre><code>class AuthenticationStrategy {
+public:
+    virtual bool authenticate(const std::string& credentials) = 0;
+};
+
+class PinAuthStrategy : public AuthenticationStrategy {
+public:
+    bool authenticate(const std::string& pin) override {
+        return validatePin(pin);
+    }
+};
+
+class AdminAuthStrategy : public AuthenticationStrategy {
+public:
+    bool authenticate(const std::string& password) override {
+        return validateAdminPassword(password);
+    }
+};</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="scalability" class="docs-section">
+                    <h2><i class="fas fa-expand-arrows-alt"></i> 擴展性設計</h2>
+                    
+                    <div class="scalability-aspects">
+                        <div class="aspect-card">
+                            <h3><i class="fas fa-plus-circle"></i> 功能擴展</h3>
+                            <ul>
+                                <li><strong>新交易類型：</strong> 可輕鬆添加新的交易功能</li>
+                                <li><strong>多幣種支援：</strong> 架構支援多種貨幣交易</li>
+                                <li><strong>更多驗證方式：</strong> 可添加生物識別等驗證</li>
+                                <li><strong>通知系統：</strong> 可擴展簡訊、郵件通知</li>
+                            </ul>
+                        </div>
+
+                        <div class="aspect-card">
+                            <h3><i class="fas fa-database"></i> 資料擴展</h3>
+                            <ul>
+                                <li><strong>資料庫整合：</strong> 可整合 MySQL、PostgreSQL</li>
+                                <li><strong>雲端儲存：</strong> 支援雲端資料備份</li>
+                                <li><strong>分散式架構：</strong> 支援多節點部署</li>
+                                <li><strong>快取系統：</strong> 可添加 Redis 快取層</li>
+                            </ul>
+                        </div>
+
+                        <div class="aspect-card">
+                            <h3><i class="fas fa-network-wired"></i> 介面擴展</h3>
+                            <ul>
+                                <li><strong>Web 介面：</strong> 可開發 Web 版本</li>
+                                <li><strong>API 服務：</strong> REST API 支援</li>
+                                <li><strong>行動應用：</strong> 手機 App 整合</li>
+                                <li><strong>第三方整合：</strong> 銀行系統 API 整合</li>
+                            </ul>
+                        </div>
+
+                        <div class="aspect-card">
+                            <h3><i class="fas fa-shield-alt"></i> 安全擴展</h3>
+                            <ul>
+                                <li><strong>加密強化：</strong> AES 資料加密</li>
+                                <li><strong>雙因子驗證：</strong> 2FA 支援</li>
+                                <li><strong>防詐騙系統：</strong> 機器學習檢測</li>
+                                <li><strong>合規性：</strong> PCI DSS 標準支援</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="performance" class="docs-section">
+                    <h2><i class="fas fa-tachometer-alt"></i> 效能考量</h2>
+                    
+                    <div class="performance-metrics">
+                        <div class="metric-card">
+                            <h3><i class="fas fa-clock"></i> 回應時間</h3>
+                            <div class="metric-value">< 100ms</div>
+                            <p>基本操作回應時間</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3><i class="fas fa-database"></i> 資料處理</h3>
+                            <div class="metric-value">1000+</div>
+                            <p>帳戶併發處理能力</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3><i class="fas fa-memory"></i> 記憶體使用</h3>
+                            <div class="metric-value">< 50MB</div>
+                            <p>系統記憶體佔用</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3><i class="fas fa-hdd"></i> 檔案大小</h3>
+                            <div class="metric-value">< 5MB</div>
+                            <p>可執行檔大小</p>
+                        </div>
+                    </div>
+
+                    <div class="optimization-strategies">
+                        <h3>效能優化策略</h3>
+                        <div class="strategy-grid">
+                            <div class="strategy-item">
+                                <h4><i class="fas fa-bolt"></i> 記憶體優化</h4>
+                                <ul>
+                                    <li>使用智慧指標管理記憶體</li>
+                                    <li>避免不必要的物件複製</li>
+                                    <li>適當使用物件池模式</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-item">
+                                <h4><i class="fas fa-search"></i> 查詢優化</h4>
+                                <ul>
+                                    <li>使用雜湊表快速查找帳戶</li>
+                                    <li>建立適當的索引結構</li>
+                                    <li>分頁處理大量交易記錄</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-item">
+                                <h4><i class="fas fa-file"></i> I/O 優化</h4>
+                                <ul>
+                                    <li>批次處理檔案寫入操作</li>
+                                    <li>使用異步 I/O 處理</li>
+                                    <li>壓縮大型資料檔案</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-item">
+                                <h4><i class="fas fa-code"></i> 程式碼優化</h4>
+                                <ul>
+                                    <li>避免深層巢狀迴圈</li>
+                                    <li>使用編譯器優化選項</li>
+                                    <li>適當的資料結構選擇</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 回到頂部按鈕 -->
+                <button id="scrollToTop" class="scroll-to-top" title="回到頂部">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ATM Banking System</h3>
+                <p>專業的銀行自動櫃員機模擬系統</p>
+            </div>
+            <div class="footer-section">
+                <h4>技術文檔</h4>
+                <ul>
+                    <li><a href="architecture.html">系統架構</a></li>
+                    <li><a href="api-reference.html">API 參考</a></li>
+                    <li><a href="#design-patterns">設計模式</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>開發團隊</h4>
+                <p>Architecture: system@atm-system.com</p>
+                <p>GitHub: <a href="https://github.com/your-repo">Architecture Guide</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ATM Banking System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
