@@ -154,8 +154,9 @@ body {
 .hero-title {
     font-size: 3.5rem;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.1;
     margin-bottom: 1rem;
+    word-break: keep-all;
 }
 
 .hero-subtitle {
@@ -765,10 +766,10 @@ body {
     .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
-    }
-
-    .hero-title {
-        font-size: 2.5rem;
+    }    .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        word-break: keep-all;
     }
 
     .architecture-content {

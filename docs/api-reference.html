@@ -2,14 +2,13 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API 參考 - ATM Banking System</title>
-    <meta name="description" content="ATM Banking System API 參考文檔 - 完整的類別、方法與程式碼範例">
-    <meta name="keywords" content="API, 參考文檔, C++, 類別, 方法, 程式設計">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>程式碼參考 - ATM Banking System</title>
+    <meta name="description" content="ATM Banking System 程式碼參考文檔 - 完整的類別、方法與程式碼範例">
+    <meta name="keywords" content="程式碼參考, C++, Qt, 類別, 方法, 程式設計">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="API 參考 - ATM Banking System">
-    <meta property="og:description" content="ATM Banking System API 參考文檔">
+    <meta property="og:title" content="程式碼參考 - ATM Banking System">
+    <meta property="og:description" content="ATM Banking System 程式碼參考文檔">
     <meta property="og:type" content="website">
     <meta property="og:image" content="assets/images/og-image.svg">
     
@@ -39,9 +38,8 @@
                 </li>
                 <li class="nav-item">
                     <a href="user-guide.html" class="nav-link">使用者指南</a>
-                </li>
-                <li class="nav-item">
-                    <a href="api-reference.html" class="nav-link active">API 參考</a>
+                </li>                <li class="nav-item">
+                    <a href="api-reference.html" class="nav-link active">程式碼參考</a>
                 </li>
                 <li class="nav-item">
                     <a href="architecture.html" class="nav-link">架構設計</a>
@@ -60,17 +58,15 @@
         <div class="docs-container">
             <!-- 側邊欄 -->
             <aside class="docs-sidebar">
-                <div class="sidebar-content">
-                    <h3>API 參考</h3>
+                <div class="sidebar-content">                    <h3>程式碼參考</h3>
                     <nav class="sidebar-nav">
                         <ul>
-                            <li><a href="#overview">API 概覽</a></li>
-                            <li><a href="#core-classes">核心類別</a>
+                            <li><a href="#overview">系統概覽</a></li>                            <li><a href="#core-classes">核心類別</a>
                                 <ul>
-                                    <li><a href="#account-class">Account 類別</a></li>
-                                    <li><a href="#bank-class">Bank 類別</a></li>
-                                    <li><a href="#atm-class">ATM 類別</a></li>
-                                    <li><a href="#transaction-class">Transaction 類別</a></li>
+                                    <li><a href="#account-class">Controller 類別</a></li>
+                                    <li><a href="#bank-class">DatabaseManager 類別</a></li>
+                                    <li><a href="#atm-class">loginWindow 類別</a></li>
+                                    <li><a href="#transaction-class">userwindow 類別</a></li>
                                 </ul>
                             </li>
                             <li><a href="#authentication">身份驗證</a>
@@ -79,16 +75,15 @@
                                     <li><a href="#pin-validation">PIN 驗證</a></li>
                                     <li><a href="#security-features">安全功能</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="#banking-operations">銀行操作</a>
+                            </li>                            <li><a href="#banking-operations">銀行操作</a>
                                 <ul>
                                     <li><a href="#balance-inquiry">餘額查詢</a></li>
-                                    <li><a href="#withdraw-api">提款 API</a></li>
-                                    <li><a href="#deposit-api">存款 API</a></li>
-                                    <li><a href="#transfer-api">轉帳 API</a></li>
+                                    <li><a href="#withdraw-api">提款功能</a></li>
+                                    <li><a href="#deposit-api">存款功能</a></li>
+                                    <li><a href="#transfer-api">轉帳功能</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#admin-api">管理員 API</a>
+                            <li><a href="#admin-api">管理員功能</a>
                                 <ul>
                                     <li><a href="#user-management-api">用戶管理</a></li>
                                     <li><a href="#system-monitoring-api">系統監控</a></li>
@@ -102,76 +97,95 @@
             </aside>
 
             <!-- 文檔內容 -->
-            <div class="docs-content">
-                <header class="docs-header">
-                    <h1>API 參考文檔</h1>
-                    <p>完整的 ATM Banking System API 開發指南</p>
-                </header>
-
-                <section id="overview" class="docs-section">
-                    <h2><i class="fas fa-code"></i> API 概覽</h2>
-                    <p>ATM Banking System 採用物件導向設計，提供完整的銀行業務 API 介面。系統支援用戶驗證、帳戶管理、交易處理和系統管理等功能。</p>
+            <div class="docs-content">                <header class="docs-header">
+                    <h1>程式碼參考文檔</h1>
+                    <p>完整的 ATM Banking System 程式碼開發指南</p>
+                </header>                <section id="overview" class="docs-section">
+                    <h2><i class="fas fa-code"></i> 系統概覽</h2>
+                    <p>ATM Banking System 採用 Qt 框架和物件導向設計，提供完整的圖形化銀行業務介面。系統使用 Controller 模式管理 14 個 Qt 視窗模組，實現用戶驗證、帳戶管理、交易處理和系統管理功能。</p>
                     
                     <div class="api-info">
                         <div class="info-card">
-                            <h3><i class="fas fa-language"></i> 開發語言</h3>
-                            <p>C++ (標準 C++17)</p>
+                            <h3><i class="fas fa-language"></i> 開發框架</h3>
+                            <p>Qt 6.9.0 + C++ (標準 C++17)</p>
                         </div>
                         <div class="info-card">
                             <h3><i class="fas fa-database"></i> 資料儲存</h3>
-                            <p>檔案系統 (JSON 格式)</p>
+                            <p>SQLite 資料庫 (atm.db)</p>
                         </div>
                         <div class="info-card">
-                            <h3><i class="fas fa-terminal"></i> 介面類型</h3>
-                            <p>命令列介面 (CLI)</p>
+                            <h3><i class="fas fa-desktop"></i> 介面類型</h3>
+                            <p>Qt GUI 圖形化介面</p>
                         </div>
                         <div class="info-card">
                             <h3><i class="fas fa-shield-alt"></i> 安全機制</h3>
-                            <p>PIN 驗證、帳戶鎖定</p>
+                            <p>密碼驗證、會話超時、帳戶狀態管理</p>
                         </div>
+                    </div>
+
+                    <div class="architecture-overview">
+                        <h3><i class="fas fa-sitemap"></i> 系統架構</h3>
+                        <p>系統採用三層架構設計：</p>
+                        <ul>
+                            <li><strong>視窗層 (Window Layer)</strong>：14 個 Qt 視窗模組負責使用者介面</li>
+                            <li><strong>控制器層 (Controller Layer)</strong>：Controller 類別管理所有視窗和業務邏輯</li>
+                            <li><strong>資料層 (Data Layer)</strong>：DatabaseManager 處理 SQLite 資料庫操作</li>
+                        </ul>
                     </div>
                 </section>
 
                 <section id="core-classes" class="docs-section">
-                    <h2><i class="fas fa-cube"></i> 核心類別</h2>
-
-                    <div id="account-class" class="api-class">
-                        <h3><i class="fas fa-user"></i> Account 類別</h3>
-                        <p>代表銀行帳戶的核心類別，管理用戶帳戶資訊和基本操作。</p>
+                    <h2><i class="fas fa-cube"></i> 核心類別</h2>                    <div id="account-class" class="api-class">
+                        <h3><i class="fas fa-microchip"></i> Controller 類別</h3>
+                        <p>系統的中央控制器，管理所有 Qt 視窗模組和業務邏輯流程。</p>
                         
                         <h4>類別宣告</h4>
                         <div class="code-block">
-                            <pre><code class="language-cpp">class Account {
-private:
-    std::string accountNumber;
-    std::string pinCode;
-    double balance;
-    bool isLocked;
-    int failedAttempts;
-    std::vector&lt;Transaction&gt; transactionHistory;
+                            <pre><code class="language-cpp">class Controller : public QObject
+{
+    Q_OBJECT
 
 public:
-    // 建構函式
-    Account(const std::string& accNum, const std::string& pin, double initBalance);
+    explicit Controller(QObject *parent = nullptr);
+    void start(); // 啟動整個流程
     
-    // 帳戶驗證
-    bool validatePin(const std::string& pin);
-    void lockAccount();
-    void unlockAccount();
+    // 靜態的 getter 和 setter 函數
+    static QString Getid();
+    static QString Getaccount();
+    static double Getbalance();
+
+    static void Setid(const QString &id);
+    static void Setaccount(const QString &account);
+    static void Setbalance(double balance);
     
-    // 餘額操作
-    double getBalance() const;
-    bool withdraw(double amount);
-    void deposit(double amount);
+    // 會話管理函數
+    void resetSessionTimer();    // 重置會話計時器
+    void handleSessionTimeout(); // 處理會話超時
+
+private slots:
+    void onSessionTimeout();     // 會話超時槽函數
+
+private:
+    loginWindow *loginWin;       // 登入畫面物件
+    userwindow *userWin;         // 使用者畫面物件
+    adminwindow *adminwin;       // 管理員畫面物件
     
-    // 交易記錄
-    void addTransaction(const Transaction& transaction);
-    std::vector&lt;Transaction&gt; getTransactionHistory() const;
+    // 其他視窗物件
+    acclistWindow *acclist;
+    addaccwindow *addacc;
+    withdrowWindow *withdrowwin; // 提款視窗
+    depositWindow *depositwin;   // 存款視窗
+    TransWindow *transwin;       // 轉帳視窗
     
-    // Getter 方法
-    std::string getAccountNumber() const;
-    bool getIsLocked() const;
-    int getFailedAttempts() const;
+    // 會話超時計時器
+    QTimer *sessionTimer;        // 會話計時器 (90秒)
+    bool sessionActive;          // 會話狀態標記
+
+    static QString id;           // 靜態變量
+    static QString account;
+    static double balance;
+
+    DatabaseManager dbm;         // 資料庫管理器
 };</code></pre>
                         </div>
 
@@ -187,352 +201,468 @@ public:
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><code>validatePin()</code></td>
-                                    <td>const std::string& pin</td>
-                                    <td>bool</td>
-                                    <td>驗證 PIN 碼是否正確</td>
+                                    <td><code>start()</code></td>
+                                    <td>無</td>
+                                    <td>void</td>
+                                    <td>啟動整個應用程式流程</td>
                                 </tr>
                                 <tr>
-                                    <td><code>getBalance()</code></td>
+                                    <td><code>Getbalance()</code></td>
                                     <td>無</td>
                                     <td>double</td>
-                                    <td>取得帳戶餘額</td>
+                                    <td>取得當前用戶餘額</td>
                                 </tr>
                                 <tr>
-                                    <td><code>withdraw()</code></td>
-                                    <td>double amount</td>
-                                    <td>bool</td>
-                                    <td>提款操作</td>
-                                </tr>
-                                <tr>
-                                    <td><code>deposit()</code></td>
-                                    <td>double amount</td>
+                                    <td><code>resetSessionTimer()</code></td>
+                                    <td>無</td>
                                     <td>void</td>
-                                    <td>存款操作</td>
+                                    <td>重置會話計時器</td>
+                                </tr>
+                                <tr>
+                                    <td><code>handleSessionTimeout()</code></td>
+                                    <td>無</td>
+                                    <td>void</td>
+                                    <td>處理會話超時</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                    <div id="bank-class" class="api-class">
+                        <h3><i class="fas fa-database"></i> DatabaseManager 類別</h3>
+                        <p>資料庫管理類別，負責 SQLite 資料庫連接和資料操作。</p>
+                        
+                        <h4>類別宣告</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">class DatabaseManager {
+public:
+    DatabaseManager();
+    bool connect();               // 連線資料庫
+
+    void createUSERTable();       // 建立用戶資料表
+    void insertTestUserData();    // 插入測試用戶資料
+    bool fetchUserData(const QString &account);  // 獲取用戶資料
+
+    int fetchPassword(const QString &account, const QString &password);  // 驗證密碼
+
+    void status(const QString &account, int index);  // 更新帳戶狀態
+    
+private:
+    QSqlDatabase db;             // SQLite 資料庫連接物件
+};</code></pre>
+                        </div>
+
+                        <h4>主要方法</h4>
+                        <table class="api-table">
+                            <thead>
+                                <tr>
+                                    <th>方法</th>
+                                    <th>參數</th>
+                                    <th>回傳值</th>
+                                    <th>說明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>connect()</code></td>
+                                    <td>無</td>
+                                    <td>bool</td>
+                                    <td>連接到 SQLite 資料庫</td>
+                                </tr>
+                                <tr>
+                                    <td><code>fetchUserData()</code></td>
+                                    <td>const QString &account</td>
+                                    <td>bool</td>
+                                    <td>根據帳號獲取用戶資料</td>
+                                </tr>
+                                <tr>
+                                    <td><code>fetchPassword()</code></td>
+                                    <td>account, password</td>
+                                    <td>int</td>
+                                    <td>驗證帳號密碼，返回用戶類型</td>
+                                </tr>
+                                <tr>
+                                    <td><code>status()</code></td>
+                                    <td>account, index</td>
+                                    <td>void</td>
+                                    <td>更新帳戶狀態</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                    <div id="atm-class" class="api-class">
+                        <h3><i class="fas fa-window-maximize"></i> loginWindow 類別</h3>
+                        <p>使用者登入視窗類別，繼承自 QMainWindow，提供登入介面和驗證功能。</p>
+                        
+                        <h4>類別宣告</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">class loginWindow : public QMainWindow {
+    Q_OBJECT
+
+public:
+    loginWindow(QWidget *parent = nullptr);
+    ~loginWindow();
+    void clearPassword();  // 清除密碼欄位
+    
+    // 美化和驗證方法
+    void setupUIEnhancements();     // 設定美化界面
+    bool validateInput(const QString &account, const QString &password); // 輸入驗證
+    void showEnhancedError(const QString &title, const QString &message); // 美化錯誤提示
+
+private slots:
+    void on_LoginButton_clicked();      // 用戶登入按鈕點擊
+    void on_adminloginButton_clicked(); // 管理員登入按鈕點擊
+
+private:
+    Ui::loginWindow *ui;  // UI 物件指標
+
+signals:
+    void userLoginSuccess();    // 用戶登入成功信號
+    void adminLoginSuccess();   // 管理員登入成功信號
+};</code></pre>
+                        </div>
+
+                        <h4>主要方法</h4>
+                        <table class="api-table">
+                            <thead>
+                                <tr>
+                                    <th>方法</th>
+                                    <th>參數</th>
+                                    <th>回傳值</th>
+                                    <th>說明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>clearPassword()</code></td>
+                                    <td>無</td>
+                                    <td>void</td>
+                                    <td>清除密碼輸入欄位</td>
+                                </tr>
+                                <tr>
+                                    <td><code>validateInput()</code></td>
+                                    <td>account, password</td>
+                                    <td>bool</td>
+                                    <td>驗證輸入的帳號密碼格式</td>
+                                </tr>
+                                <tr>
+                                    <td><code>setupUIEnhancements()</code></td>
+                                    <td>無</td>
+                                    <td>void</td>
+                                    <td>設定視窗美化和樣式</td>
+                                </tr>
+                                <tr>
+                                    <td><code>showEnhancedError()</code></td>
+                                    <td>title, message</td>
+                                    <td>void</td>
+                                    <td>顯示美化的錯誤提示對話框</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                    <div id="transaction-class" class="api-class">
+                        <h3><i class="fas fa-user-cog"></i> userwindow 類別</h3>
+                        <p>用戶主畫面視窗類別，提供用戶登入後的主要功能選單。</p>
+                        
+                        <h4>類別宣告</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">class userwindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit userwindow(QWidget *parent = nullptr);
+    ~userwindow();
+    void setWelcomeText(const QString &name); // 設定歡迎訊息
+
+private slots:
+    void on_logout_clicked();        // 登出按鈕
+    void on_changepass_clicked();    // 變更密碼按鈕
+    void on_deposit_clicked();       // 存款按鈕
+    void on_withdrow_clicked();      // 提款按鈕
+    void on_trans_clicked();         // 轉帳按鈕
+    void on_docu_clicked();          // 交易紀錄按鈕
+    void on_idk_clicked();           // 其他功能按鈕
+
+private:
+    Ui::userwindow *ui;
+
+signals:
+    void logout();                   // 登出信號
+    void openChangePassword();       // 開啟變更密碼信號
+    void openDeposit();              // 開啟存款信號
+    void openWithdraw();             // 開啟提款信號
+    void openTransfer();             // 開啟轉帳信號
+    void openTransactionHistory();   // 開啟交易紀錄信號
+};</code></pre>
+                        </div>
+
+                        <h4>主要方法</h4>
+                        <table class="api-table">
+                            <thead>
+                                <tr>
+                                    <th>方法</th>
+                                    <th>參數</th>
+                                    <th>回傳值</th>
+                                    <th>說明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>setWelcomeText()</code></td>
+                                    <td>const QString &name</td>
+                                    <td>void</td>
+                                    <td>設定歡迎訊息和用戶名稱</td>
+                                </tr>
+                                <tr>
+                                    <td><code>on_deposit_clicked()</code></td>
+                                    <td>無</td>
+                                    <td>void</td>
+                                    <td>處理存款按鈕點擊事件</td>
+                                </tr>
+                                <tr>
+                                    <td><code>on_withdrow_clicked()</code></td>
+                                    <td>無</td>
+                                    <td>void</td>
+                                    <td>處理提款按鈕點擊事件</td>
+                                </tr>
+                                <tr>
+                                    <td><code>on_trans_clicked()</code></td>
+                                    <td>無</td>
+                                    <td>void</td>
+                                    <td>處理轉帳按鈕點擊事件</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-
-                    <div id="bank-class" class="api-class">
-                        <h3><i class="fas fa-university"></i> Bank 類別</h3>
-                        <p>銀行系統的主要管理類別，負責帳戶管理和系統操作。</p>
-                        
-                        <h4>類別宣告</h4>
-                        <div class="code-block">
-                            <pre><code class="language-cpp">class Bank {
-private:
-    std::vector&lt;Account&gt; accounts;
-    std::string dataFile;
-
-public:
-    Bank(const std::string& dataFile);
-    
-    // 帳戶管理
-    Account* findAccount(const std::string& accountNumber);
-    bool addAccount(const Account& account);
-    bool removeAccount(const std::string& accountNumber);
-    
-    // 轉帳功能
-    bool transfer(const std::string& fromAccount, 
-                  const std::string& toAccount, 
-                  double amount);
-    
-    // 資料持久化
-    void loadData();
-    void saveData();
-    
-    // 系統統計
-    std::vector&lt;Account&gt; getAllAccounts() const;
-    double getTotalBalance() const;
-    int getTotalTransactions() const;
-};</code></pre>
-                        </div>
-                    </div>
-
-                    <div id="atm-class" class="api-class">
-                        <h3><i class="fas fa-credit-card"></i> ATM 類別</h3>
-                        <p>ATM 機器的主要介面類別，處理用戶互動和操作流程。</p>
-                        
-                        <h4>類別宣告</h4>
-                        <div class="code-block">
-                            <pre><code class="language-cpp">class ATM {
-private:
-    Bank* bank;
-    Account* currentAccount;
-    bool isUserLoggedIn;
-    bool isAdminLoggedIn;
-
-public:
-    ATM(Bank* bankSystem);
-    
-    // 系統啟動
-    void start();
-    void showMainMenu();
-    
-    // 用戶操作
-    bool userLogin();
-    void userMenu();
-    void checkBalance();
-    void withdrawMoney();
-    void depositMoney();
-    void transferMoney();
-    void viewTransactionHistory();
-    void changePinCode();
-    
-    // 管理員操作
-    bool adminLogin();
-    void adminMenu();
-    void viewAllUsers();
-    void addNewUser();
-    void deleteUser();
-    void unlockUserAccount();
-    
-    // 系統控制
-    void logout();
-    void shutdown();
-};</code></pre>
-                        </div>
-                    </div>
-
-                    <div id="transaction-class" class="api-class">
-                        <h3><i class="fas fa-exchange-alt"></i> Transaction 類別</h3>
-                        <p>代表交易記錄的類別，儲存交易詳細資訊。</p>
-                        
-                        <h4>類別宣告</h4>
-                        <div class="code-block">
-                            <pre><code class="language-cpp">class Transaction {
-private:
-    std::string transactionId;
-    std::string accountNumber;
-    std::string type;  // "WITHDRAW", "DEPOSIT", "TRANSFER"
-    double amount;
-    double balanceAfter;
-    std::string timestamp;
-    std::string description;
-
-public:
-    Transaction(const std::string& account, 
-                const std::string& transType,
-                double amt, 
-                double balance,
-                const std::string& desc = "");
-    
-    // Getter 方法
-    std::string getTransactionId() const;
-    std::string getAccountNumber() const;
-    std::string getType() const;
-    double getAmount() const;
-    double getBalanceAfter() const;
-    std::string getTimestamp() const;
-    std::string getDescription() const;
-    
-    // 格式化輸出
-    std::string toString() const;
-};</code></pre>
-                        </div>
-                    </div>
                 </section>
 
                 <section id="authentication" class="docs-section">
-                    <h2><i class="fas fa-key"></i> 身份驗證</h2>
-
-                    <div id="login-methods" class="api-method">
+                    <h2><i class="fas fa-key"></i> 身份驗證</h2>                    <div id="login-methods" class="api-method">
                         <h3>登入方法</h3>
-                        <p>系統提供兩種登入方式：用戶登入和管理員登入。</p>
+                        <p>系統提供兩種登入方式：用戶登入和管理員登入，透過 Qt 信號槽機制處理。</p>
                         
                         <h4>用戶登入</h4>
                         <div class="code-block">
-                            <pre><code class="language-cpp">bool ATM::userLogin() {
-    std::string accountNumber, pinCode;
-    
-    std::cout << "請輸入帳號: ";
-    std::cin >> accountNumber;
-    
-    std::cout << "請輸入 PIN 碼: ";
-    std::cin >> pinCode;
-    
-    Account* account = bank->findAccount(accountNumber);
-    if (account && !account->getIsLocked()) {
-        if (account->validatePin(pinCode)) {
-            currentAccount = account;
-            isUserLoggedIn = true;
-            return true;
-        }
+                            <pre><code class="language-cpp">void loginWindow::on_LoginButton_clicked() {
+    QString account = ui->AccountEdit->text();     // 獲取帳號輸入
+    QString password = ui->PasswordEdit->text();   // 獲取密碼輸入
+
+    // 檢查輸入是否為空
+    if (account.isEmpty() || password.isEmpty()) {
+        showEnhancedError("登入錯誤", "請先輸入帳號和密碼");
+        return;
     }
-    return false;
+    
+    // 輸入驗證
+    if (!validateInput(account, password)) {
+        return; // 驗證失敗則終止
+    }
+      // 發出用戶登入信號
+    emit loginPress(account, password);
 }</code></pre>
                         </div>
 
                         <h4>管理員登入</h4>
                         <div class="code-block">
-                            <pre><code class="language-cpp">bool ATM::adminLogin() {
-    std::string username, password;
-    
-    std::cout << "管理員帳號: ";
-    std::cin >> username;
-    
-    std::cout << "管理員密碼: ";
-    std::cin >> password;
-    
-    if (username == "admin" && password == "admin123") {
-        isAdminLoggedIn = true;
-        return true;
-    }
-    return false;
-}</code></pre>
-                        </div>
-                    </div>
+                            <pre><code class="language-cpp">void loginWindow::on_adminloginButton_clicked() {
+    QString account = ui->AccountEdit->text();     // 獲取帳號輸入
+    QString password = ui->PasswordEdit->text();   // 獲取密碼輸入
 
-                    <div id="pin-validation" class="api-method">
-                        <h3>PIN 驗證機制</h3>
-                        <div class="code-block">
-                            <pre><code class="language-cpp">bool Account::validatePin(const std::string& pin) {
-    if (isLocked) {
-        return false;
+    // 檢查輸入是否為空
+    if (account.isEmpty() || password.isEmpty()) {
+        showEnhancedError("管理員登入錯誤", "請先輸入管理員帳密");
+        return;
     }
     
-    if (pinCode == pin) {
-        failedAttempts = 0;
-        return true;
-    } else {
-        failedAttempts++;
-        if (failedAttempts >= 3) {
-            lockAccount();
+    // 管理員輸入驗證
+    if (!validateInput(account, password)) {
+        return;
+    }
+    
+    // 發出管理員登入信號
+    emit adminpress(account, password);
+}</code></pre>
+                        </div>                        <h4>信號槽連接</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">// 在 Controller 建構子中連接信號槽
+connect(loginWin, &loginWindow::loginPress, this, [=](const QString &account, const QString &password) {
+    qDebug() << "Controller received Account:" << account << "Password:" << password;
+    int result = dbm.fetchPassword(account, password);
+    
+    if (result == 1) {
+        // 用戶登入成功
+        if (dbm.fetchUserData(account)) {
+            loginWin->hide();
+            userWin->setWelcomeText(account);
+            userWin->show();
+            sessionActive = true;
+            sessionTimer->start();
         }
+    } else {
+        // 登入失敗處理
+        QMessageBox::warning(loginWin, "登入失敗", "密碼錯誤，請再試一次。");
+        loginWin->clearPassword();
+    }
+});
+
+connect(loginWin, &loginWindow::adminpress, this, [=](const QString &account, const QString &password) {
+    int result = dbm.fetchPassword(account, password);
+    
+    if (result == 501) {
+        // 管理員登入成功
+        loginWin->hide();
+        adminwin->show();
+        sessionActive = true;
+        sessionTimer->start();
+    } else {
+        QMessageBox::critical(loginWin, "連接錯誤", 
+                             "密碼錯誤。非管理員請勿嘗試登入。");
+        loginWin->clearPassword();
+    }
+});</code></pre>
+                        </div>
+                    </div>                    <div id="pin-validation" class="api-method">
+                        <h3>密碼驗證機制</h3>
+                        <p>系統使用 SHA-256 加密演算法儲存和驗證密碼，並支援帳戶狀態管理。</p>
+                        
+                        <h4>密碼驗證流程</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">int DatabaseManager::fetchPassword(const QString &account, const QString &inputPassword) {
+    QSqlQuery query(db);
+    query.prepare("SELECT password, status FROM users WHERE account = ?");
+    query.addBindValue(account);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to fetch user data:" << query.lastError().text();
+        return -1; // 查詢失敗
+    }
+
+    if (query.next()) {
+        QString storedHashPassword = query.value(0).toString();
+        int status = query.value(1).toInt();
+
+        // 檢查帳戶是否被鎖定
+        if (status == 3) {
+            return 9; // 鎖定狀態
+        }
+
+        // 使用 SHA-256 加密輸入密碼
+        QByteArray hashedInput = QCryptographicHash::hash(
+            inputPassword.toUtf8(), 
+            QCryptographicHash::Sha256
+        ).toHex();
+
+        // 檢查管理員權限
+        if (status == 500) {
+            if (storedHashPassword == hashedInput) {
+                return 501; // 管理員登入成功
+            }
+            return 0; // 管理員密碼錯誤
+        }
+
+        // 檢查一般用戶密碼
+        if (storedHashPassword == hashedInput) {
+            return 1; // 用戶登入成功
+        }
+        
+        return 0; // 密碼錯誤
+    }
+
+    return -1; // 帳戶不存在
+}</code></pre>
+                        </div>
+
+                        <h4>密碼加密</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">// 密碼加密範例
+QString plainPassword = "55688";
+QByteArray hashed = QCryptographicHash::hash(
+    plainPassword.toUtf8(), 
+    QCryptographicHash::Sha256
+);
+QString hashedPassword = hashed.toHex();</code></pre>
+                        </div>
+                    </div>                    <div id="security-features" class="api-method">
+                        <h3>安全功能</h3>
+                        <p>系統提供多層次的安全機制，包括會話超時、帳戶狀態管理和輸入驗證。</p>
+                        
+                        <h4>會話超時機制</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">// 在 Controller 中設定 90 秒會話超時
+void Controller::resetSessionTimer() {
+    if (sessionTimer) {
+        sessionTimer->stop();
+        sessionTimer->start(90000); // 90 秒
+        sessionActive = true;
+    }
+}
+
+void Controller::onSessionTimeout() {
+    if (sessionActive) {
+        qDebug() << "Session timeout - auto logout";
+        handleSessionTimeout();
+    }
+}
+
+void Controller::handleSessionTimeout() {
+    sessionActive = false;
+    
+    // 關閉所有視窗
+    if (userWin) userWin->close();
+    if (adminwin) adminwin->close();
+    if (withdrowwin) withdrowwin->close();
+    if (depositwin) depositwin->close();
+    if (transwin) transwin->close();
+    
+    // 顯示登入視窗
+    if (loginWin) {
+        loginWin->clearPassword();
+        loginWin->show();
+    }
+}</code></pre>
+                        </div>
+
+                        <h4>帳戶狀態管理</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">void DatabaseManager::status(const QString &account, int index) {
+    QSqlQuery query(db);
+    query.prepare("UPDATE users SET status = ? WHERE account = ?");
+    query.addBindValue(index);
+    query.addBindValue(account);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update user status:" << query.lastError().text();
+    } else {
+        qDebug() << "User status updated successfully for account:" << account;
+        qDebug() << "New status:" << index;
+    }
+}
+
+// 狀態代碼說明：
+// 0: 正常狀態
+// 3: 帳戶鎖定
+// 500: 管理員權限
+// 501: 管理員登入成功</code></pre>
+                        </div>
+
+                        <h4>輸入驗證</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">bool loginWindow::validateInput(const QString &account, const QString &password) {
+    // 檢查帳號格式
+    if (account.length() < 3 || account.length() > 20) {
+        showEnhancedError("輸入錯誤", "帳號長度需要在 3-20 字元之間");
         return false;
     }
-}</code></pre>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="banking-operations" class="docs-section">
-                    <h2><i class="fas fa-coins"></i> 銀行操作</h2>
-
-                    <div id="balance-inquiry" class="api-method">
-                        <h3>餘額查詢</h3>
-                        <div class="code-block">
-                            <pre><code class="language-cpp">void ATM::checkBalance() {
-    if (!isUserLoggedIn || !currentAccount) {
-        std::cout << "請先登入!" << std::endl;
-        return;
+    
+    // 檢查密碼格式
+    if (password.length() < 4 || password.length() > 20) {
+        showEnhancedError("輸入錯誤", "密碼長度需要在 4-20 字元之間");
+        return false;
     }
     
-    double balance = currentAccount->getBalance();
-    std::cout << "當前餘額: $" << std::fixed << std::setprecision(2) 
-              << balance << std::endl;
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div id="withdraw-api" class="api-method">
-                        <h3>提款 API</h3>
-                        <div class="code-block">
-                            <pre><code class="language-cpp">void ATM::withdrawMoney() {
-    if (!isUserLoggedIn || !currentAccount) {
-        std::cout << "請先登入!" << std::endl;
-        return;
+    // 檢查是否包含特殊字元
+    QRegularExpression regex("^[a-zA-Z0-9]+$");
+    if (!regex.match(account).hasMatch()) {
+        showEnhancedError("輸入錯誤", "帳號只能包含英文字母和數字");
+        return false;
     }
-    
-    double amount;
-    std::cout << "請輸入提款金額: $";
-    std::cin >> amount;
-    
-    // 驗證金額
-    if (amount <= 0) {
-        std::cout << "無效的金額!" << std::endl;
-        return;
-    }
-    
-    if (amount > 1000) {
-        std::cout << "單次提款限額為 $1,000!" << std::endl;
-        return;
-    }
-    
-    if (currentAccount->withdraw(amount)) {
-        // 記錄交易
-        Transaction transaction(currentAccount->getAccountNumber(),
-                              "WITHDRAW", 
-                              amount,
-                              currentAccount->getBalance(),
-                              "ATM 提款");
-        currentAccount->addTransaction(transaction);
-        
-        std::cout << "提款成功! 剩餘餘額: $" 
-                  << currentAccount->getBalance() << std::endl;
-    } else {
-        std::cout << "提款失敗! 餘額不足!" << std::endl;
-    }
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div id="deposit-api" class="api-method">
-                        <h3>存款 API</h3>
-                        <div class="code-block">
-                            <pre><code class="language-cpp">void ATM::depositMoney() {
-    if (!isUserLoggedIn || !currentAccount) {
-        std::cout << "請先登入!" << std::endl;
-        return;
-    }
-    
-    double amount;
-    std::cout << "請輸入存款金額: $";
-    std::cin >> amount;
-    
-    if (amount <= 0) {
-        std::cout << "無效的金額!" << std::endl;
-        return;
-    }
-    
-    currentAccount->deposit(amount);
-    
-    // 記錄交易
-    Transaction transaction(currentAccount->getAccountNumber(),
-                          "DEPOSIT", 
-                          amount,
-                          currentAccount->getBalance(),
-                          "ATM 存款");
-    currentAccount->addTransaction(transaction);
-    
-    std::cout << "存款成功! 當前餘額: $" 
-              << currentAccount->getBalance() << std::endl;
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div id="transfer-api" class="api-method">
-                        <h3>轉帳 API</h3>
-                        <div class="code-block">
-                            <pre><code class="language-cpp">bool Bank::transfer(const std::string& fromAccount, 
-                   const std::string& toAccount, 
-                   double amount) {
-    Account* from = findAccount(fromAccount);
-    Account* to = findAccount(toAccount);
-    
-    if (!from || !to) {
-        return false;  // 帳戶不存在
-    }
-    
-    if (from->getBalance() < amount) {
-        return false;  // 餘額不足
-    }
-    
-    // 執行轉帳
-    from->withdraw(amount);
-    to->deposit(amount);
-    
-    // 記錄交易
-    Transaction fromTransaction(fromAccount, "TRANSFER_OUT", 
-                               amount, from->getBalance(),
-                               "轉帳至 " + toAccount);
-    Transaction toTransaction(toAccount, "TRANSFER_IN", 
-                             amount, to->getBalance(),
-                             "收到來自 " + fromAccount + " 的轉帳");
-    
-    from->addTransaction(fromTransaction);
-    to->addTransaction(toTransaction);
     
     return true;
 }</code></pre>
@@ -540,209 +670,1052 @@ public:
                     </div>
                 </section>
 
-                <section id="admin-api" class="docs-section">
-                    <h2><i class="fas fa-user-shield"></i> 管理員 API</h2>
-
-                    <div id="user-management-api" class="api-method">
-                        <h3>用戶管理 API</h3>
+                <section id="banking-operations" class="docs-section">
+                    <h2><i class="fas fa-coins"></i> 銀行操作</h2>                    <div id="balance-inquiry" class="api-method">
+                        <h3>餘額查詢</h3>
+                        <p>系統通過 Controller 靜態方法提供餘額查詢功能，各視窗可即時顯示最新餘額。</p>
                         
-                        <h4>新增用戶</h4>
+                        <h4>餘額顯示實現</h4>
                         <div class="code-block">
-                            <pre><code class="language-cpp">void ATM::addNewUser() {
-    std::string accountNumber, pinCode;
-    double initialBalance;
+                            <pre><code class="language-cpp">void withdrowWindow::refreshBalance() {
+    double balance = Controller::Getbalance();
+    ui->label_4->setText(QString("目 前 餘 額 : %1 元").arg(balance, 0, 'f', 0));
+}
+
+void depositWindow::refreshBalance() {
+    double balance = Controller::Getbalance();
+    ui->label_balance->setText(QString("目 前 餘 額 : %1 元").arg(balance, 0, 'f', 0));
+}
+
+void TransWindow::refreshBalance() {
+    double balance = Controller::Getbalance();
+    ui->label_balance->setText(QString("目 前 餘 額 : %1 元").arg(balance, 0, 'f', 0));
+}</code></pre>
+                        </div>
+                        
+                        <h4>Controller 餘額管理</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">// Controller 類別中的靜態方法
+static double Controller::Getbalance() {
+    return balance;  // 返回當前用戶餘額
+}
+
+static void Controller::Setbalance(double newBalance) {
+    balance = newBalance;  // 更新用戶餘額
+}</code></pre>
+                        </div>
+                    </div><div id="withdraw-api" class="api-method">
+                        <h3>提款 API</h3>
+                        <p>提款功能通過 <code>withdrowwindow</code> 視窗實現，支援快速選項和自定義金額。</p>
+                        
+                        <h4>提款視窗初始化</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">withdrowwindow::withdrowwindow(QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::withdrowwindow) {
+    ui->setupUi(this);
+    refreshBalance();
     
-    std::cout << "輸入新帳號: ";
-    std::cin >> accountNumber;
-    
-    // 檢查帳號是否已存在
-    if (bank->findAccount(accountNumber)) {
-        std::cout << "帳號已存在!" << std::endl;
-        return;
-    }
-    
-    std::cout << "輸入 PIN 碼: ";
-    std::cin >> pinCode;
-    
-    std::cout << "輸入初始餘額: $";
-    std::cin >> initialBalance;
-    
-    Account newAccount(accountNumber, pinCode, initialBalance);
-    if (bank->addAccount(newAccount)) {
-        std::cout << "用戶新增成功!" << std::endl;
-    } else {
-        std::cout << "用戶新增失敗!" << std::endl;
-    }
+    // 連接快速提款按鈕
+    connect(ui->money_1000, &QPushButton::clicked, this, &withdrowwindow::on_1000_clicked);
+    connect(ui->money_2000, &QPushButton::clicked, this, &withdrowwindow::on_2000_clicked);
+    connect(ui->money_3000, &QPushButton::clicked, this, &withdrowwindow::on_3000_clicked);
+    connect(ui->money_5000, &QPushButton::clicked, this, &withdrowwindow::on_5000_clicked);
+    connect(ui->money_10000, &QPushButton::clicked, this, &withdrowwindow::on_10000_clicked);
+    connect(ui->other_money, &QPushButton::clicked, this, &withdrowwindow::on_other_money_clicked);
 }</code></pre>
                         </div>
 
-                        <h4>解鎖用戶帳戶</h4>
+                        <h4>提款處理邏輯</h4>
                         <div class="code-block">
-                            <pre><code class="language-cpp">void ATM::unlockUserAccount() {
-    std::string accountNumber;
-    std::cout << "輸入要解鎖的帳號: ";
-    std::cin >> accountNumber;
+                            <pre><code class="language-cpp">void withdrowwindow::withdraw(int amount) {
+    DatabaseManager dbm;
+    if (!dbm.connect()) {
+        QMessageBox::critical(this, "Database Error", "無法連線至系統。");
+        return;
+    }
     
-    Account* account = bank->findAccount(accountNumber);
-    if (account) {
-        account->unlockAccount();
-        std::cout << "帳戶解鎖成功!" << std::endl;
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    QSqlQuery balQuery(db);
+    balQuery.prepare("SELECT balance FROM users WHERE account = ?");
+    balQuery.addBindValue(Controller::Getaccount());
+    
+    if (!balQuery.exec() || !balQuery.next()) {
+        QMessageBox::critical(this, "錯誤", "查詢餘額失敗");
+        return;
+    }
+    
+    double balance = balQuery.value(0).toDouble();
+    if (amount > balance) {
+        QMessageBox::warning(this, "餘額不足", "您的餘額不足。");
+        return;
+    }
+    
+    double newBalance = balance - amount;
+    QString now = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+    
+    // 更新餘額和交易紀錄
+    QSqlQuery query(db);
+    query.prepare(R"(
+        UPDATE users SET
+            balance = ?,
+            change_amount_5 = change_amount_4, balance_5 = balance_4, change_time_5 = change_time_4,
+            change_amount_4 = change_amount_3, balance_4 = balance_3, change_time_4 = change_time_3,
+            change_amount_3 = change_amount_2, balance_3 = balance_2, change_time_3 = change_time_2,
+            change_amount_2 = change_amount_1, balance_2 = balance_1, change_time_2 = change_time_1,
+            change_amount_1 = ?, balance_1 = ?, change_time_1 = ?
+        WHERE account = ?
+    )");
+    query.addBindValue(newBalance);
+    query.addBindValue(-amount);  // 負數表示提款
+    query.addBindValue(newBalance);
+    query.addBindValue(now);
+    query.addBindValue(Controller::Getaccount());
+    
+    if (query.exec()) {
+        Controller::Setbalance(newBalance);
+        refreshBalance();
+        emit showSummary("提款", amount, "", newBalance);
+    }
+}</code></pre>
+                        </div>
+                    </div>                    <div id="deposit-api" class="api-method">
+                        <h3>存款 API</h3>
+                        <p>存款功能通過 <code>depositWindow</code> 視窗實現，支援自定義金額輸入。</p>
+                        
+                        <div class="code-block">
+                            <pre><code class="language-cpp">void depositWindow::on_deposit_btn_clicked() {
+    bool ok = false;
+    int amount = ui->deposit->text().toInt(&ok);
+    
+    if (!ok || amount <= 0) {
+        QMessageBox::warning(this, "錯誤", "請輸入正確的存款金額。");
+        ui->deposit->clear();
+        return;
+    }
+    
+    if (!dbm.connect()) {
+        QMessageBox::critical(this, "Database Error", "無法連線至系統。");
+        return;
+    }
+    
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    QSqlQuery balQuery(db);
+    balQuery.prepare("SELECT balance FROM users WHERE account = ?");
+    balQuery.addBindValue(Controller::Getaccount());
+    
+    if (!balQuery.exec() || !balQuery.next()) {
+        QMessageBox::critical(this, "錯誤", "查詢餘額失敗");
+        return;
+    }
+    
+    double balance = balQuery.value(0).toDouble();
+    double newBalance = balance + amount;
+    QString now = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+    
+    // 更新餘額和交易紀錄
+    QSqlQuery query(db);
+    query.prepare(R"(
+        UPDATE users SET
+            balance = ?,
+            change_amount_5 = change_amount_4, balance_5 = balance_4, change_time_5 = change_time_4,
+            change_amount_4 = change_amount_3, balance_4 = balance_3, change_time_4 = change_time_3,
+            change_amount_3 = change_amount_2, balance_3 = balance_2, change_time_3 = change_time_2,
+            change_amount_2 = change_amount_1, balance_2 = balance_1, change_time_2 = change_time_1,
+            change_amount_1 = ?, balance_1 = ?, change_time_1 = ?
+        WHERE account = ?
+    )");
+    query.addBindValue(newBalance);
+    query.addBindValue(amount);  // 正數表示存款
+    query.addBindValue(newBalance);
+    query.addBindValue(now);
+    query.addBindValue(Controller::Getaccount());
+    
+    if (query.exec()) {
+        Controller::Setbalance(newBalance);
+        refreshBalance();
+        emit showSummary("存款", amount, "", newBalance);
+        ui->deposit->clear();
+    }
+}</code></pre>
+                        </div>
+                    </div>                    <div id="transfer-api" class="api-method">
+                        <h3>轉帳 API</h3>
+                        <p>轉帳功能通過 <code>TransWindow</code> 視窗實現，支援帳號輸入和金額轉帳。</p>
+                        
+                        <div class="code-block">
+                            <pre><code class="language-cpp">void TransWindow::on_trans_btn_clicked() {
+    QString toAccount = ui->account->text().trimmed();
+    bool ok = false;
+    int amount = ui->amount->text().toInt(&ok);
+    
+    // 輸入驗證
+    if (!ok || amount <= 0) {
+        QMessageBox::warning(this, "錯誤", "請輸入正確的轉帳金額。");
+        return;
+    }
+    
+    if (toAccount.isEmpty()) {
+        QMessageBox::warning(this, "錯誤", "請輸入對方帳號。");
+        return;
+    }
+    
+    if (toAccount == Controller::Getaccount()) {
+        QMessageBox::warning(this, "錯誤", "不能轉帳給自己。");
+        return;
+    }
+    
+    DatabaseManager dbm;
+    if (!dbm.connect()) {
+        QMessageBox::critical(this, "Database Error", "無法連線至系統。");
+        return;
+    }
+    
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    
+    // 查詢自己餘額
+    QSqlQuery balQuery(db);
+    balQuery.prepare("SELECT balance FROM users WHERE account = ?");
+    balQuery.addBindValue(Controller::Getaccount());
+    
+    if (!balQuery.exec() || !balQuery.next()) {
+        QMessageBox::critical(this, "錯誤", "查詢餘額失敗");
+        return;
+    }
+    
+    double myBalance = balQuery.value(0).toDouble();
+    if (amount > myBalance) {
+        QMessageBox::warning(this, "餘額不足", "您的餘額不足。");
+        return;
+    }
+    
+    // 查詢對方帳號是否存在
+    QSqlQuery toQuery(db);
+    toQuery.prepare("SELECT balance FROM users WHERE account = ?");
+    toQuery.addBindValue(toAccount);
+    
+    if (!toQuery.exec() || !toQuery.next()) {
+        QMessageBox::warning(this, "錯誤", "對方帳號不存在。");
+        return;
+    }
+    
+    double toBalance = toQuery.value(0).toDouble();
+    double myNewBalance = myBalance - amount;
+    double toNewBalance = toBalance + amount;
+    QString now = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+    
+    // 使用事務處理保證數據一致性
+    db.transaction();
+    
+    // 更新轉出方餘額
+    QSqlQuery myUpdate(db);
+    myUpdate.prepare(R"(
+        UPDATE users SET
+            balance = ?,
+            change_amount_5 = change_amount_4, balance_5 = balance_4, change_time_5 = change_time_4,
+            change_amount_4 = change_amount_3, balance_4 = balance_3, change_time_4 = change_time_3,
+            change_amount_3 = change_amount_2, balance_3 = balance_2, change_time_3 = change_time_2,
+            change_amount_2 = change_amount_1, balance_2 = balance_1, change_time_2 = change_time_1,
+            change_amount_1 = ?, balance_1 = ?, change_time_1 = ?
+        WHERE account = ?
+    )");
+    myUpdate.addBindValue(myNewBalance);
+    myUpdate.addBindValue(-amount);  // 負數表示轉出
+    myUpdate.addBindValue(myNewBalance);
+    myUpdate.addBindValue(now);
+    myUpdate.addBindValue(Controller::Getaccount());
+    
+    // 更新轉入方餘額
+    QSqlQuery toUpdate(db);
+    toUpdate.prepare(R"(
+        UPDATE users SET
+            balance = ?,
+            change_amount_5 = change_amount_4, balance_5 = balance_4, change_time_5 = change_time_4,
+            change_amount_4 = change_amount_3, balance_4 = balance_3, change_time_4 = change_time_3,
+            change_amount_3 = change_amount_2, balance_3 = balance_2, change_time_3 = change_time_2,
+            change_amount_2 = change_amount_1, balance_2 = balance_1, change_time_2 = change_time_1,
+            change_amount_1 = ?, balance_1 = ?, change_time_1 = ?
+        WHERE account = ?
+    )");
+    toUpdate.addBindValue(toNewBalance);
+    toUpdate.addBindValue(amount);   // 正數表示轉入
+    toUpdate.addBindValue(toNewBalance);
+    toUpdate.addBindValue(now);
+    toUpdate.addBindValue(toAccount);
+    
+    if (myUpdate.exec() && toUpdate.exec() && db.commit()) {
+        Controller::Setbalance(myNewBalance);
+        refreshBalance();
+        emit showSummary("轉帳", amount, toAccount, myNewBalance);
+        ui->amount->clear();
+        ui->account->clear();
     } else {
-        std::cout << "帳戶不存在!" << std::endl;
+        db.rollback();
+        QMessageBox::critical(this, "資料庫錯誤", "轉帳失敗");
     }
 }</code></pre>
                         </div>
                     </div>
                 </section>
 
-                <section id="error-handling" class="docs-section">
+                <section id="admin-api" class="docs-section">
+                    <h2><i class="fas fa-user-shield"></i> 管理員 API</h2>                    <div id="user-management-api" class="api-method">
+                        <h3>用戶管理 API</h3>
+                        <p>管理員功能通過 <code>adminwindow</code> 主視窗以及相關管理視窗實現。</p>
+                        
+                        <h4>新增用戶 - addaccwindow</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">void addaccwindow::on_add_clicked() {
+    QString account = ui->accountEdit->text().trimmed();
+    QString password = ui->passwordEdit->text();
+    QString password2 = ui->passwordEdit2->text();
+    QString balanceStr = ui->balanceEdit->text();
+    QString statusText = ui->StatusCombo->currentText();
+
+    // 輸入驗證
+    if (account.isEmpty() || password.isEmpty() || password2.isEmpty() || 
+        balanceStr.isEmpty() || statusText == "請選擇用戶屬性") {
+        QMessageBox::warning(this, "Input Error", "請填寫所有欄位。");
+        return;
+    }
+
+    if (password != password2) {
+        QMessageBox::warning(this, "Password Error", "兩次輸入的密碼不一致。");
+        return;
+    }
+
+    bool ok;
+    double balance = balanceStr.toDouble(&ok);
+    if (!ok || balance < 0) {
+        QMessageBox::warning(this, "Balance Error", "請輸入有效的餘額數值（大於等於 0）。");
+        return;
+    }
+
+    int status = 0;
+    if (statusText == "普通用戶") status = 0;
+    else if (statusText == "管理人員") status = 500;
+
+    // SHA-256 密碼加密
+    QByteArray hashedPassword = QCryptographicHash::hash(
+        password.toUtf8(), 
+        QCryptographicHash::Sha256
+    ).toHex();
+
+    DatabaseManager dbm;
+    if (!dbm.connect()) {
+        QMessageBox::critical(this, "Database Error", "無法連線至系統。");
+        return;
+    }
+
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO users (account, password, status, balance) VALUES (?, ?, ?, ?)");
+    query.addBindValue(account);
+    query.addBindValue(QString(hashedPassword));
+    query.addBindValue(status);
+    query.addBindValue(balance);
+
+    if (query.exec()) {
+        QMessageBox::information(this, "Success", "新增帳號成功！");
+        // 清空欄位
+        ui->accountEdit->clear();
+        ui->passwordEdit->clear();
+        ui->passwordEdit2->clear();
+        ui->balanceEdit->clear();
+        ui->StatusCombo->setCurrentIndex(0);
+    } else {
+        QMessageBox::critical(this, "Database Error", "新增帳號失敗，帳號可能已存在。");
+    }
+}</code></pre>
+                        </div>
+
+                        <h4>帳戶列表查看 - acclistwindow</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">void acclistWindow::loadAccounts() {
+    ui->accountlist->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
+    ui->accountlist->verticalHeader()->setSectionResizeMode(QHeaderView::Interactive);
+
+    DatabaseManager dbm;
+    if (!dbm.connect()) {
+        qDebug() << "Database Error";
+        return;
+    }
+
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    
+    // 創建資料表模型
+    model = new QSqlTableModel(this, db);
+    model->setTable("users");
+    model->setEditStrategy(QSqlTableModel::OnRowChange);
+    
+    if (!model->select()) {
+        qDebug() << "[DEBUG] Select failed:" << model->lastError().text();
+        return;
+    }
+
+    // 設定欄位標題
+    model->setHeaderData(0, Qt::Horizontal, "ID");
+    model->setHeaderData(1, Qt::Horizontal, "Account");
+    model->setHeaderData(3, Qt::Horizontal, "Status");
+    model->setHeaderData(19, Qt::Horizontal, "Balance");
+
+    // 設定表格模型並隱藏敏感欄位
+    ui->accountlist->setModel(model);
+    ui->accountlist->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->accountlist->setColumnHidden(2, true);  // 隱藏密碼欄
+    
+    // 隱藏交易紀錄欄位
+    for (int i = 4; i <= 18; ++i) {
+        ui->accountlist->setColumnHidden(i, true);
+    }
+}</code></pre>
+                        </div>
+
+                        <h4>帳戶狀態設定 - setstatuswindow</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">// 帳戶狀態管理
+void DatabaseManager::status(const QString &account, int index) {
+    QSqlQuery query(db);
+    query.prepare("UPDATE users SET status = ? WHERE account = ?");
+    query.addBindValue(index);
+    query.addBindValue(account);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update user status:" << query.lastError().text();
+    } else {
+        qDebug() << "User status updated successfully for account:" << account;
+        qDebug() << "New status:" << index;
+    }
+}
+
+// 狀態代碼說明：
+// 0: 正常狀態用戶
+// 3: 帳戶鎖定
+// 500: 管理員權限
+// 501: 管理員登入狀態</code></pre>
+                        </div>
+
+                        <h4>密碼重設 - setpasswordwindow</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">// 密碼重設功能範例
+void setPasswordWindow::resetUserPassword(const QString &account, const QString &newPassword) {
+    // SHA-256 加密新密碼
+    QByteArray hashedPassword = QCryptographicHash::hash(
+        newPassword.toUtf8(), 
+        QCryptographicHash::Sha256
+    ).toHex();
+
+    DatabaseManager dbm;
+    if (!dbm.connect()) {
+        QMessageBox::critical(this, "Database Error", "無法連線至系統。");
+        return;
+    }
+
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    QSqlQuery query(db);
+    query.prepare("UPDATE users SET password = ? WHERE account = ?");
+    query.addBindValue(QString(hashedPassword));
+    query.addBindValue(account);
+
+    if (query.exec()) {
+        QMessageBox::information(this, "Success", "密碼重設成功！");
+    } else {
+        QMessageBox::critical(this, "Error", "密碼重設失敗：" + query.lastError().text());
+    }
+}</code></pre>
+                        </div>
+                    </div>                    <div id="system-monitoring-api" class="api-method">
+                        <h3>系統監控 API</h3>
+                        <p>提供系統狀態監控和資料庫統計資訊查詢功能。</p>
+                        
+                        <h4>資料庫連接監控</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">bool DatabaseManager::connect() {
+    if (QSqlDatabase::contains("atm_connection")) {
+        db = QSqlDatabase::database("atm_connection");
+    } else {
+        db = QSqlDatabase::addDatabase("QSQLITE", "atm_connection");
+        db.setDatabaseName("atm.db");
+    }
+    
+    if (!db.open()) {
+        qDebug() << "Database connection failed:" << db.lastError().text();
+        return false;
+    }
+    
+    qDebug() << "Database connected successfully.";
+    
+    // 檢查並創建必要的資料表
+    createUSERTable();
+    insertTestUserData();
+    
+    return true;
+}</code></pre>
+                        </div>
+
+                        <h4>用戶統計查詢</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">// 獲取系統統計資訊
+struct SystemStats {
+    int totalUsers;
+    int activeUsers; 
+    int lockedUsers;
+    int adminUsers;
+    double totalBalance;
+};
+
+SystemStats getSystemStats() {
+    SystemStats stats = {0, 0, 0, 0, 0.0};
+    
+    DatabaseManager dbm;
+    if (!dbm.connect()) {
+        return stats;
+    }
+    
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    
+    // 統計總用戶數
+    QSqlQuery totalQuery(db);
+    totalQuery.prepare("SELECT COUNT(*) FROM users");
+    if (totalQuery.exec() && totalQuery.next()) {
+        stats.totalUsers = totalQuery.value(0).toInt();
+    }
+    
+    // 統計活躍用戶數（狀態為0的用戶）
+    QSqlQuery activeQuery(db);
+    activeQuery.prepare("SELECT COUNT(*) FROM users WHERE status = 0");
+    if (activeQuery.exec() && activeQuery.next()) {
+        stats.activeUsers = activeQuery.value(0).toInt();
+    }
+    
+    // 統計鎖定用戶數（狀態為3的用戶）
+    QSqlQuery lockedQuery(db);
+    lockedQuery.prepare("SELECT COUNT(*) FROM users WHERE status = 3");
+    if (lockedQuery.exec() && lockedQuery.next()) {
+        stats.lockedUsers = lockedQuery.value(0).toInt();
+    }
+    
+    // 統計管理員數量（狀態為500的用戶）
+    QSqlQuery adminQuery(db);
+    adminQuery.prepare("SELECT COUNT(*) FROM users WHERE status = 500");
+    if (adminQuery.exec() && adminQuery.next()) {
+        stats.adminUsers = adminQuery.value(0).toInt();
+    }
+    
+    // 統計系統總餘額
+    QSqlQuery balanceQuery(db);
+    balanceQuery.prepare("SELECT SUM(balance) FROM users WHERE status != 500");
+    if (balanceQuery.exec() && balanceQuery.next()) {
+        stats.totalBalance = balanceQuery.value(0).toDouble();
+    }
+    
+    return stats;
+}</code></pre>
+                        </div>
+
+                        <h4>交易紀錄監控</h4>
+                        <div class="code-block">
+                            <pre><code class="language-cpp">// 獲取系統交易統計
+struct TransactionStats {
+    int totalTransactions;
+    double totalWithdrawals;
+    double totalDeposits;
+    double totalTransfers;
+};
+
+TransactionStats getTransactionStats() {
+    TransactionStats stats = {0, 0.0, 0.0, 0.0};
+    
+    DatabaseManager dbm;
+    if (!dbm.connect()) {
+        return stats;
+    }
+    
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    QSqlQuery query(db);
+    
+    // 統計所有用戶的交易紀錄
+    query.prepare(R"(
+        SELECT 
+            change_amount_1, change_amount_2, change_amount_3, change_amount_4, change_amount_5
+        FROM users 
+        WHERE status != 500
+    )");
+    
+    if (query.exec()) {
+        while (query.next()) {
+            for (int i = 0; i < 5; ++i) {
+                double amount = query.value(i).toDouble();
+                if (amount != 0) {
+                    stats.totalTransactions++;
+                    if (amount > 0) {
+                        stats.totalDeposits += amount;
+                    } else {
+                        stats.totalWithdrawals += abs(amount);
+                    }
+                }
+            }
+        }
+    }
+    
+    return stats;
+}</code></pre>
+                        </div>
+                    </div>
+                </section>                <section id="error-handling" class="docs-section">
                     <h2><i class="fas fa-exclamation-triangle"></i> 錯誤處理</h2>
+                    <p>系統使用 Qt 錯誤處理機制，包括 QMessageBox 提示框和 qDebug 除錯輸出。</p>
                     
-                    <h3>錯誤類型</h3>
+                    <h3>錯誤類型與處理方式</h3>
                     <table class="api-table">
                         <thead>
                             <tr>
                                 <th>錯誤類型</th>
-                                <th>錯誤碼</th>
+                                <th>錯誤碼/狀態</th>
                                 <th>說明</th>
-                                <th>處理方式</th>
+                                <th>Qt 處理方式</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>帳戶不存在</td>
-                                <td>ACCOUNT_NOT_FOUND</td>
-                                <td>輸入的帳號不存在</td>
-                                <td>提示用戶檢查帳號</td>
+                                <td>return -1</td>
+                                <td>輸入的帳號不存在於資料庫</td>
+                                <td>QMessageBox::warning 提示用戶檢查帳號</td>
                             </tr>
                             <tr>
-                                <td>PIN 碼錯誤</td>
-                                <td>INVALID_PIN</td>
-                                <td>PIN 碼驗證失敗</td>
-                                <td>增加失敗次數，超過 3 次鎖定</td>
+                                <td>密碼錯誤</td>
+                                <td>return 0</td>
+                                <td>SHA-256 密碼驗證失敗</td>
+                                <td>QMessageBox::warning 提示密碼錯誤</td>
                             </tr>
                             <tr>
                                 <td>帳戶鎖定</td>
-                                <td>ACCOUNT_LOCKED</td>
-                                <td>帳戶被鎖定</td>
-                                <td>需要管理員解鎖</td>
+                                <td>status = 3</td>
+                                <td>帳戶狀態被設為鎖定</td>
+                                <td>QMessageBox::critical 提示需要管理員解鎖</td>
                             </tr>
                             <tr>
                                 <td>餘額不足</td>
-                                <td>INSUFFICIENT_FUNDS</td>
-                                <td>帳戶餘額不足</td>
-                                <td>提示用戶檢查餘額</td>
+                                <td>amount > balance</td>
+                                <td>提款或轉帳金額超過帳戶餘額</td>
+                                <td>QMessageBox::warning 提示餘額不足</td>
                             </tr>
                             <tr>
                                 <td>無效金額</td>
-                                <td>INVALID_AMOUNT</td>
-                                <td>輸入的金額無效</td>
-                                <td>提示用戶重新輸入</td>
+                                <td>amount <= 0 或 !ok</td>
+                                <td>輸入的金額格式無效</td>
+                                <td>QMessageBox::warning 要求重新輸入</td>
                             </tr>
                             <tr>
-                                <td>超過限額</td>
-                                <td>LIMIT_EXCEEDED</td>
-                                <td>超過交易限額</td>
-                                <td>提示用戶限額資訊</td>
+                                <td>資料庫錯誤</td>
+                                <td>!query.exec()</td>
+                                <td>SQL 查詢執行失敗</td>
+                                <td>QMessageBox::critical 顯示資料庫錯誤</td>
+                            </tr>
+                            <tr>
+                                <td>會話超時</td>
+                                <td>90秒無操作</td>
+                                <td>用戶閒置時間過長</td>
+                                <td>自動登出並返回登入畫面</td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <h3>錯誤處理範例</h3>
+                    <h3>Qt 錯誤處理範例</h3>
                     <div class="code-block">
-                        <pre><code class="language-cpp">try {
-    if (!currentAccount->withdraw(amount)) {
-        throw std::runtime_error("INSUFFICIENT_FUNDS");
+                        <pre><code class="language-cpp">// 資料庫錯誤處理
+void depositWindow::on_deposit_btn_clicked() {
+    bool ok = false;
+    int amount = ui->deposit->text().toInt(&ok);
+    
+    if (!ok || amount <= 0) {
+        QMessageBox::warning(this, "錯誤", "請輸入正確的存款金額。");
+        ui->deposit->clear();
+        return;
     }
-} catch (const std::exception& e) {
-    std::cout << "錯誤: " << e.what() << std::endl;
-    // 記錄錯誤日誌
-    logError("提款失敗", e.what());
+    
+    DatabaseManager dbm;
+    if (!dbm.connect()) {
+        QMessageBox::critical(this, "Database Error", "無法連線至系統。");
+        ui->deposit->clear();
+        return;
+    }
+    
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    if (!db.isOpen()) {
+        QMessageBox::critical(this, "Database Error", "系統未開啟！");
+        ui->deposit->clear();
+        return;
+    }
+    
+    QSqlQuery query(db);
+    query.prepare("UPDATE users SET balance = ? WHERE account = ?");
+    query.addBindValue(newBalance);
+    query.addBindValue(Controller::Getaccount());
+    
+    if (!query.exec()) {
+        QMessageBox::critical(this, "資料庫錯誤", 
+            "存款失敗：" + query.lastError().text());
+        qDebug() << "[DEBUG] Database update failed:" << query.lastError().text();
+        ui->deposit->clear();
+        return;
+    }
+    
+    // 成功處理
+    QMessageBox::information(this, "成功", "存款操作完成！");
 }</code></pre>
                     </div>
-                </section>
 
-                <section id="examples" class="docs-section">
+                    <h3>會話超時處理</h3>
+                    <div class="code-block">
+                        <pre><code class="language-cpp">void Controller::handleSessionTimeout() {
+    sessionActive = false;
+    
+    // 關閉所有相關視窗
+    if (userWin) {
+        userWin->close();
+        userWin = nullptr;
+    }
+    if (adminwin) {
+        adminwin->close();
+        adminwin = nullptr;
+    }
+    if (withdrowwin) {
+        withdrowwin->close();
+        withdrowwin = nullptr;
+    }
+    if (depositwin) {
+        depositwin->close();
+        depositwin = nullptr;
+    }
+    if (transwin) {
+        transwin->close();
+        transwin = nullptr;
+    }
+    
+    // 清除用戶資料
+    Setid("");
+    Setaccount("");
+    Setbalance(0.0);
+    
+    // 顯示登入視窗
+    if (loginWin) {
+        loginWin->clearPassword();
+        loginWin->show();
+        QMessageBox::information(loginWin, "會話超時", 
+            "閒置時間過長，已自動登出。請重新登入。");
+    }
+}</code></pre>
+                    </div>
+
+                    <h3>事務處理錯誤回滾</h3>
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// 轉帳操作的事務處理
+void TransWindow::on_trans_btn_clicked() {
+    // ...前置驗證...
+    
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    db.transaction(); // 開始事務
+    
+    bool success = true;
+    
+    // 更新轉出方餘額
+    QSqlQuery myUpdate(db);
+    myUpdate.prepare("UPDATE users SET balance = ? WHERE account = ?");
+    myUpdate.addBindValue(myNewBalance);
+    myUpdate.addBindValue(Controller::Getaccount());
+    
+    if (!myUpdate.exec()) {
+        success = false;
+        qDebug() << "轉出方更新失敗:" << myUpdate.lastError().text();
+    }
+    
+    // 更新轉入方餘額
+    if (success) {
+        QSqlQuery toUpdate(db);
+        toUpdate.prepare("UPDATE users SET balance = ? WHERE account = ?");
+        toUpdate.addBindValue(toNewBalance);
+        toUpdate.addBindValue(toAccount);
+        
+        if (!toUpdate.exec()) {
+            success = false;
+            qDebug() << "轉入方更新失敗:" << toUpdate.lastError().text();
+        }
+    }
+    
+    if (success && db.commit()) {
+        QMessageBox::information(this, "成功", "轉帳完成！");
+        Controller::Setbalance(myNewBalance);
+        refreshBalance();
+        emit showSummary("轉帳", amount, toAccount, myNewBalance);
+    } else {
+        db.rollback(); // 回滾事務
+        QMessageBox::critical(this, "轉帳失敗", 
+            "轉帳過程中發生錯誤，操作已取消。");
+    }
+}</code></pre>
+                    </div>
+                </section>                <section id="examples" class="docs-section">
                     <h2><i class="fas fa-code"></i> 程式碼範例</h2>
                     
-                    <h3>完整的提款流程</h3>
+                    <h3>完整的應用程式啟動流程</h3>
                     <div class="code-block">
-                        <pre><code class="language-cpp">#include "ATM.h"
-#include "Bank.h"
+                        <pre><code class="language-cpp">#include <QApplication>
+#include "controller.h"
 
-int main() {
-    // 初始化銀行系統
-    Bank bank("accounts.json");
-    bank.loadData();
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
     
-    // 創建 ATM 實例
-    ATM atm(&bank);
+    // 創建主控制器
+    Controller controller;
     
     // 啟動系統
-    atm.start();
+    controller.start();
     
-    return 0;
+    return app.exec();
 }
 
-// 使用範例：用戶提款
-void exampleWithdraw() {
-    Bank bank("test_accounts.json");
-    ATM atm(&bank);
+// Controller 啟動流程
+void Controller::start() {
+    // 初始化資料庫連接
+    if (!dbm.connect()) {
+        QMessageBox::critical(nullptr, "系統錯誤", "無法連接到資料庫！");
+        return;
+    }
     
-    // 模擬用戶登入
-    Account testAccount("1234567890", "1234", 1000.0);
-    bank.addAccount(testAccount);
+    // 創建登入視窗
+    loginWin = new loginWindow();
     
-    // 執行提款
-    Account* account = bank.findAccount("1234567890");
-    if (account && account->validatePin("1234")) {
-        if (account->withdraw(500.0)) {
-            std::cout << "提款成功，餘額: $" << account->getBalance() << std::endl;
+    // 連接信號槽
+    connect(loginWin, &loginWindow::loginPress, this, [=](const QString &account, const QString &password) {
+        handleUserLogin(account, password);
+    });
+    
+    connect(loginWin, &loginWindow::adminpress, this, [=](const QString &account, const QString &password) {
+        handleAdminLogin(account, password);
+    });
+    
+    // 顯示登入視窗
+    loginWin->show();
+}</code></pre>
+                    </div>
+
+                    <h3>用戶登入和提款完整流程</h3>
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// 用戶登入處理
+void Controller::handleUserLogin(const QString &account, const QString &password) {
+    int result = dbm.fetchPassword(account, password);
+    
+    if (result == 1) {
+        // 登入成功，載入用戶資料
+        if (dbm.fetchUserData(account)) {
+            loginWin->hide();
+            
+            // 創建用戶主視窗
+            userWin = new userwindow();
+            userWin->setWelcomeText(account);
+            
+            // 連接提款信號
+            connect(userWin, &userwindow::openWithdraw, this, [=]() {
+                userWin->hide();
+                withdrowwin = new withdrowWindow();
+                withdrowwin->show();
+                
+                // 連接提款摘要信號
+                connect(withdrowwin, &withdrowWindow::showSummary, this, 
+                       [=](const QString &type, int amount, const QString &target, double balance) {
+                    showTransactionSummary(type, amount, target, balance);
+                });
+            });
+            
+            userWin->show();
+            
+            // 啟動會話計時器
+            sessionActive = true;
+            sessionTimer->start(90000); // 90秒
+        }
+    } else {
+        QMessageBox::warning(loginWin, "登入失敗", "帳號或密碼錯誤");
+        loginWin->clearPassword();
+    }
+}</code></pre>
+                    </div>
+
+                    <h3>管理員新增用戶範例</h3>
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// 管理員新增用戶完整流程
+void Controller::handleAdminAddUser() {
+    // 創建新增用戶視窗
+    addacc = new addaccwindow();
+    
+    // 連接確認按鈕信號
+    connect(addacc, &addaccwindow::userAdded, this, [=](const QString &account) {
+        QMessageBox::information(addacc, "成功", 
+            QString("用戶 %1 已成功新增到系統中").arg(account));
+        addacc->close();
+        adminwin->show();
+    });
+    
+    // 連接返回按鈕信號
+    connect(addacc, &addaccwindow::back, this, [=]() {
+        addacc->close();
+        adminwin->show();
+    });
+    
+    adminwin->hide();
+    addacc->show();
+}
+
+// 新增用戶的實際實現（在 addaccwindow.cpp 中）
+void addaccwindow::on_add_clicked() {
+    QString account = ui->accountEdit->text().trimmed();
+    QString password = ui->passwordEdit->text();
+    QString password2 = ui->passwordEdit2->text();
+    QString balanceStr = ui->balanceEdit->text();
+    QString statusText = ui->StatusCombo->currentText();
+
+    // 輸入驗證
+    if (account.isEmpty() || password.isEmpty() || password2.isEmpty() || 
+        balanceStr.isEmpty() || statusText == "請選擇用戶屬性") {
+        QMessageBox::warning(this, "輸入錯誤", "請填寫所有欄位。");
+        return;
+    }
+
+    if (password != password2) {
+        QMessageBox::warning(this, "密碼錯誤", "兩次輸入的密碼不一致。");
+        return;
+    }
+
+    // SHA-256 密碼加密
+    QByteArray hashedPassword = QCryptographicHash::hash(
+        password.toUtf8(), QCryptographicHash::Sha256).toHex();
+
+    // 新增到資料庫
+    DatabaseManager dbm;
+    if (dbm.connect()) {
+        QSqlDatabase db = QSqlDatabase::database("atm_connection");
+        QSqlQuery query(db);
+        query.prepare("INSERT INTO users (account, password, status, balance) VALUES (?, ?, ?, ?)");
+        query.addBindValue(account);
+        query.addBindValue(QString(hashedPassword));
+        query.addBindValue(statusText == "普通用戶" ? 0 : 500);
+        query.addBindValue(balanceStr.toDouble());
+
+        if (query.exec()) {
+            emit userAdded(account);
+        } else {
+            QMessageBox::critical(this, "資料庫錯誤", "新增用戶失敗：" + query.lastError().text());
         }
     }
 }</code></pre>
                     </div>
 
-                    <h3>轉帳操作範例</h3>
+                    <h3>交易記錄查詢範例</h3>
                     <div class="code-block">
-                        <pre><code class="language-cpp">void exampleTransfer() {
-    Bank bank("accounts.json");
+                        <pre><code class="language-cpp">// 查詢用戶交易記錄（在 docuwindow.cpp 中實現）
+void docuWindow::loadTransactionHistory() {
+    DatabaseManager dbm;
+    if (!dbm.connect()) {
+        QMessageBox::critical(this, "資料庫錯誤", "無法連接到資料庫");
+        return;
+    }
+
+    QSqlDatabase db = QSqlDatabase::database("atm_connection");
+    QSqlQuery query(db);
     
-    // 創建兩個測試帳戶
-    Account account1("1111111111", "1111", 2000.0);
-    Account account2("2222222222", "2222", 500.0);
-    
-    bank.addAccount(account1);
-    bank.addAccount(account2);
-    
-    // 執行轉帳：從帳戶1轉300元到帳戶2
-    if (bank.transfer("1111111111", "2222222222", 300.0)) {
-        std::cout << "轉帳成功!" << std::endl;
+    // 查詢最近5筆交易記錄
+    query.prepare(R"(
+        SELECT 
+            change_amount_1, balance_1, change_time_1,
+            change_amount_2, balance_2, change_time_2,
+            change_amount_3, balance_3, change_time_3,
+            change_amount_4, balance_4, change_time_4,
+            change_amount_5, balance_5, change_time_5
+        FROM users 
+        WHERE account = ?
+    )");
+    query.addBindValue(Controller::Getaccount());
+
+    if (query.exec() && query.next()) {
+        // 清空表格
+        ui->transactionTable->setRowCount(0);
         
-        Account* acc1 = bank.findAccount("1111111111");
-        Account* acc2 = bank.findAccount("2222222222");
-        
-        std::cout << "帳戶1餘額: $" << acc1->getBalance() << std::endl;
-        std::cout << "帳戶2餘額: $" << acc2->getBalance() << std::endl;
+        // 處理5筆交易記錄
+        for (int i = 0; i < 5; ++i) {
+            double amount = query.value(i * 3).toDouble();
+            double balance = query.value(i * 3 + 1).toDouble();
+            QString time = query.value(i * 3 + 2).toString();
+            
+            if (amount != 0 && !time.isEmpty()) {
+                int row = ui->transactionTable->rowCount();
+                ui->transactionTable->insertRow(row);
+                
+                // 設定交易類型
+                QString type = (amount > 0) ? "存款" : "提款";
+                if (amount < 0) amount = -amount; // 顯示正數金額
+                
+                ui->transactionTable->setItem(row, 0, new QTableWidgetItem(type));
+                ui->transactionTable->setItem(row, 1, new QTableWidgetItem(QString::number(amount)));
+                ui->transactionTable->setItem(row, 2, new QTableWidgetItem(QString::number(balance)));
+                ui->transactionTable->setItem(row, 3, new QTableWidgetItem(time));
+            }
+        }
     }
 }</code></pre>
                     </div>
 
-                    <h3>交易記錄查詢</h3>
+                    <h3>會話管理和安全機制範例</h3>
                     <div class="code-block">
-                        <pre><code class="language-cpp">void exampleTransactionHistory() {
-    Account account("1234567890", "1234", 1000.0);
+                        <pre><code class="language-cpp">// 會話超時處理完整流程
+void Controller::setupSessionManagement() {
+    // 創建會話計時器
+    sessionTimer = new QTimer(this);
+    sessionTimer->setSingleShot(true);
+    sessionActive = false;
     
-    // 執行一些交易
-    account.deposit(500.0);
-    account.withdraw(200.0);
+    // 連接超時信號
+    connect(sessionTimer, &QTimer::timeout, this, &Controller::onSessionTimeout);
+}
+
+void Controller::resetSessionTimer() {
+    if (sessionActive && sessionTimer) {
+        sessionTimer->stop();
+        sessionTimer->start(90000); // 重新開始90秒計時
+        qDebug() << "Session timer reset";
+    }
+}
+
+void Controller::onSessionTimeout() {
+    if (sessionActive) {
+        qDebug() << "Session timeout - auto logout";
+        handleSessionTimeout();
+    }
+}
+
+void Controller::handleSessionTimeout() {
+    sessionActive = false;
     
-    // 查看交易記錄
-    auto history = account.getTransactionHistory();
+    // 關閉所有業務視窗
+    QList<QMainWindow*> windows = {userWin, adminwin, withdrowwin, depositwin, transwin};
+    for (auto window : windows) {
+        if (window) {
+            window->close();
+            delete window;
+            window = nullptr;
+        }
+    }
     
-    std::cout << "=== 交易記錄 ===" << std::endl;
-    for (const auto& transaction : history) {
-        std::cout << transaction.toString() << std::endl;
+    // 清除用戶資料
+    Setid("");
+    Setaccount("");
+    Setbalance(0.0);
+    
+    // 返回登入畫面
+    if (loginWin) {
+        loginWin->clearPassword();
+        loginWin->show();
+        QMessageBox::information(loginWin, "會話超時", 
+            "由於長時間未操作，系統已自動登出。請重新登入。");
     }
 }</code></pre>
                     </div>
@@ -766,7 +1739,7 @@ void exampleWithdraw() {
             <div class="footer-section">
                 <h4>開發資源</h4>
                 <ul>
-                    <li><a href="api-reference.html">API 參考</a></li>
+                    <li><a href="api-reference.html">程式碼參考</a></li>
                     <li><a href="architecture.html">架構設計</a></li>
                     <li><a href="#examples">程式碼範例</a></li>
                 </ul>

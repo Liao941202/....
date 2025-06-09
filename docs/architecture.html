@@ -38,9 +38,8 @@
                 </li>
                 <li class="nav-item">
                     <a href="user-guide.html" class="nav-link">使用者指南</a>
-                </li>
-                <li class="nav-item">
-                    <a href="api-reference.html" class="nav-link">API 參考</a>
+                </li>                <li class="nav-item">
+                    <a href="api-reference.html" class="nav-link">程式碼參考</a>
                 </li>
                 <li class="nav-item">
                     <a href="architecture.html" class="nav-link active">架構設計</a>
@@ -95,25 +94,23 @@
                 <header class="docs-header">
                     <h1>系統架構設計</h1>
                     <p>ATM Banking System 的完整架構設計與技術說明</p>
-                </header>
-
-                <section id="overview" class="docs-section">
+                </header>                <section id="overview" class="docs-section">
                     <h2><i class="fas fa-sitemap"></i> 系統概覽</h2>
-                    <p>ATM Banking System 採用分層架構設計，將系統劃分為展示層、業務邏輯層和資料層，提供清晰的職責分離和良好的維護性。</p>
+                    <p>ATM Banking System 採用Qt Framework的MVC架構設計，將應用程式分為三個主要層次：視窗介面層、控制器層和資料存取層，提供清晰的職責分離和良好的維護性。</p>
                     
                     <div class="architecture-overview">
                         <div class="layer-diagram">
                             <div class="layer presentation">
-                                <h3><i class="fas fa-desktop"></i> 展示層 (Presentation Layer)</h3>
-                                <p>ATM 介面、用戶互動、選單系統</p>
+                                <h3><i class="fas fa-desktop"></i> 視窗介面層 (UI Layer)</h3>
+                                <p>基於Qt的圖形使用者介面，包含14個專門視窗模組</p>
                             </div>
                             <div class="layer business">
-                                <h3><i class="fas fa-cogs"></i> 業務層 (Business Layer)</h3>
-                                <p>帳戶管理、交易處理、安全驗證</p>
+                                <h3><i class="fas fa-cogs"></i> 控制器層 (Controller Layer)</h3>
+                                <p>處理業務邏輯和視窗間的協調，使用信號槽機制</p>
                             </div>
                             <div class="layer data">
-                                <h3><i class="fas fa-database"></i> 資料層 (Data Layer)</h3>
-                                <p>檔案儲存、資料持久化、JSON 處理</p>
+                                <h3><i class="fas fa-database"></i> 資料存取層 (Data Layer)</h3>
+                                <p>基於SQLite的資料庫管理系統</p>
                             </div>
                         </div>
                     </div>
@@ -122,19 +119,19 @@
                         <div class="spec-card">
                             <h3><i class="fas fa-code"></i> 技術棧</h3>
                             <ul>
-                                <li>程式語言：C++ (C++17)</li>
-                                <li>建構工具：CMake</li>
-                                <li>JSON 處理：nlohmann/json</li>
-                                <li>開發環境：Visual Studio 2019+</li>
+                                <li>GUI框架：Qt 6.9.0</li>
+                                <li>建構工具：qmake</li>
+                                <li>資料庫：SQLite</li>
+                                <li>樣式系統：QSS (Qt Style Sheets)</li>
                             </ul>
                         </div>
                         <div class="spec-card">
                             <h3><i class="fas fa-cubes"></i> 架構特色</h3>
                             <ul>
-                                <li>物件導向設計</li>
-                                <li>分層架構模式</li>
-                                <li>SOLID 設計原則</li>
-                                <li>錯誤處理機制</li>
+                                <li>Qt信號槽機制</li>
+                                <li>MVC架構模式</li>
+                                <li>模組化視窗設計</li>
+                                <li>SQLite資料持久化</li>
                             </ul>
                         </div>
                     </div>
@@ -164,84 +161,87 @@
                 </section>
 
                 <section id="system-components" class="docs-section">
-                    <h2><i class="fas fa-puzzle-piece"></i> 系統組件</h2>
-
-                    <div id="presentation-layer" class="component-section">
-                        <h3><i class="fas fa-desktop"></i> 展示層 (Presentation Layer)</h3>
-                        <p>負責與用戶的互動，包括輸入處理、輸出顯示和選單導航。</p>
+                    <h2><i class="fas fa-puzzle-piece"></i> 系統組件</h2>                    <div id="presentation-layer" class="component-section">
+                        <h3><i class="fas fa-desktop"></i> 視窗介面層 (UI Layer)</h3>
+                        <p>負責與用戶的互動，基於Qt Framework實現的圖形使用者介面，包含多個專門化的視窗模組。</p>
                         
                         <div class="component-details">
                             <h4>主要組件：</h4>
                             <ul>
-                                <li><strong>ATM 類別：</strong> 主要的使用者介面控制器</li>
-                                <li><strong>選單系統：</strong> 階層式選單導航</li>
-                                <li><strong>輸入驗證：</strong> 用戶輸入的格式驗證</li>
-                                <li><strong>顯示格式化：</strong> 金額、日期的格式化顯示</li>
+                                <li><strong>loginWindow：</strong> 主要的登入介面，處理用戶和管理員登入</li>
+                                <li><strong>userWindow：</strong> 用戶主介面，提供銀行操作選單</li>
+                                <li><strong>adminWindow：</strong> 管理員介面，提供系統管理功能</li>
+                                <li><strong>專門視窗：</strong> 提款、存款、轉帳、修改密碼等專用視窗</li>
                             </ul>
 
                             <div class="code-block">
-                                <pre><code>ATM
-├── 主選單
+                                <pre><code>Qt視窗架構
+├── loginWindow (登入視窗)
 │   ├── 用戶登入
 │   ├── 管理員登入
-│   └── 系統退出
-├── 用戶選單
+│   └── 系統設定
+├── userWindow (用戶主視窗)
 │   ├── 查詢餘額
-│   ├── 提款操作
+│   ├── 快速提款 (1000/2000/3000/5000/10000)
 │   ├── 存款操作
 │   ├── 轉帳功能
 │   ├── 交易記錄
 │   └── 修改密碼
-└── 管理員選單
-    ├── 查看所有用戶
-    ├── 新增用戶
-    ├── 刪除用戶
-    └── 解鎖帳戶</code></pre>
+├── adminWindow (管理員視窗)
+│   ├── 用戶清單管理
+│   ├── 新增用戶帳戶
+│   ├── 設定帳戶狀態
+│   └── 系統統計資料
+└── 專門操作視窗
+    ├── withdrowWindow (提款視窗)
+    ├── depositWindow (存款視窗)
+    ├── transWindow (轉帳視窗)
+    ├── changepasswordWindow (修改密碼)
+    ├── summaryWindow (交易摘要)
+    └── acclistWindow (帳戶清單)</code></pre>
                             </div>
                         </div>
-                    </div>
-
-                    <div id="business-layer" class="component-section">
-                        <h3><i class="fas fa-cogs"></i> 業務層 (Business Layer)</h3>
-                        <p>包含所有的業務邏輯和規則，處理銀行操作的核心功能。</p>
+                    </div>                    <div id="business-layer" class="component-section">
+                        <h3><i class="fas fa-cogs"></i> 控制器層 (Controller Layer)</h3>
+                        <p>包含所有的業務邏輯和規則，處理銀行操作的核心功能，使用Qt信號槽機制協調各視窗間的互動。</p>
                         
                         <div class="component-details">
                             <h4>核心模組：</h4>
                             <div class="module-grid">
                                 <div class="module-card">
-                                    <h5><i class="fas fa-user"></i> Account 模組</h5>
+                                    <h5><i class="fas fa-cogs"></i> Controller 模組</h5>
                                     <ul>
+                                        <li>中央控制器邏輯</li>
+                                        <li>視窗間信號槽協調</li>
+                                        <li>業務流程控制</li>
+                                        <li>錯誤處理機制</li>
+                                    </ul>
+                                </div>
+                                <div class="module-card">
+                                    <h5><i class="fas fa-database"></i> DatabaseManager 模組</h5>
+                                    <ul>
+                                        <li>SQLite資料庫連接</li>
                                         <li>帳戶資料管理</li>
-                                        <li>PIN 碼驗證</li>
-                                        <li>帳戶鎖定機制</li>
-                                        <li>餘額操作</li>
+                                        <li>交易記錄處理</li>
+                                        <li>資料查詢與更新</li>
                                     </ul>
                                 </div>
                                 <div class="module-card">
-                                    <h5><i class="fas fa-university"></i> Bank 模組</h5>
+                                    <h5><i class="fas fa-exchange-alt"></i> 交易處理模組</h5>
                                     <ul>
-                                        <li>帳戶集合管理</li>
-                                        <li>轉帳處理</li>
-                                        <li>系統統計</li>
-                                        <li>資料同步</li>
+                                        <li>提款功能處理</li>
+                                        <li>存款功能處理</li>
+                                        <li>轉帳功能處理</li>
+                                        <li>交易驗證邏輯</li>
                                     </ul>
                                 </div>
                                 <div class="module-card">
-                                    <h5><i class="fas fa-exchange-alt"></i> Transaction 模組</h5>
+                                    <h5><i class="fas fa-shield-alt"></i> 安全驗證模組</h5>
                                     <ul>
-                                        <li>交易記錄</li>
-                                        <li>交易驗證</li>
-                                        <li>歷史查詢</li>
-                                        <li>審計追蹤</li>
-                                    </ul>
-                                </div>
-                                <div class="module-card">
-                                    <h5><i class="fas fa-shield-alt"></i> Security 模組</h5>
-                                    <ul>
-                                        <li>身份驗證</li>
-                                        <li>授權控制</li>
-                                        <li>安全日誌</li>
-                                        <li>錯誤處理</li>
+                                        <li>密碼驗證 (SHA-256)</li>
+                                        <li>登入狀態管理</li>
+                                        <li>權限控制檢查</li>
+                                        <li>QMessageBox錯誤提示</li>
                                     </ul>
                                 </div>
                             </div>
@@ -249,113 +249,105 @@
                     </div>
 
                     <div id="data-layer" class="component-section">
-                        <h3><i class="fas fa-database"></i> 資料層 (Data Layer)</h3>
-                        <p>負責資料的持久化存儲和檢索，使用 JSON 格式存儲帳戶和交易資料。</p>
+                        <h3><i class="fas fa-database"></i> 資料存取層 (Data Layer)</h3>
+                        <p>負責資料的持久化存儲和檢索，使用SQLite資料庫存儲帳戶和交易資料。</p>
                         
                         <div class="component-details">
-                            <h4>資料結構：</h4>
+                            <h4>SQLite資料庫結構：</h4>
                             <div class="code-block">
-                                <pre><code>{
-  "accounts": [
-    {
-      "accountNumber": "1234567890",
-      "pinCode": "1234",
-      "balance": 10000.00,
-      "isLocked": false,
-      "failedAttempts": 0,
-      "transactionHistory": [
-        {
-          "transactionId": "TXN_001",
-          "type": "DEPOSIT",
-          "amount": 1000.00,
-          "balanceAfter": 10000.00,
-          "timestamp": "2024-01-15T10:30:00Z",
-          "description": "ATM 存款"
-        }
-      ]
-    }
-  ],
-  "systemInfo": {
-    "lastBackup": "2024-01-15T00:00:00Z",
-    "totalTransactions": 156,
-    "activeAccounts": 25
-  }
-}</code></pre>
+                                <pre><code>-- 用戶帳戶表
+CREATE TABLE users (
+    account_id TEXT PRIMARY KEY,
+    password TEXT NOT NULL,
+    balance REAL DEFAULT 0.0,
+    account_type TEXT DEFAULT 'user',
+    status TEXT DEFAULT 'active',
+    created_date TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 交易記錄表  
+CREATE TABLE transactions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    account_id TEXT NOT NULL,
+    transaction_type TEXT NOT NULL,
+    amount REAL NOT NULL,
+    target_account TEXT,
+    timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
+    description TEXT,
+    FOREIGN KEY (account_id) REFERENCES users(account_id)
+);
+
+-- 預設測試帳戶
+INSERT INTO users VALUES 
+('123', SHA256('3210'), 50000.0, 'user', 'active', CURRENT_TIMESTAMP),
+('admin', SHA256('5678'), 0.0, 'admin', 'active', CURRENT_TIMESTAMP);</code></pre>
                             </div>
                         </div>
                     </div>
-                </section>
-
-                <section id="class-diagram" class="docs-section">
+                </section>                <section id="class-diagram" class="docs-section">
                     <h2><i class="fas fa-project-diagram"></i> 類別圖</h2>
-                    <p>系統的主要類別及其關係圖：</p>
+                    <p>系統的主要類別及其關係圖（基於Qt架構）：</p>
                     
                     <div class="diagram-container">
                         <div class="class-diagram">
                             <div class="class-box atm-class">
-                                <h4>ATM</h4>
+                                <h4>Controller</h4>
                                 <div class="attributes">
-                                    <p>- bank: Bank*</p>
-                                    <p>- currentAccount: Account*</p>
+                                    <p>- dbManager: DatabaseManager*</p>
+                                    <p>- currentAccountId: QString</p>
                                     <p>- isUserLoggedIn: bool</p>
                                     <p>- isAdminLoggedIn: bool</p>
                                 </div>
                                 <div class="methods">
-                                    <p>+ start(): void</p>
-                                    <p>+ userLogin(): bool</p>
-                                    <p>+ adminLogin(): bool</p>
-                                    <p>+ userMenu(): void</p>
-                                    <p>+ adminMenu(): void</p>
+                                    <p>+ login(QString, QString): bool</p>
+                                    <p>+ logout(): void</p>
+                                    <p>+ getBalance(QString): double</p>
+                                    <p>+ processTransaction(): void</p>
+                                    <p>+ validateCredentials(): bool</p>
                                 </div>
                             </div>
 
                             <div class="class-box bank-class">
-                                <h4>Bank</h4>
+                                <h4>DatabaseManager</h4>
                                 <div class="attributes">
-                                    <p>- accounts: vector&lt;Account&gt;</p>
-                                    <p>- dataFile: string</p>
+                                    <p>- db: QSqlDatabase</p>
+                                    <p>- dbPath: QString</p>
                                 </div>
                                 <div class="methods">
-                                    <p>+ findAccount(string): Account*</p>
-                                    <p>+ addAccount(Account): bool</p>
-                                    <p>+ transfer(string, string, double): bool</p>
-                                    <p>+ loadData(): void</p>
-                                    <p>+ saveData(): void</p>
+                                    <p>+ initializeDatabase(): bool</p>
+                                    <p>+ createUser(QString, QString): bool</p>
+                                    <p>+ authenticateUser(QString, QString): bool</p>
+                                    <p>+ updateBalance(QString, double): bool</p>
+                                    <p>+ getTransactionHistory(QString): QList</p>
                                 </div>
                             </div>
 
                             <div class="class-box account-class">
-                                <h4>Account</h4>
+                                <h4>loginWindow</h4>
                                 <div class="attributes">
-                                    <p>- accountNumber: string</p>
-                                    <p>- pinCode: string</p>
-                                    <p>- balance: double</p>
-                                    <p>- isLocked: bool</p>
-                                    <p>- transactionHistory: vector&lt;Transaction&gt;</p>
+                                    <p>- ui: Ui::loginWindow*</p>
+                                    <p>- controller: Controller*</p>
                                 </div>
                                 <div class="methods">
-                                    <p>+ validatePin(string): bool</p>
-                                    <p>+ getBalance(): double</p>
-                                    <p>+ withdraw(double): bool</p>
-                                    <p>+ deposit(double): void</p>
-                                    <p>+ addTransaction(Transaction): void</p>
+                                    <p>+ on_userLoginButton_clicked(): void</p>
+                                    <p>+ on_adminLoginButton_clicked(): void</p>
+                                    <p>+ validateInput(): bool</p>
+                                    <p>+ showErrorMessage(QString): void</p>
                                 </div>
                             </div>
 
                             <div class="class-box transaction-class">
-                                <h4>Transaction</h4>
+                                <h4>userWindow</h4>
                                 <div class="attributes">
-                                    <p>- transactionId: string</p>
-                                    <p>- accountNumber: string</p>
-                                    <p>- type: string</p>
-                                    <p>- amount: double</p>
-                                    <p>- timestamp: string</p>
+                                    <p>- ui: Ui::userWindow*</p>
+                                    <p>- controller: Controller*</p>
+                                    <p>- currentAccountId: QString</p>
                                 </div>
                                 <div class="methods">
-                                    <p>+ getTransactionId(): string</p>
-                                    <p>+ getType(): string</p>
-                                    <p>+ getAmount(): double</p>
-                                    <p>+ toString(): string</p>
+                                    <p>+ on_withdrawButton_clicked(): void</p>
+                                    <p>+ on_depositButton_clicked(): void</p>
+                                    <p>+ on_transferButton_clicked(): void</p>
+                                    <p>+ updateBalanceDisplay(): void</p>
                                 </div>
                             </div>
                         </div>
@@ -363,145 +355,129 @@
                         <div class="relationships">
                             <p><strong>關係說明：</strong></p>
                             <ul>
-                                <li>ATM <strong>使用</strong> Bank (1:1)</li>
-                                <li>Bank <strong>管理</strong> Account (1:N)</li>
-                                <li>Account <strong>擁有</strong> Transaction (1:N)</li>
-                                <li>ATM <strong>當前操作</strong> Account (1:0..1)</li>
+                                <li>Controller <strong>使用</strong> DatabaseManager (1:1)</li>
+                                <li>loginWindow <strong>依賴</strong> Controller (1:1)</li>
+                                <li>userWindow <strong>依賴</strong> Controller (1:1)</li>
+                                <li>Qt視窗間使用 <strong>信號槽機制</strong> 通訊</li>
                             </ul>
                         </div>
                     </div>
                 </section>
 
                 <section id="sequence-diagrams" class="docs-section">
-                    <h2><i class="fas fa-long-arrow-alt-right"></i> 循序圖</h2>
-
-                    <div id="login-sequence" class="sequence-section">
+                    <h2><i class="fas fa-long-arrow-alt-right"></i> 循序圖</h2>                    <div id="login-sequence" class="sequence-section">
                         <h3><i class="fas fa-sign-in-alt"></i> 用戶登入流程</h3>
                         <div class="sequence-diagram">
                             <div class="sequence-step">
                                 <div class="step-number">1</div>
                                 <div class="step-description">
-                                    <strong>用戶</strong> → <strong>ATM</strong>: 選擇用戶登入
+                                    <strong>用戶</strong> → <strong>loginWindow</strong>: 點擊用戶登入按鈕
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">2</div>
                                 <div class="step-description">
-                                    <strong>ATM</strong> → <strong>用戶</strong>: 請求輸入帳號
+                                    <strong>loginWindow</strong> → <strong>用戶</strong>: 顯示帳號密碼輸入框
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">3</div>
                                 <div class="step-description">
-                                    <strong>用戶</strong> → <strong>ATM</strong>: 輸入帳號
+                                    <strong>用戶</strong> → <strong>loginWindow</strong>: 輸入帳號和密碼
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">4</div>
                                 <div class="step-description">
-                                    <strong>ATM</strong> → <strong>Bank</strong>: findAccount(accountNumber)
+                                    <strong>loginWindow</strong> → <strong>Controller</strong>: 發出login信號
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">5</div>
                                 <div class="step-description">
-                                    <strong>Bank</strong> → <strong>ATM</strong>: 回傳 Account 物件
+                                    <strong>Controller</strong> → <strong>DatabaseManager</strong>: authenticateUser(accountId, password)
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">6</div>
                                 <div class="step-description">
-                                    <strong>ATM</strong> → <strong>用戶</strong>: 請求輸入 PIN 碼
+                                    <strong>DatabaseManager</strong> → <strong>Controller</strong>: 回傳驗證結果
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">7</div>
                                 <div class="step-description">
-                                    <strong>用戶</strong> → <strong>ATM</strong>: 輸入 PIN 碼
+                                    <strong>Controller</strong> → <strong>loginWindow</strong>: 發出loginResult信號
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">8</div>
                                 <div class="step-description">
-                                    <strong>ATM</strong> → <strong>Account</strong>: validatePin(pinCode)
+                                    <strong>loginWindow</strong> → <strong>userWindow</strong>: 開啟用戶主視窗
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">9</div>
                                 <div class="step-description">
-                                    <strong>Account</strong> → <strong>ATM</strong>: 回傳驗證結果
-                                </div>
-                            </div>
-                            <div class="sequence-step">
-                                <div class="step-number">10</div>
-                                <div class="step-description">
-                                    <strong>ATM</strong> → <strong>用戶</strong>: 顯示登入結果
+                                    <strong>userWindow</strong> → <strong>用戶</strong>: 顯示用戶操作介面
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div id="withdraw-sequence" class="sequence-section">
+                    </div>                    <div id="withdraw-sequence" class="sequence-section">
                         <h3><i class="fas fa-money-bill-wave"></i> 提款操作流程</h3>
                         <div class="sequence-diagram">
                             <div class="sequence-step">
                                 <div class="step-number">1</div>
                                 <div class="step-description">
-                                    <strong>用戶</strong> → <strong>ATM</strong>: 選擇提款功能
+                                    <strong>用戶</strong> → <strong>userWindow</strong>: 點擊提款按鈕或快速提款按鈕
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">2</div>
                                 <div class="step-description">
-                                    <strong>ATM</strong> → <strong>用戶</strong>: 請求輸入提款金額
+                                    <strong>userWindow</strong> → <strong>withdrowWindow</strong>: 開啟提款視窗
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">3</div>
                                 <div class="step-description">
-                                    <strong>用戶</strong> → <strong>ATM</strong>: 輸入金額
+                                    <strong>用戶</strong> → <strong>withdrowWindow</strong>: 輸入提款金額或選擇快速金額
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">4</div>
                                 <div class="step-description">
-                                    <strong>ATM</strong> → <strong>ATM</strong>: 驗證金額有效性
+                                    <strong>withdrowWindow</strong> → <strong>Controller</strong>: 發出withdraw信號
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">5</div>
                                 <div class="step-description">
-                                    <strong>ATM</strong> → <strong>Account</strong>: withdraw(amount)
+                                    <strong>Controller</strong> → <strong>DatabaseManager</strong>: 檢查帳戶餘額
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">6</div>
                                 <div class="step-description">
-                                    <strong>Account</strong> → <strong>Account</strong>: 檢查餘額是否足夠
+                                    <strong>DatabaseManager</strong> → <strong>DatabaseManager</strong>: 更新餘額並記錄交易
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">7</div>
                                 <div class="step-description">
-                                    <strong>Account</strong> → <strong>ATM</strong>: 回傳操作結果
+                                    <strong>DatabaseManager</strong> → <strong>Controller</strong>: 回傳操作結果
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">8</div>
                                 <div class="step-description">
-                                    <strong>ATM</strong> → <strong>Transaction</strong>: 建立交易記錄
+                                    <strong>Controller</strong> → <strong>withdrowWindow</strong>: 發出操作完成信號
                                 </div>
                             </div>
                             <div class="sequence-step">
                                 <div class="step-number">9</div>
                                 <div class="step-description">
-                                    <strong>ATM</strong> → <strong>Account</strong>: addTransaction(transaction)
-                                </div>
-                            </div>
-                            <div class="sequence-step">
-                                <div class="step-number">10</div>
-                                <div class="step-description">
-                                    <strong>ATM</strong> → <strong>用戶</strong>: 顯示操作結果
+                                    <strong>withdrowWindow</strong> → <strong>用戶</strong>: 顯示提款成功訊息
                                 </div>
                             </div>
                         </div>
@@ -513,7 +489,65 @@
                             <div class="sequence-step">
                                 <div class="step-number">1</div>
                                 <div class="step-description">
-                                    <strong>用戶</strong> → <strong>ATM</strong>: 選擇轉帳功能
+                                    <strong>用戶</strong> → <strong>userWindow</strong>: 點擊轉帳按鈕
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">2</div>
+                                <div class="step-description">
+                                    <strong>userWindow</strong> → <strong>transWindow</strong>: 開啟轉帳視窗
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">3</div>
+                                <div class="step-description">
+                                    <strong>用戶</strong> → <strong>transWindow</strong>: 輸入收款帳號
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">4</div>
+                                <div class="step-description">
+                                    <strong>transWindow</strong> → <strong>Controller</strong>: 驗證收款帳號
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">5</div>
+                                <div class="step-description">
+                                    <strong>用戶</strong> → <strong>transWindow</strong>: 輸入轉帳金額
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">6</div>
+                                <div class="step-description">
+                                    <strong>transWindow</strong> → <strong>Controller</strong>: 發出transfer信號
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">7</div>
+                                <div class="step-description">
+                                    <strong>Controller</strong> → <strong>DatabaseManager</strong>: 執行轉帳交易
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">8</div>
+                                <div class="step-description">
+                                    <strong>DatabaseManager</strong> → <strong>DatabaseManager</strong>: 同時更新兩個帳戶餘額
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">9</div>
+                                <div class="step-description">
+                                    <strong>Controller</strong> → <strong>transWindow</strong>: 回傳轉帳結果
+                                </div>
+                            </div>
+                            <div class="sequence-step">
+                                <div class="step-number">10</div>
+                                <div class="step-description">
+                                    <strong>transWindow</strong> → <strong>用戶</strong>: 顯示轉帳完成訊息
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                                 </div>
                             </div>
                             <div class="sequence-step">
@@ -572,18 +606,17 @@
                             </div>
                         </div>
                     </div>
-                </section>
-
-                <section id="security-architecture" class="docs-section">
+                </section>                <section id="security-architecture" class="docs-section">
                     <h2><i class="fas fa-shield-alt"></i> 安全架構</h2>
                     
                     <div class="security-layers">
                         <div class="security-layer">
                             <h3><i class="fas fa-key"></i> 身份驗證層</h3>
                             <ul>
-                                <li><strong>PIN 碼驗證：</strong> 4 位數字 PIN 碼保護</li>
-                                <li><strong>帳戶鎖定：</strong> 3 次錯誤嘗試後自動鎖定</li>
+                                <li><strong>密碼驗證：</strong> SHA-256加密的密碼保護</li>
+                                <li><strong>帳戶狀態管理：</strong> active/inactive狀態控制</li>
                                 <li><strong>管理員認證：</strong> 獨立的管理員登入系統</li>
+                                <li><strong>Qt輸入驗證：</strong> QLineEdit格式限制</li>
                             </ul>
                         </div>
                         
@@ -591,17 +624,19 @@
                             <h3><i class="fas fa-lock"></i> 授權控制層</h3>
                             <ul>
                                 <li><strong>角色分離：</strong> 用戶與管理員功能分離</li>
-                                <li><strong>操作限制：</strong> 交易金額限制和頻率控制</li>
+                                <li><strong>視窗權限控制：</strong> 基於角色的視窗存取</li>
                                 <li><strong>資料隔離：</strong> 用戶只能存取自己的帳戶</li>
+                                <li><strong>操作驗證：</strong> 每次交易前重新驗證</li>
                             </ul>
                         </div>
                         
                         <div class="security-layer">
                             <h3><i class="fas fa-history"></i> 審計追蹤層</h3>
                             <ul>
-                                <li><strong>交易記錄：</strong> 完整的交易歷史追蹤</li>
-                                <li><strong>操作日誌：</strong> 系統操作的詳細記錄</li>
-                                <li><strong>錯誤監控：</strong> 異常行為的檢測和記錄</li>
+                                <li><strong>交易記錄：</strong> SQLite資料庫完整記錄</li>
+                                <li><strong>Qt錯誤處理：</strong> QMessageBox統一錯誤提示</li>
+                                <li><strong>時間戳記：</strong> 所有操作時間記錄</li>
+                                <li><strong>資料庫日誌：</strong> SQLite交易日誌</li>
                             </ul>
                         </div>
                     </div>
@@ -609,46 +644,41 @@
                     <div class="security-measures">
                         <h3>安全措施實作</h3>
                         <div class="code-block">
-                            <pre><code>// PIN 碼驗證與帳戶鎖定
-bool Account::validatePin(const std::string& pin) {
-    if (isLocked) {
-        return false;
-    }
+                            <pre><code>// Qt密碼驗證與SHA-256加密
+bool DatabaseManager::authenticateUser(const QString& accountId, const QString& password) {
+    QSqlQuery query(db);
+    query.prepare("SELECT password FROM users WHERE account_id = ?");
+    query.addBindValue(accountId);
     
-    if (pinCode == pin) {
-        failedAttempts = 0;
-        return true;
-    } else {
-        failedAttempts++;
-        if (failedAttempts >= MAX_FAILED_ATTEMPTS) {
-            lockAccount();
-        }
-        return false;
+    if (query.exec() && query.next()) {
+        QString storedHash = query.value(0).toString();
+        QString inputHash = QString(QCryptographicHash::hash(
+            password.toUtf8(), QCryptographicHash::Sha256).toHex());
+        return (storedHash == inputHash);
     }
+    return false;
 }
 
-// 交易限額檢查
-bool Account::withdraw(double amount) {
-    if (amount > DAILY_LIMIT) {
-        throw std::runtime_error("超過每日提款限額");
-    }
-    
-    if (amount > SINGLE_TRANSACTION_LIMIT) {
-        throw std::runtime_error("超過單次交易限額");
-    }
-    
-    if (balance < amount) {
+// Qt錯誤提示處理
+void loginWindow::showError(const QString& message) {
+    QMessageBox::warning(this, "登入錯誤", message);
+}
+
+// 交易金額驗證
+bool Controller::validateAmount(double amount) {
+    if (amount <= 0) {
+        QMessageBox::warning(nullptr, "錯誤", "金額必須大於零");
         return false;
     }
-    
-    balance -= amount;
+    if (amount > 50000) {
+        QMessageBox::warning(nullptr, "錯誤", "單次交易限額為50,000");
+        return false;
+    }
     return true;
 }</code></pre>
                         </div>
                     </div>
-                </section>
-
-                <section id="data-flow" class="docs-section">
+                </section>                <section id="data-flow" class="docs-section">
                     <h2><i class="fas fa-stream"></i> 資料流程</h2>
                     
                     <div class="data-flow-diagram">
@@ -657,13 +687,50 @@ bool Account::withdraw(double amount) {
                             <div class="flow-step">
                                 <div class="step-icon"><i class="fas fa-user"></i></div>
                                 <h4>用戶輸入</h4>
-                                <p>帳號、PIN 碼、交易資訊</p>
+                                <p>帳號、密碼、交易資訊</p>
                             </div>
                             <div class="flow-arrow">→</div>
                             <div class="flow-step">
                                 <div class="step-icon"><i class="fas fa-desktop"></i></div>
-                                <h4>ATM 介面</h4>
-                                <p>輸入驗證、格式化處理</p>
+                                <h4>Qt視窗介面</h4>
+                                <p>QLineEdit驗證、QMessageBox提示</p>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="step-icon"><i class="fas fa-cogs"></i></div>
+                                <h4>Controller控制器</h4>
+                                <p>信號槽處理、業務邏輯驗證</p>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="step-icon"><i class="fas fa-database"></i></div>
+                                <h4>SQLite資料庫</h4>
+                                <p>資料查詢與更新</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-persistence">
+                        <h3>資料持久化策略</h3>
+                        <div class="persistence-grid">
+                            <div class="persistence-card">
+                                <h4><i class="fas fa-save"></i> 即時存檔</h4>
+                                <p>每次交易完成後立即提交SQLite事務</p>
+                            </div>
+                            <div class="persistence-card">
+                                <h4><i class="fas fa-shield-alt"></i> 資料完整性</h4>
+                                <p>使用SQLite ACID特性確保資料一致性</p>
+                            </div>
+                            <div class="persistence-card">
+                                <h4><i class="fas fa-history"></i> 交易記錄</h4>
+                                <p>完整的交易歷史記錄與時間戳</p>
+                            </div>
+                            <div class="persistence-card">
+                                <h4><i class="fas fa-sync-alt"></i> 自動連接</h4>
+                                <p>Qt應用程式啟動時自動連接資料庫</p>
+                            </div>
+                        </div>
+                    </div>
                             </div>
                             <div class="flow-arrow">→</div>
                             <div class="flow-step">
@@ -701,26 +768,25 @@ bool Account::withdraw(double amount) {
                             </div>
                         </div>
                     </div>
-                </section>
-
-                <section id="design-patterns" class="docs-section">
+                </section>                <section id="design-patterns" class="docs-section">
                     <h2><i class="fas fa-drafting-compass"></i> 設計模式</h2>
                     
                     <div class="patterns-grid">
                         <div class="pattern-card">
                             <h3><i class="fas fa-crown"></i> Singleton 模式</h3>
-                            <p><strong>應用：</strong> Bank 系統實例</p>
-                            <p><strong>用途：</strong> 確保整個系統只有一個銀行實例，統一管理所有帳戶</p>
+                            <p><strong>應用：</strong> DatabaseManager 資料庫管理</p>
+                            <p><strong>用途：</strong> 確保整個應用程式只有一個資料庫連接實例，統一管理所有資料操作</p>
                             <div class="code-example">
-                                <pre><code>class Bank {
+                                <pre><code>class DatabaseManager {
 private:
-    static Bank* instance;
-    Bank() {}
+    static DatabaseManager* instance;
+    QSqlDatabase db;
+    DatabaseManager() {}
     
 public:
-    static Bank* getInstance() {
+    static DatabaseManager* getInstance() {
         if (!instance) {
-            instance = new Bank();
+            instance = new DatabaseManager();
         }
         return instance;
     }
@@ -729,87 +795,79 @@ public:
                         </div>
 
                         <div class="pattern-card">
-                            <h3><i class="fas fa-factory"></i> Factory 模式</h3>
-                            <p><strong>應用：</strong> Transaction 物件創建</p>
-                            <p><strong>用途：</strong> 根據交易類型創建不同的交易物件</p>
+                            <h3><i class="fas fa-signal"></i> Signal-Slot 模式</h3>
+                            <p><strong>應用：</strong> Qt視窗間通訊</p>
+                            <p><strong>用途：</strong> 實現視窗間的解耦通訊，響應用戶操作和系統事件</p>
                             <div class="code-example">
-                                <pre><code>class TransactionFactory {
-public:
-    static Transaction* createTransaction(
-        const std::string& type,
-        double amount,
-        const std::string& account) {
-        
-        if (type == "WITHDRAW") {
-            return new WithdrawTransaction(amount, account);
-        } else if (type == "DEPOSIT") {
-            return new DepositTransaction(amount, account);
-        }
-        return nullptr;
-    }
-};</code></pre>
+                                <pre><code>// 在loginWindow中
+signals:
+    void loginSuccess(const QString& accountId);
+    void loginFailed(const QString& error);
+
+// 在Controller中
+public slots:
+    void handleLogin(const QString& accountId, const QString& password);
+
+// 連接信號槽
+connect(loginWindow, &loginWindow::loginAttempt,
+        controller, &Controller::handleLogin);</code></pre>
                             </div>
                         </div>
 
                         <div class="pattern-card">
                             <h3><i class="fas fa-eye"></i> Observer 模式</h3>
-                            <p><strong>應用：</strong> 交易通知系統</p>
-                            <p><strong>用途：</strong> 當帳戶餘額變化時通知相關觀察者</p>
+                            <p><strong>應用：</strong> 餘額更新通知</p>
+                            <p><strong>用途：</strong> 當帳戶餘額變化時自動更新所有相關的Qt視窗顯示</p>
                             <div class="code-example">
-                                <pre><code>class Account : public Subject {
-    void notifyObservers() override {
-        for (auto observer : observers) {
-            observer->update(this);
+                                <pre><code>// 在Controller中發出信號
+signals:
+    void balanceUpdated(const QString& accountId, double newBalance);
+
+// 在userWindow中接收
+public slots:
+    void updateBalanceDisplay(const QString& accountId, double balance) {
+        if (accountId == currentAccountId) {
+            ui->balanceLabel->setText(QString::number(balance));
         }
-    }
-    
-    void withdraw(double amount) {
-        balance -= amount;
-        notifyObservers();  // 通知餘額變化
-    }
-};</code></pre>
+    }</code></pre>
                             </div>
                         </div>
 
                         <div class="pattern-card">
-                            <h3><i class="fas fa-chess-knight"></i> Strategy 模式</h3>
-                            <p><strong>應用：</strong> 不同的驗證策略</p>
-                            <p><strong>用途：</strong> 根據用戶類型使用不同的身份驗證方式</p>
+                            <h3><i class="fas fa-window-restore"></i> MVC 模式</h3>
+                            <p><strong>應用：</strong> Qt視窗架構</p>
+                            <p><strong>用途：</strong> 分離視圖(Qt視窗)、模型(資料庫)和控制器(業務邏輯)</p>
                             <div class="code-example">
-                                <pre><code>class AuthenticationStrategy {
-public:
-    virtual bool authenticate(const std::string& credentials) = 0;
+                                <pre><code>// Model: DatabaseManager
+class DatabaseManager {
+    QSqlDatabase db;
+    bool updateBalance(QString accountId, double amount);
 };
 
-class PinAuthStrategy : public AuthenticationStrategy {
-public:
-    bool authenticate(const std::string& pin) override {
-        return validatePin(pin);
-    }
+// View: Qt視窗
+class userWindow : public QMainWindow {
+    Ui::userWindow *ui;
 };
 
-class AdminAuthStrategy : public AuthenticationStrategy {
-public:
-    bool authenticate(const std::string& password) override {
-        return validateAdminPassword(password);
-    }
+// Controller: 業務邏輯
+class Controller : public QObject {
+    DatabaseManager* dbManager;
+    void processTransaction();
 };</code></pre>
                             </div>
                         </div>
                     </div>
-                </section>
-
-                <section id="scalability" class="docs-section">
+                </section>                <section id="scalability" class="docs-section">
                     <h2><i class="fas fa-expand-arrows-alt"></i> 擴展性設計</h2>
                     
                     <div class="scalability-aspects">
                         <div class="aspect-card">
                             <h3><i class="fas fa-plus-circle"></i> 功能擴展</h3>
                             <ul>
-                                <li><strong>新交易類型：</strong> 可輕鬆添加新的交易功能</li>
-                                <li><strong>多幣種支援：</strong> 架構支援多種貨幣交易</li>
-                                <li><strong>更多驗證方式：</strong> 可添加生物識別等驗證</li>
-                                <li><strong>通知系統：</strong> 可擴展簡訊、郵件通知</li>
+                                <li><strong>新視窗模組：</strong> 可輕鬆添加新的Qt視窗功能</li>
+                                <li><strong>多語言支援：</strong> Qt國際化系統支援多語言</li>
+                                <li><strong>新支付方式：</strong> 可添加QR Code、NFC等支付</li>
+                                <li><strong>通知系統：</strong> 可擴展QSystemTrayIcon通知</li>
                             </ul>
                         </div>
 
@@ -817,29 +875,29 @@ public:
                             <h3><i class="fas fa-database"></i> 資料擴展</h3>
                             <ul>
                                 <li><strong>資料庫整合：</strong> 可整合 MySQL、PostgreSQL</li>
-                                <li><strong>雲端儲存：</strong> 支援雲端資料備份</li>
-                                <li><strong>分散式架構：</strong> 支援多節點部署</li>
-                                <li><strong>快取系統：</strong> 可添加 Redis 快取層</li>
+                                <li><strong>雲端資料庫：</strong> 支援遠端資料庫連接</li>
+                                <li><strong>資料同步：</strong> Qt Network支援多節點同步</li>
+                                <li><strong>快取系統：</strong> 可添加QCache記憶體快取</li>
                             </ul>
                         </div>
 
                         <div class="aspect-card">
                             <h3><i class="fas fa-network-wired"></i> 介面擴展</h3>
                             <ul>
-                                <li><strong>Web 介面：</strong> 可開發 Web 版本</li>
-                                <li><strong>API 服務：</strong> REST API 支援</li>
-                                <li><strong>行動應用：</strong> 手機 App 整合</li>
-                                <li><strong>第三方整合：</strong> 銀行系統 API 整合</li>
+                                <li><strong>Web整合：</strong> QWebEngine支援Web介面</li>
+                                <li><strong>REST API：</strong> QNetworkAccessManager API服務</li>
+                                <li><strong>行動支援：</strong> Qt for Mobile跨平台開發</li>
+                                <li><strong>第三方整合：</strong> Qt Plugin系統擴展</li>
                             </ul>
                         </div>
 
                         <div class="aspect-card">
                             <h3><i class="fas fa-shield-alt"></i> 安全擴展</h3>
                             <ul>
-                                <li><strong>加密強化：</strong> AES 資料加密</li>
-                                <li><strong>雙因子驗證：</strong> 2FA 支援</li>
-                                <li><strong>防詐騙系統：</strong> 機器學習檢測</li>
-                                <li><strong>合規性：</strong> PCI DSS 標準支援</li>
+                                <li><strong>加密強化：</strong> QCA加密模組整合</li>
+                                <li><strong>SSL/TLS：</strong> QSslSocket安全通訊</li>
+                                <li><strong>硬體安全：</strong> Qt支援智慧卡讀取</li>
+                                <li><strong>生物識別：</strong> 可整合指紋、人臉識別</li>
                             </ul>
                         </div>
                     </div>
@@ -869,41 +927,39 @@ public:
                             <div class="metric-value">< 5MB</div>
                             <p>可執行檔大小</p>
                         </div>
-                    </div>
-
-                    <div class="optimization-strategies">
+                    </div>                    <div class="optimization-strategies">
                         <h3>效能優化策略</h3>
                         <div class="strategy-grid">
                             <div class="strategy-item">
-                                <h4><i class="fas fa-bolt"></i> 記憶體優化</h4>
+                                <h4><i class="fas fa-bolt"></i> Qt視窗優化</h4>
                                 <ul>
-                                    <li>使用智慧指標管理記憶體</li>
-                                    <li>避免不必要的物件複製</li>
-                                    <li>適當使用物件池模式</li>
+                                    <li>使用Qt智慧指標(QPointer)管理物件</li>
+                                    <li>適當使用QWidget::setUpdatesEnabled</li>
+                                    <li>QSS樣式預編譯與快取</li>
                                 </ul>
                             </div>
                             <div class="strategy-item">
-                                <h4><i class="fas fa-search"></i> 查詢優化</h4>
+                                <h4><i class="fas fa-search"></i> 資料庫優化</h4>
                                 <ul>
-                                    <li>使用雜湊表快速查找帳戶</li>
-                                    <li>建立適當的索引結構</li>
-                                    <li>分頁處理大量交易記錄</li>
+                                    <li>使用QSqlQuery預編譯語句</li>
+                                    <li>SQLite索引優化查詢性能</li>
+                                    <li>QSqlDatabase連接池管理</li>
                                 </ul>
                             </div>
                             <div class="strategy-item">
-                                <h4><i class="fas fa-file"></i> I/O 優化</h4>
+                                <h4><i class="fas fa-file"></i> 信號槽優化</h4>
                                 <ul>
-                                    <li>批次處理檔案寫入操作</li>
-                                    <li>使用異步 I/O 處理</li>
-                                    <li>壓縮大型資料檔案</li>
+                                    <li>使用Qt::QueuedConnection避免阻塞</li>
+                                    <li>適當使用Qt::DirectConnection</li>
+                                    <li>避免循環信號槽連接</li>
                                 </ul>
                             </div>
                             <div class="strategy-item">
-                                <h4><i class="fas fa-code"></i> 程式碼優化</h4>
+                                <h4><i class="fas fa-code"></i> Qt程式碼優化</h4>
                                 <ul>
-                                    <li>避免深層巢狀迴圈</li>
-                                    <li>使用編譯器優化選項</li>
-                                    <li>適當的資料結構選擇</li>
+                                    <li>使用QStringBuilder優化字串處理</li>
+                                    <li>QList與QVector適當選擇</li>
+                                    <li>Qt編譯時優化選項設定</li>
                                 </ul>
                             </div>
                         </div>
@@ -929,7 +985,7 @@ public:
                 <h4>技術文檔</h4>
                 <ul>
                     <li><a href="architecture.html">系統架構</a></li>
-                    <li><a href="api-reference.html">API 參考</a></li>
+                    <li><a href="api-reference.html">程式碼參考</a></li>
                     <li><a href="#design-patterns">設計模式</a></li>
                 </ul>
             </div>

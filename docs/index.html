@@ -7,7 +7,8 @@
     <meta name="description" content="Enterprise-grade ATM banking simulation built with modern C++ and Qt framework">
     <meta name="keywords" content="ATM, Banking System, C++, Qt, SQLite, GUI, Enterprise">
     <meta name="author" content="WU">
-      <!-- Open Graph Meta Tags -->
+    
+    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="ATM 自動櫃員機系統">
     <meta property="og:description" content="專業的銀行自動櫃員機模擬系統 - 使用 C++ 開發的完整金融交易平台">
     <meta property="og:type" content="website">
@@ -82,18 +83,16 @@
                 </div>
                 <h1 class="hero-title">
                     🏦 ATM 自動櫃員機系統
-                </h1>
-                <p class="hero-subtitle">
-                    Enterprise-grade ATM banking simulation for modern C++ and Qt
-                </p>
-                <p class="hero-description">
-                    企業級自動櫃員機模擬系統，運用現代 C++ 技術與 Qt 框架開發的完整金融應用程式，
-                    具備多層次安全機制、豐富的 GUI 界面以及完整的銀行業務流程模擬。
-                </p>
-                <div class="hero-badges">
+                </h1>                <p class="hero-subtitle">
+                    現代化的Qt GUI銀行自動櫃員機系統，採用Controller模式設計與SQLite資料庫整合
+                </p>                <p class="hero-description">
+                    企業級自動櫃員機模擬系統，運用Qt 6.9.0框架開發的完整GUI金融應用程式，
+                    具備14個視窗模組、SQLite資料庫整合、Signal-Slot通訊機制以及完整的Controller架構設計。
+                </p><div class="hero-badges">
                     <img src="https://img.shields.io/badge/Language-C%2B%2B17-blue.svg" alt="C++17">
                     <img src="https://img.shields.io/badge/Framework-Qt%206.9.0-green.svg" alt="Qt 6.9.0">
                     <img src="https://img.shields.io/badge/Database-SQLite-orange.svg" alt="SQLite">
+                    <img src="https://img.shields.io/badge/UI-QSS%20Styling-purple.svg" alt="QSS Styling">
                     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License">
                 </div>
                 <div class="hero-buttons">
@@ -152,46 +151,48 @@
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-user-shield"></i>
-                    </div>
-                    <h3>用戶功能模組</h3>
+                    </div>                    <h3>用戶功能模組</h3>
                     <ul>
-                        <li>🔐 安全登入系統</li>
-                        <li>💰 餘額查詢</li>
-                        <li>💳 存款作業</li>
-                        <li>🏧 提款作業</li>
-                        <li>💸 轉帳功能</li>
-                        <li>📊 交易紀錄</li>
-                        <li>🔑 密碼變更</li>
+                        <li>🔐 Qt GUI安全登入介面 (使用者身份驗證)</li>
+                        <li>💰 餘額查詢視窗 (即時SQLite查詢)</li>
+                        <li>💳 存款功能 (金額輸入框+確認按鈕)</li>
+                        <li>🏧 提款服務 (快速金額按鈕: 1000/2000/3000/5000/10000)</li>
+                        <li>💸 轉帳視窗 (目標帳戶選擇+金額確認)</li>
+                        <li>📊 交易歷史表格 (最近5筆記錄顯示)</li>
+                        <li>🔑 密碼變更對話框 (舊密碼驗證)</li>
+                        <li>📋 交易摘要彈出視窗 (操作完成反饋)</li>
                     </ul>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>管理員功能模組</h3>
+                    </div>                    <h3>管理員功能模組</h3>
                     <ul>
-                        <li>🛡️ 管理員專用登入</li>
-                        <li>📋 帳戶管理</li>
-                        <li>🔧 系統維護</li>
-                        <li>📈 系統監控</li>
-                        <li>👥 用戶狀態管理</li>
-                        <li>🔄 密碼重設</li>
+                        <li>🛡️ 管理員專用Qt登入視窗</li>
+                        <li>📋 帳戶列表表格視窗 (ID/帳號/狀態/餘額顯示)</li>
+                        <li>➕ 新增帳戶對話框 (使用者/管理員角色選擇)</li>
+                        <li>🔄 密碼重設視窗 (帳戶選擇+新密碼輸入)</li>
+                        <li>⚙️ 帳戶狀態管理介面 (啟用/停用下拉選單)</li>
+                        <li>📊 SQLite資料庫管理 (Controller統一操作)</li>
+                        <li>🔍 帳戶查詢與驗證 (即時資料更新)</li>
+                        <li>🎛️ 批量管理操作界面</li>
                     </ul>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-lock"></i>
-                    </div>
-                    <h3>安全機制</h3>
+                    </div>                    <h3>Qt架構與安全</h3>
                     <ul>
-                        <li>⏰ 90秒會話超時</li>
-                        <li>🚫 登入失敗保護</li>
-                        <li>🔐 SHA-256 密碼加密</li>
-                        <li>👮 異常行為監測</li>
-                        <li>🔒 多層次身份驗證</li>
-                        <li>📝 完整日誌記錄</li>
+                        <li>⏰ 90秒會話超時 + 自動返回登入視窗</li>
+                        <li>🔐 SQLite SHA-256密碼雜湊儲存</li>
+                        <li>🚫 Qt輸入驗證與錯誤對話框</li>
+                        <li>💾 SQLite事務完整性保護</li>
+                        <li>📋 交易記錄持久化 (5筆歷史)</li>
+                        <li>🔒 Controller靜態狀態管理</li>
+                        <li>⚡ 即時SQLite餘額驗證</li>
+                        <li>🎯 Qt Signal-Slot線程安全通訊</li>
                     </ul>
                 </div>
             </div>
@@ -200,30 +201,28 @@
 
     <!-- Architecture Section -->
     <section id="architecture" class="architecture">
-        <div class="container">
-            <div class="section-header">
+        <div class="container">            <div class="section-header">
                 <h2>系統架構</h2>
-                <p>基於 MVC 模式的企業級架構設計</p>
+                <p>基於 Qt Controller 模式的企業級架構設計</p>
             </div>
-            
-            <div class="architecture-content">
+              <div class="architecture-content">
                 <div class="architecture-diagram">
                     <div class="arch-layer">
-                        <h3>Presentation Layer</h3>
-                        <p>GUI Windows & User Interface</p>
-                        <div class="layer-tech">Qt Widgets</div>
+                        <h3>Qt視窗層 (Qt GUI Layer)</h3>
+                        <p>14個視窗模組 + QSS樣式 + Signal/Slot通訊</p>
+                        <div class="layer-tech">loginWindow, userWindow, adminWindow, depositWindow, withdrowWindow, transWindow, changepasswordWindow, acclistWindow, addaccWindow, setpasswordWindow, setstatusWindow, summaryWindow, docuWindow</div>
                     </div>
                     <div class="arch-arrow">↕</div>
                     <div class="arch-layer">
-                        <h3>Business Logic Layer</h3>
-                        <p>Controller & Signal/Slots</p>
-                        <div class="layer-tech">Qt Signals</div>
+                        <h3>控制器層 (Controller Layer)</h3>
+                        <p>中央Controller + 會話管理 + 靜態使用者狀態</p>
+                        <div class="layer-tech">Controller Pattern + Qt MOC System</div>
                     </div>
                     <div class="arch-arrow">↕</div>
                     <div class="arch-layer">
-                        <h3>Data Access Layer</h3>
-                        <p>DatabaseManager & SQLite DB</p>
-                        <div class="layer-tech">SQLite</div>
+                        <h3>資料層 (Data Access Layer)</h3>
+                        <p>DatabaseManager + SQLite atm.db + 交易記錄</p>
+                        <div class="layer-tech">SQLite 3 + SHA-256 Encryption</div>
                     </div>
                 </div>
                 
@@ -231,10 +230,9 @@
                     <div class="stat-item">
                         <div class="stat-number">6,650+</div>
                         <div class="stat-label">行程式碼</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">13</div>
-                        <div class="stat-label">GUI 界面</div>
+                    </div>                    <div class="stat-item">
+                        <div class="stat-number">14</div>
+                        <div class="stat-label">視窗模組</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">43</div>
@@ -277,8 +275,7 @@
                 <a href="api-reference.html" class="doc-card">
                     <div class="doc-icon">
                         <i class="fas fa-code"></i>
-                    </div>
-                    <h3>API 參考</h3>
+                    </div>                    <h3>程式碼參考</h3>
                     <p>完整的類別與方法文檔</p>
                 </a>
                 
@@ -381,7 +378,7 @@
                     <ul>
                         <li><a href="getting-started.html">快速開始</a></li>
                         <li><a href="user-guide.html">使用手冊</a></li>
-                        <li><a href="api-reference.html">API 參考</a></li>
+                        <li><a href="api-reference.html">程式碼參考</a></li>
                         <li><a href="architecture.html">架構設計</a></li>
                     </ul>
                 </div>

@@ -38,9 +38,8 @@
                 </li>
                 <li class="nav-item">
                     <a href="user-guide.html" class="nav-link active">使用者指南</a>
-                </li>
-                <li class="nav-item">
-                    <a href="api-reference.html" class="nav-link">API 參考</a>
+                </li>                <li class="nav-item">
+                    <a href="api-reference.html" class="nav-link">程式碼參考</a>
                 </li>
                 <li class="nav-item">
                     <a href="architecture.html" class="nav-link">架構設計</a>
@@ -127,147 +126,214 @@
                             <p>系統管理與用戶管理</p>
                         </div>
                     </div>
-                </section>
-
-                <section id="user-interface" class="docs-section">
-                    <h2><i class="fas fa-desktop"></i> 使用者介面</h2>
-                    <p>系統採用命令列介面 (CLI) 設計，提供直觀的選單導航：</p>
+                </section>                <section id="user-interface" class="docs-section">
+                    <h2><i class="fas fa-desktop"></i> Qt GUI 使用者介面</h2>
+                    <p>系統採用 Qt 6.9.0 圖形化介面設計，提供完整的視窗化操作體驗：</p>
                     <div class="code-block">
-                        <pre><code>=======================================
-         ATM Banking System
-=======================================
-1. 用戶登入
-2. 管理員登入  
-3. 退出系統
-請選擇 (1-3): </code></pre>
+                        <pre><code>🏦 ATM Banking System - Qt GUI 應用程式
+
+主要視窗模組：
+├── 🔑 loginWindow     - 登入視窗 (帳號/密碼輸入)
+├── 👤 userWindow      - 用戶主介面 (功能選單)  
+├── 👔 adminWindow     - 管理員介面 (管理功能)
+├── 💰 depositWindow   - 存款視窗 (金額輸入)
+├── 🏧 withdrowWindow  - 提款視窗 (快速金額按鈕)
+├── 💸 transWindow     - 轉帳視窗 (目標帳戶選擇)
+├── 🔐 changepasswordWindow - 密碼變更對話框
+├── 📋 acclistWindow   - 帳戶列表表格
+├── ➕ addaccWindow    - 新增帳戶表單
+├── 🔄 setpasswordWindow - 密碼重設視窗
+├── ⚙️ setstatusWindow - 帳戶狀態管理
+├── 📊 summaryWindow   - 交易摘要彈出視窗
+└── 📖 docuWindow      - 說明文檔視窗</code></pre>
                     </div>
                     <div class="alert alert-info">
                         <i class="fas fa-info-circle"></i>
-                        <strong>提示：</strong> 輸入對應的數字選項，按 Enter 確認
+                        <strong>操作方式：</strong> 透過滑鼠點擊按鈕、輸入框操作，支援QSS樣式美化介面
                     </div>
                 </section>
 
                 <section id="login" class="docs-section">
                     <h2><i class="fas fa-sign-in-alt"></i> 登入系統</h2>
-                    
-                    <h3>用戶登入流程</h3>
+                      <h3>Qt GUI 登入流程</h3>
                     <ol class="step-list">
                         <li>
-                            <strong>選擇用戶登入</strong>
-                            <p>在主選單選擇 "1. 用戶登入"</p>
+                            <strong>啟動應用程式</strong>
+                            <p>雙擊 ATM.exe 啟動Qt應用程式，將顯示登入視窗</p>
                         </li>
                         <li>
                             <strong>輸入帳號</strong>
-                            <p>輸入您的銀行帳號 (10 位數字)</p>
+                            <p>在帳號輸入框中輸入您的使用者名稱（如：user）</p>
                         </li>
                         <li>
-                            <strong>輸入 PIN 碼</strong>
-                            <p>輸入 4 位數的 PIN 碼</p>
+                            <strong>輸入密碼</strong>
+                            <p>在密碼輸入框中輸入對應的密碼（顯示為星號）</p>
                         </li>
                         <li>
-                            <strong>驗證成功</strong>
-                            <p>系統將驗證您的身份並進入用戶介面</p>
+                            <strong>點擊登入按鈕</strong>
+                            <p>點擊「登入」按鈕或按 Enter 鍵進行身份驗證</p>
                         </li>
-                    </ol>
-
-                    <div class="alert alert-warning">
+                        <li>
+                            <strong>進入主介面</strong>
+                            <p>驗證成功後將自動跳轉到用戶主視窗或管理員介面</p>
+                        </li>
+                    </ol>                    <div class="alert alert-warning">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <strong>安全提醒：</strong> PIN 碼輸入錯誤超過 3 次將鎖定帳戶
+                        <strong>安全提醒：</strong> 密碼錯誤過多次將觸發安全機制，系統將顯示錯誤對話框
                     </div>
 
-                    <h3>測試帳戶</h3>
+                    <h3>測試帳戶資訊</h3>
                     <table class="docs-table">
                         <thead>
                             <tr>
-                                <th>帳號</th>
-                                <th>PIN 碼</th>
-                                <th>初始餘額</th>
+                                <th>帳號類型</th>
+                                <th>使用者名稱</th>
+                                <th>密碼</th>
                                 <th>說明</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                        </thead>                        <tbody>
                             <tr>
-                                <td>1234567890</td>
-                                <td>1234</td>
-                                <td>$10,000</td>
-                                <td>一般用戶帳戶</td>
+                                <td>一般用戶</td>
+                                <td>123</td>
+                                <td>3210</td>
+                                <td>用戶功能操作測試</td>
                             </tr>
                             <tr>
-                                <td>9876543210</td>
+                                <td>管理員</td>
+                                <td>admin</td>
                                 <td>5678</td>
-                                <td>$25,000</td>
-                                <td>高額度帳戶</td>
-                            </tr>
-                            <tr>
-                                <td>1111111111</td>
-                                <td>0000</td>
-                                <td>$5,000</td>
-                                <td>基本帳戶</td>
+                                <td>管理員權限操作</td>
                             </tr>
                         </tbody>
                     </table>
-                </section>
+                </section>                <section id="basic-operations" class="docs-section">
+                    <h2><i class="fas fa-tasks"></i> Qt GUI 基本操作</h2>
 
-                <section id="basic-operations" class="docs-section">
-                    <h2><i class="fas fa-tasks"></i> 基本操作</h2>
+                    <div id="user-main-window" class="operation-section">
+                        <h3><i class="fas fa-home"></i> 用戶主視窗</h3>
+                        <p>成功登入後，將看到用戶主視窗，包含以下按鈕選項：</p>
+                        <ul>
+                            <li>💰 <strong>餘額查詢</strong> - 顯示當前帳戶餘額</li>
+                            <li>💳 <strong>存款</strong> - 開啟存款操作視窗</li>
+                            <li>🏧 <strong>提款</strong> - 開啟提款操作視窗</li>
+                            <li>💸 <strong>轉帳</strong> - 開啟轉帳功能視窗</li>
+                            <li>📊 <strong>交易記錄</strong> - 查看最近5筆交易</li>
+                            <li>🔑 <strong>修改密碼</strong> - 開啟密碼變更視窗</li>
+                            <li>🚪 <strong>登出</strong> - 返回登入畫面</li>
+                        </ul>
+                    </div>
 
                     <div id="check-balance" class="operation-section">
-                        <h3><i class="fas fa-search-dollar"></i> 查詢餘額</h3>
-                        <p>查看帳戶當前餘額：</p>
+                        <h3><i class="fas fa-search-dollar"></i> Qt 餘額查詢</h3>
+                        <p>在Qt GUI中查看帳戶餘額：</p>
                         <ol>
-                            <li>登入後選擇 "1. 查詢餘額"</li>
-                            <li>系統顯示當前餘額</li>
-                            <li>按任意鍵返回主選單</li>
+                            <li>在用戶主視窗點擊「餘額查詢」按鈕</li>
+                            <li>系統將在主視窗或彈出對話框中顯示當前餘額</li>
+                            <li>餘額資訊即時從SQLite資料庫讀取</li>
+                            <li>點擊「確定」或「返回」按鈕回到主視窗</li>
                         </ol>
                         <div class="code-block">
-                            <pre><code>當前餘額: $10,000.00
-按任意鍵繼續...</code></pre>
+                            <pre><code>┌─────────────────────────────┐
+│     帳戶餘額查詢結果        │
+├─────────────────────────────┤
+│  目前餘額: NT$ 10,000      │
+│  上次更新: 2025-06-09      │
+│                             │
+│        [  確定  ]          │
+└─────────────────────────────┘</code></pre>
                         </div>
                     </div>
 
                     <div id="withdraw" class="operation-section">
-                        <h3><i class="fas fa-money-bill-wave"></i> 提款操作</h3>
-                        <p>從帳戶提取現金：</p>
+                        <h3><i class="fas fa-money-bill-wave"></i> Qt 提款操作</h3>
+                        <p>使用Qt GUI介面進行提款：</p>
                         <ol>
-                            <li>選擇 "2. 提款"</li>
-                            <li>輸入提款金額</li>
-                            <li>確認交易</li>
-                            <li>系統處理並更新餘額</li>
+                            <li>點擊主視窗的「提款」按鈕</li>
+                            <li>在提款視窗中選擇提款方式：
+                                <ul>
+                                    <li>🎯 <strong>快速提款</strong>：點擊預設金額按鈕（1000/2000/3000/5000/10000）</li>
+                                    <li>✏️ <strong>自訂金額</strong>：在輸入框中輸入指定金額</li>
+                                </ul>
+                            </li>
+                            <li>點擊「確認提款」按鈕</li>
+                            <li>系統驗證餘額並處理交易</li>
+                            <li>顯示交易摘要視窗確認結果</li>
                         </ol>
                         <div class="alert alert-info">
                             <i class="fas fa-info-circle"></i>
-                            <strong>限制：</strong> 單次提款限額 $1,000，每日限額 $3,000
+                            <strong>Qt功能：</strong> 快速提款按鈕讓操作更便利，系統會即時檢查餘額是否足夠
                         </div>
-                    </div>
-
-                    <div id="deposit" class="operation-section">
-                        <h3><i class="fas fa-piggy-bank"></i> 存款操作</h3>
-                        <p>向帳戶存入現金：</p>
+                    </div>                    <div id="deposit" class="operation-section">
+                        <h3><i class="fas fa-piggy-bank"></i> Qt 存款操作</h3>
+                        <p>使用Qt介面進行存款：</p>
                         <ol>
-                            <li>選擇 "3. 存款"</li>
-                            <li>輸入存款金額</li>
-                            <li>確認交易</li>
-                            <li>系統處理並更新餘額</li>
+                            <li>點擊主視窗的「存款」按鈕</li>
+                            <li>在存款視窗的金額輸入框中輸入存款金額</li>
+                            <li>點擊「確認存款」按鈕</li>
+                            <li>系統處理交易並更新SQLite資料庫</li>
+                            <li>顯示交易摘要視窗確認存款完成</li>
                         </ol>
                         <div class="alert alert-success">
                             <i class="fas fa-check-circle"></i>
-                            <strong>無限制：</strong> 存款金額無上限限制
+                            <strong>Qt優勢：</strong> 即時輸入驗證，防止無效金額輸入
                         </div>
                     </div>
 
                     <div id="transfer" class="operation-section">
-                        <h3><i class="fas fa-exchange-alt"></i> 轉帳功能</h3>
-                        <p>向其他帳戶轉帳：</p>
+                        <h3><i class="fas fa-exchange-alt"></i> Qt 轉帳功能</h3>
+                        <p>使用Qt介面進行帳戶間轉帳：</p>
                         <ol>
-                            <li>選擇 "4. 轉帳"</li>
-                            <li>輸入收款人帳號</li>
-                            <li>輸入轉帳金額</li>
-                            <li>確認交易詳情</li>
-                            <li>系統處理轉帳</li>
+                            <li>點擊主視窗的「轉帳」按鈕</li>
+                            <li>在轉帳視窗中選擇或輸入目標帳戶</li>
+                            <li>在金額輸入框中輸入轉帳金額</li>
+                            <li>系統即時驗證目標帳戶是否存在</li>
+                            <li>點擊「確認轉帳」按鈕</li>
+                            <li>系統處理雙向帳戶餘額更新</li>
+                            <li>顯示轉帳完成的交易摘要</li>
                         </ol>
                         <div class="alert alert-warning">
                             <i class="fas fa-exclamation-triangle"></i>
-                            <strong>注意：</strong> 轉帳前請確認收款人帳號正確
+                            <strong>Qt安全機制：</strong> 系統會在轉帳前驗證目標帳戶並確認餘額充足
+                        </div>
+                    </div>
+
+                    <div id="transaction-history" class="operation-section">
+                        <h3><i class="fas fa-history"></i> Qt 交易記錄查詢</h3>
+                        <p>查看最近的交易記錄：</p>
+                        <ol>
+                            <li>點擊主視窗的「交易記錄」按鈕</li>
+                            <li>系統開啟交易記錄視窗</li>
+                            <li>以表格形式顯示最近5筆交易</li>
+                            <li>記錄包含：交易類型、金額、時間、餘額</li>
+                            <li>點擊「返回」按鈕回到主視窗</li>
+                        </ol>
+                        <div class="code-block">
+                            <pre><code>┌─────────────────────────────────────┐
+│           交易記錄               │
+├─────────────────────────────────────┤
+│ 時間       │ 類型 │ 金額   │ 餘額  │
+├─────────────────────────────────────┤
+│ 09:30:15  │ 存款 │ +1000  │ 11000 │
+│ 08:45:32  │ 提款 │ -500   │ 10000 │
+│ 08:20:11  │ 轉帳 │ -2000  │ 10500 │
+└─────────────────────────────────────┘</code></pre>
+                        </div>
+                    </div>
+
+                    <div id="change-password" class="operation-section">
+                        <h3><i class="fas fa-key"></i> Qt 密碼變更</h3>
+                        <p>修改帳戶密碼：</p>
+                        <ol>
+                            <li>點擊主視窗的「修改密碼」按鈕</li>
+                            <li>在密碼變更視窗中輸入舊密碼</li>
+                            <li>輸入新密碼（兩次確認）</li>
+                            <li>點擊「確認變更」按鈕</li>
+                            <li>系統使用SHA-256加密新密碼</li>
+                            <li>更新SQLite資料庫中的密碼雜湊</li>
+                        </ol>
+                        <div class="alert alert-info">
+                            <i class="fas fa-shield-alt"></i>
+                            <strong>安全保護：</strong> 所有密碼都經過SHA-256雜湊加密存儲
                         </div>
                     </div>
                 </section>
@@ -288,48 +354,134 @@
 日期: 2024-01-15 10:30:25 | 類型: 提款 | 金額: -$500.00 | 餘額: $9,500.00
 日期: 2024-01-14 14:22:10 | 類型: 存款 | 金額: +$1,000.00 | 餘額: $10,000.00</code></pre>
                         </div>
-                    </div>
-
-                    <div id="change-pin" class="operation-section">
-                        <h3><i class="fas fa-key"></i> 修改密碼</h3>
-                        <p>更改 PIN 碼以提高安全性：</p>
+                    </div>                    <div id="change-pin" class="operation-section">
+                        <h3><i class="fas fa-key"></i> Qt 密碼修改</h3>
+                        <p>在Qt介面中更改帳戶密碼以提高安全性：</p>
                         <ol>
-                            <li>選擇 "6. 修改 PIN 碼"</li>
-                            <li>輸入當前 PIN 碼</li>
-                            <li>輸入新的 PIN 碼</li>
-                            <li>確認新的 PIN 碼</li>
-                            <li>系統更新密碼</li>
+                            <li>點擊用戶主視窗的「修改密碼」按鈕</li>
+                            <li>在密碼變更視窗中輸入當前密碼</li>
+                            <li>輸入新密碼（兩次確認）</li>
+                            <li>點擊「確認變更」按鈕</li>
+                            <li>系統更新密碼並使用SHA-256加密儲存</li>
+                            <li>顯示密碼更新成功的確認對話框</li>
                         </ol>
                         <div class="alert alert-info">
                             <i class="fas fa-info-circle"></i>
-                            <strong>要求：</strong> PIN 碼必須為 4 位數字
+                            <strong>Qt安全機制：</strong> 系統會驗證舊密碼正確性才允許變更
                         </div>
                     </div>
-                </section>
-
-                <section id="admin-features" class="docs-section">
-                    <h2><i class="fas fa-user-shield"></i> 管理員功能</h2>
+                </section>                <section id="admin-features" class="docs-section">
+                    <h2><i class="fas fa-user-shield"></i> Qt 管理員功能</h2>
 
                     <div id="admin-login" class="operation-section">
                         <h3><i class="fas fa-sign-in-alt"></i> 管理員登入</h3>
-                        <p>管理員專用登入介面：</p>
+                        <p>使用管理員權限登入Qt系統：</p>
                         <ol>
-                            <li>在主選單選擇 "2. 管理員登入"</li>
-                            <li>輸入管理員帳號：<code>admin</code></li>
+                            <li>在登入視窗輸入管理員帳號：<code>admin</code></li>
                             <li>輸入管理員密碼：<code>admin123</code></li>
+                            <li>點擊「登入」按鈕</li>
+                            <li>系統驗證後將進入管理員主視窗</li>
+                        </ol>
+                        <div class="alert alert-info">
+                            <i class="fas fa-crown"></i>
+                            <strong>管理員介面：</strong> 具備完整的帳戶管理與系統控制功能
+                        </div>
+                    </div>
+
+                    <div id="admin-main-window" class="operation-section">
+                        <h3><i class="fas fa-tachometer-alt"></i> 管理員主視窗</h3>
+                        <p>管理員主視窗提供以下功能按鈕：</p>
+                        <ul>
+                            <li>📋 <strong>帳戶列表</strong> - 查看所有用戶帳戶資訊</li>
+                            <li>➕ <strong>新增帳戶</strong> - 創建新的用戶或管理員帳戶</li>
+                            <li>🔑 <strong>重設密碼</strong> - 強制重設任何帳戶密碼</li>
+                            <li>⚙️ <strong>帳戶狀態</strong> - 啟用/停用/鎖定帳戶</li>
+                            <li>📖 <strong>說明文檔</strong> - 查看系統使用說明</li>
+                            <li>🚪 <strong>登出</strong> - 返回登入畫面</li>
+                        </ul>
+                    </div>
+
+                    <div id="account-list-management" class="operation-section">
+                        <h3><i class="fas fa-list"></i> Qt 帳戶列表管理</h3>
+                        <p>使用Qt表格視窗管理所有帳戶：</p>
+                        <ol>
+                            <li>點擊管理員主視窗的「帳戶列表」按鈕</li>
+                            <li>系統開啟帳戶列表視窗，顯示完整的帳戶表格</li>
+                            <li>表格包含欄位：ID、帳號、狀態、餘額、角色</li>
+                            <li>可以瀏覽所有用戶和管理員帳戶資訊</li>
+                            <li>點擊「返回」按鈕回到管理員主視窗</li>
+                        </ol>
+                        <div class="code-block">
+                            <pre><code>┌─────────────────────────────────────────────┐
+│               帳戶列表管理                  │
+├─────────────────────────────────────────────┤
+│ ID │ 帳號  │ 狀態   │ 餘額    │ 角色     │
+├─────────────────────────────────────────────┤
+│ 1  │ user  │ 啟用   │ 10000   │ 用戶     │
+│ 2  │ admin │ 啟用   │ 50000   │ 管理員   │
+│ 3  │ test  │ 停用   │ 5000    │ 用戶     │
+└─────────────────────────────────────────────┘</code></pre>
+                        </div>
+                    </div>
+
+                    <div id="add-account" class="operation-section">
+                        <h3><i class="fas fa-user-plus"></i> Qt 新增帳戶</h3>
+                        <p>使用Qt對話框創建新帳戶：</p>
+                        <ol>
+                            <li>點擊管理員主視窗的「新增帳戶」按鈕</li>
+                            <li>在新增帳戶視窗中填寫：
+                                <ul>
+                                    <li>🆔 <strong>帳號名稱</strong>：輸入新用戶的帳號</li>
+                                    <li>🔐 <strong>初始密碼</strong>：設定預設密碼</li>
+                                    <li>💰 <strong>初始餘額</strong>：設定帳戶起始金額</li>
+                                    <li>👤 <strong>帳戶角色</strong>：選擇用戶或管理員權限</li>
+                                </ul>
+                            </li>
+                            <li>點擊「確認新增」按鈕</li>
+                            <li>系統將新帳戶資料寫入SQLite資料庫</li>
+                            <li>顯示新增成功的確認訊息</li>
                         </ol>
                     </div>
 
-                    <div id="user-management" class="operation-section">
-                        <h3><i class="fas fa-users"></i> 用戶管理</h3>
-                        <p>管理系統用戶：</p>
-                        <ul>
-                            <li><strong>查看所有用戶：</strong> 顯示系統中所有用戶資訊</li>
-                            <li><strong>新增用戶：</strong> 創建新的用戶帳戶</li>
-                            <li><strong>刪除用戶：</strong> 移除指定用戶</li>
-                            <li><strong>解鎖帳戶：</strong> 解鎖被鎖定的用戶帳戶</li>
-                        </ul>
+                    <div id="reset-password" class="operation-section">
+                        <h3><i class="fas fa-undo"></i> Qt 密碼重設</h3>
+                        <p>管理員強制重設任何帳戶密碼：</p>
+                        <ol>
+                            <li>點擊管理員主視窗的「重設密碼」按鈕</li>
+                            <li>在密碼重設視窗中選擇目標帳戶</li>
+                            <li>輸入新密碼（兩次確認）</li>
+                            <li>點擊「確認重設」按鈕</li>
+                            <li>系統使用SHA-256加密新密碼並更新資料庫</li>
+                            <li>顯示重設完成的通知</li>
+                        </ol>
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>管理員權限：</strong> 此功能僅限管理員使用，可重設任何帳戶密碼
+                        </div>
                     </div>
+
+                    <div id="account-status" class="operation-section">
+                        <h3><i class="fas fa-toggle-on"></i> Qt 帳戶狀態管理</h3>
+                        <p>控制帳戶的啟用/停用狀態：</p>
+                        <ol>
+                            <li>點擊管理員主視窗的「帳戶狀態」按鈕</li>
+                            <li>在狀態管理視窗中選擇目標帳戶</li>
+                            <li>從下拉選單選擇新狀態：
+                                <ul>
+                                    <li>✅ <strong>啟用</strong>：帳戶可正常使用</li>
+                                    <li>⛔ <strong>停用</strong>：暫時停用帳戶</li>
+                                    <li>🔒 <strong>鎖定</strong>：完全鎖定帳戶</li>
+                                </ul>
+                            </li>
+                            <li>點擊「確認變更」按鈕</li>
+                            <li>系統立即更新帳戶狀態並同步到資料庫</li>
+                        </ol>
+                        <div class="alert alert-info">
+                            <i class="fas fa-shield-alt"></i>
+                            <strong>安全控制：</strong> 停用的帳戶無法登入系統，確保帳戶安全
+                        </div>
+                    </div>
+                </section>
 
                     <div id="system-monitoring" class="operation-section">
                         <h3><i class="fas fa-chart-line"></i> 系統監控</h3>
@@ -340,51 +492,65 @@
                             <li><strong>系統日誌：</strong> 查看系統運行日誌</li>
                         </ul>
                     </div>
-                </section>
-
-                <section id="security-tips" class="docs-section">
-                    <h2><i class="fas fa-shield-alt"></i> 安全提醒</h2>
+                </section>                <section id="security-tips" class="docs-section">
+                    <h2><i class="fas fa-shield-alt"></i> Qt系統安全提醒</h2>
                     <div class="security-tips">
                         <div class="tip-item">
                             <i class="fas fa-eye-slash"></i>
-                            <h3>保護 PIN 碼</h3>
-                            <p>不要與他人分享您的 PIN 碼，輸入時注意遮擋</p>
+                            <h3>保護登入密碼</h3>
+                            <p>在Qt登入視窗輸入密碼時注意周圍環境，密碼以星號顯示保護隱私</p>
                         </div>
                         <div class="tip-item">
                             <i class="fas fa-clock"></i>
-                            <h3>及時登出</h3>
-                            <p>使用完畢後請及時登出系統</p>
+                            <h3>90秒會話超時</h3>
+                            <p>系統設有90秒自動登出機制，長時間未操作將自動返回登入視窗</p>
                         </div>
                         <div class="tip-item">
                             <i class="fas fa-sync-alt"></i>
                             <h3>定期更換密碼</h3>
-                            <p>建議定期更換 PIN 碼以保障帳戶安全</p>
+                            <p>使用Qt密碼變更視窗定期更新密碼，系統採用SHA-256加密保護</p>
                         </div>
                         <div class="tip-item">
                             <i class="fas fa-exclamation-triangle"></i>
-                            <h3>異常提醒</h3>
-                            <p>發現異常交易請立即聯繫管理員</p>
+                            <h3>異常交易提醒</h3>
+                            <p>發現異常交易請立即使用管理員功能檢查帳戶狀態或聯繫系統管理員</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-database"></i>
+                            <h3>資料庫安全</h3>
+                            <p>SQLite資料庫檔案(atm.db)包含敏感資訊，請妥善保管避免外洩</p>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-window-close"></i>
+                            <h3>正確關閉應用程式</h3>
+                            <p>使用Qt視窗的登出按鈕或關閉按鈕正確退出，避免強制終止程式</p>
                         </div>
                     </div>
-                </section>
-
-                <section id="troubleshooting" class="docs-section">
-                    <h2><i class="fas fa-tools"></i> 故障排除</h2>
+                </section><section id="troubleshooting" class="docs-section">
+                    <h2><i class="fas fa-tools"></i> Qt系統故障排除</h2>
                     <div class="troubleshoot-item">
-                        <h3>Q: 忘記 PIN 碼怎麼辦？</h3>
-                        <p><strong>A:</strong> 請聯繫管理員重置 PIN 碼，或使用管理員功能解鎖帳戶。</p>
+                        <h3>Q: Qt應用程式無法啟動怎麼辦？</h3>
+                        <p><strong>A:</strong> 確認系統已安裝Qt 6.9.0運行庫，檢查atm.db資料庫檔案是否存在於應用程式目錄中。</p>
                     </div>
                     <div class="troubleshoot-item">
-                        <h3>Q: 帳戶被鎖定如何處理？</h3>
-                        <p><strong>A:</strong> PIN 碼輸入錯誤超過 3 次會導致帳戶鎖定，需要管理員解鎖。</p>
+                        <h3>Q: 忘記登入密碼怎麼辦？</h3>
+                        <p><strong>A:</strong> 請聯繫管理員使用「重設密碼」功能重置密碼，或使用管理員帳號(admin/admin123)進行重設。</p>
                     </div>
                     <div class="troubleshoot-item">
-                        <h3>Q: 轉帳失敗的原因？</h3>
-                        <p><strong>A:</strong> 可能原因包括：餘額不足、收款帳號不存在、輸入金額無效。</p>
+                        <h3>Q: 帳戶狀態顯示為停用如何處理？</h3>
+                        <p><strong>A:</strong> 請聯繫管理員使用「帳戶狀態」管理功能將帳戶重新啟用。</p>
                     </div>
                     <div class="troubleshoot-item">
-                        <h3>Q: 如何查看完整交易記錄？</h3>
-                        <p><strong>A:</strong> 在交易記錄選單中選擇 "查看全部記錄" 選項。</p>
+                        <h3>Q: Qt視窗無法正常顯示怎麼辦？</h3>
+                        <p><strong>A:</strong> 檢查螢幕解析度設定，確認QSS樣式檔案完整，重新啟動應用程式。</p>
+                    </div>
+                    <div class="troubleshoot-item">
+                        <h3>Q: 轉帳操作失敗的原因？</h3>
+                        <p><strong>A:</strong> 可能原因包括：餘額不足、目標帳戶不存在、SQLite資料庫連線錯誤、輸入金額格式無效。</p>
+                    </div>
+                    <div class="troubleshoot-item">
+                        <h3>Q: 如何查看SQLite資料庫中的完整記錄？</h3>
+                        <p><strong>A:</strong> 系統僅顯示最近5筆交易記錄，完整資料可使用SQLite管理工具查看atm.db檔案。</p>
                     </div>
                 </section>
 
@@ -408,7 +574,7 @@
                 <ul>
                     <li><a href="getting-started.html">快速開始</a></li>
                     <li><a href="user-guide.html">使用者指南</a></li>
-                    <li><a href="api-reference.html">API 參考</a></li>
+                    <li><a href="api-reference.html">程式碼參考</a></li>
                 </ul>
             </div>
             <div class="footer-section">
