@@ -1,16 +1,16 @@
 # 🏦 ATM 自動櫃員機系統
 “Enterprise-grade ATM banking simulation for modern C++ and Qt, with multi-layered security and rich GUI.”
-[![Language](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg)](https://isocpp.org/)
+- [![Language](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg)](https://isocpp.org/)
 [![Framework](https://img.shields.io/badge/Framework-Qt%206.9.0-green.svg)](https://www.qt.io/)
 [![Database](https://img.shields.io/badge/Database-SQLite-orange.svg)](https://www.sqlite.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](MIT%20LICENSE/LICENSE)
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)]()
 
 > **企業級自動櫃員機模擬系統** - 運用現代 C++ 技術與 Qt 框架開發的完整金融應用程式
-第12組
-資工1A
-吳維盛
-陳思儒
+- 第12組
+- 資工1A
+- 吳維盛
+- 陳思儒
 
 
 ## 📖 目錄導航
