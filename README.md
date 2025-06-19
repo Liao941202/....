@@ -333,7 +333,7 @@ sequenceDiagram
 **專案開發者**: [An]
 - 🎓 **專長**: C++、Qt、資料庫設計、軟體架構
 - 📧 **聯絡**: B3230916@ulive.pccu.edu.tw
-- 🔗 **GitHub**: [@sheng5526cs](https://github.com/sheng5526cs)
+- 🔗 **GitHub**: https://github.com/Liao941202/.....git
 
 ---
 
