@@ -330,7 +330,7 @@ sequenceDiagram
 
 ## 👨‍💻 開發者
 
-**專案開發者**: [An]
+**專案開發者**: 廖廷安、吳維盛
 - 🎓 **專長**: C++、Qt、資料庫設計、軟體架構
 - 📧 **聯絡**: B3230916@ulive.pccu.edu.tw
 - 🔗 **GitHub**: https://github.com/Liao941202/.....git
